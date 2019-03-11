@@ -1,0 +1,15 @@
+@import "src/@fuse/scss/fuse";
+
+.main-widget {
+    display: flex;
+    flex-direction: column;
+}
+.fuse-card.auto-width {
+    min-width: 0;
+    max-width: none;
+
+}
+
+table {
+    width: 100%;
+}

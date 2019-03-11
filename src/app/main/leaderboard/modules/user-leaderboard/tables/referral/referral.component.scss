@@ -1,0 +1,47 @@
+@import "src/@fuse/scss/fuse";
+
+$default-anchor-color: #4267b2;
+
+.header-info {
+    .sorting {
+        display: flex;
+        align-items: center;
+        @include media-breakpoint('lt-sm') {
+            display: block;
+        }
+        .calendar {
+            margin-left: auto; 
+        }
+        .mat-form-field {
+            display: block;
+        }
+    }
+    .mat-table {
+        width: 100%;
+        .title {
+            font-size: 16px;
+            font-weight: bolder;
+            color: #464646;
+        }
+    }
+    .chip {
+        padding: 5px 10px;
+        border: 1px solid;
+        text-align: center;
+        border-radius: 20px;
+    }
+    .active {
+        color: #4caf50;
+    }
+    .mat-column-name {
+        a {
+            color: $default-anchor-color;
+        }
+    }
+    .mat-column-avatar {
+        flex: 0 1 70px;
+    }
+    .mat-column-button {
+        flex: 0 1 90px;
+    }
+}

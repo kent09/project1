@@ -1,0 +1,189 @@
+@import "src/@fuse/scss/fuse";
+
+$default-complete-color: #4caf50;
+$default-anchor-color: #4267b2;
+app-bank-widthrawal-reward {
+    width: 100%;
+
+    .mat-table {
+        // mat-row:nth-child(even) {
+        //     background-color: white;
+        // }
+
+        // mat-row:nth-child(odd) {
+        //     background-color: rgb(243, 243, 243);
+        
+        // }
+
+        width: 100%;
+        height: auto;
+        min-height: 550px;
+
+        .mat-column-status {
+            flex: 0 1 120px;
+            justify-content: center;
+            .chip {
+                border: 1px solid;
+                padding: 5px 10px;
+                border-radius: 20px;
+            }
+            .completed {
+                color: $default-complete-color;
+            }
+        }
+
+        .mat-column-fee {
+            flex: 0 2 75px;
+            justify-content: center;
+        }
+
+        .mat-column-options {
+            flex: 0 2 95px;
+            justify-content: center;
+        }
+
+        .mat-column-avatar {
+            margin-left: 0; 
+        }
+
+        .mat-column-txn_date {
+            flex: 0 2 100px;
+            justify-content: center;
+        }
+
+        .mat-column-description {
+            flex: 0 2 100px;
+            justify-content: center;
+        }
+
+        .mat-column-status {
+            flex: 0 1 120px;
+            justify-content: center;
+        }
+        .mat-column-tx_id {
+            .small-name{
+                color:rgb(29, 77, 165);
+            }
+        }
+        
+
+        .mat-sort-header-button,
+        .mat-header-cell {
+            font-weight: bolder;
+            font-size: 16px;
+            color: rgb(70, 70, 70);
+        }
+
+        .mat-column-option {
+            flex: 0 1 100px;
+            justify-content: center;
+        }
+        .mat-column-category {
+            i {
+                display: block;
+                background-repeat: no-repeat;
+                background-size: contain;
+            }
+            .fb {
+                background-image: url(/assets/socials/fb.svg);
+            }
+            .twitter {
+                background-image: url(/assets/socials/twitter-color.svg);
+            }
+            .g-plus {
+                background-image: url(/assets/socials/google-plus-color.svg);
+            }
+            .instagram {
+                background-image: url(/assets/socials/instagram.svg);
+            }
+            .linkedin {
+                background-image: url(/assets/socials/linkedin-color.svg);
+            }
+            .kblog {
+                background-image: url(/assets/socials/kblog.svg);
+            }
+            .youtube {
+                background-image: url(/assets/socials/youtube.svg);
+            }
+            .steemit {
+                background-image: url(/assets/socials/steemit.svg);
+            }
+        }
+
+        .mat-row {
+            position: relative;
+            cursor: pointer;
+            padding: 0;
+
+            .mat-cell {
+                min-width: 0;
+                margin-top: 0;
+
+                &.mat-column-detail-button {
+                    flex: 0 1 auto;
+                    padding: 0 24px 0 0;
+
+                    @include media-breakpoint('gt-md') {
+                        display: none;
+                    }
+                }
+            }
+        }
+        .mat-column-completed_date {
+            flex: 0 1 160px;
+        }
+        .mat-column-task_title {
+            a,
+            a:not(.mat-button):not(.mat-raised-button):not(.mat-icon-button):hover {
+                color: $default-anchor-color;
+                text-decoration: none;
+            }
+            .mat-title {
+                line-height: normal;
+                padding: 5px 0;
+            }
+            ul {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+                .m-view {
+                    display: flex;
+                    align-items: center;
+                    &>span {
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+            }
+        }
+        .mat-column-completed_by {
+            flex: 0 1 140px;
+            margin-right: 15px;  
+        }
+        .mat-column-task_expiration {
+            flex: 0 1 135px;
+        }
+        .mat-column-reward {
+            flex: 0 1 100px;
+        }
+        .mat-header-row {
+            border-top-color: rgba(0, 0, 0, 0.12);
+            border-top-width: 1px;
+        }
+    }
+    .mat-paginator
+    .mat-paginator-page-size {
+        @include media-breakpoint('xs') {
+            display: none;
+        }
+        
+    }
+
+    #superior-coin-tab {
+        width: 100%;
+    }
+
+    .widget {
+        width: 100% !important;
+    }
+}

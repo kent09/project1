@@ -1,0 +1,47 @@
+<div class="content-holder">
+  <div class="close" (click)="onNoClick()">
+    <mat-icon>
+      close
+    </mat-icon>
+  </div>
+  <div class="mat-subheading-2 mb-0">
+    <a [routerLink]="[ '/task/taskdetails', data.slug ]" (click)="onNoClick()"><b>{{ data.title }}</b></a>
+    <div class="small">
+        <span class="mr-4">Creator:</span>
+        <span><a [routerLink]="[ '/others/profile', data.name ]" >{{ data.username }}</a></span>
+    </div>
+  </div>
+  <ul class="reward-category p-0">
+    <li class="category pb-8">
+      <span class="mr-8">Category: </span>
+      <span>
+          <i *ngIf="data.category == 'global'" class="material-icons">public</i>
+          <i *ngIf="data.category == 'facebook'" class="fb w-24 h-24"></i>
+          <i *ngIf="data.category == 'twitter'" class="twitter w-24 h-24"></i>
+          <i *ngIf="data.category == 'googleplus'" class="g-plus w-24 h-24"></i>
+          <i *ngIf="data.category == 'instagram'" class="instagram w-24 h-24"></i>
+          <i *ngIf="data.category == 'linkedin'" class="linkedin w-24 h-24"></i>
+          <i *ngIf="data.category == 'kblog'" class="kblog w-24 h-24"></i>
+          <i *ngIf="data.category == 'youtube'" class="youtube w-24 h-24"></i>
+          <i *ngIf="data.category == 'steemit'" class="steemit w-24 h-24"></i>
+      </span>
+    </li>
+    <li class="reward">
+        <span>Reward:</span>
+        <span class="display-flex">
+          <img class="avatar w-16 h-16 mr-4 ml-8" src="assets/images/logos/rewardLogo.png" alt="reward">
+          <b>{{ data.reward | prettify : 'pretty'}}</b>
+        </span>
+    </li>
+  </ul>
+  <!-- <div class="mat-subheading-1">Requirements:</div> -->
+  <ul class="required">
+    <li>
+      <span>
+          <b>Available Completion</b>:
+          <font class="green-fg s-16">{{data.available_completer}}</font>
+      </span>
+    </li>
+  </ul>
+</div>
+  

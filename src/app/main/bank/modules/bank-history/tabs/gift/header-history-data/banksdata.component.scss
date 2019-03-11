@@ -1,0 +1,38 @@
+@import "src/@fuse/scss/fuse";
+
+#dashboard-project-cards {
+    .card-counts{
+        margin-left: -5px;
+        padding: 5px;
+    }
+    width: 100%;
+    > .content {
+        flex: 1;
+    }
+    fuse-widget.widget.ng-trigger.ng-trigger-animate {
+        padding: 6px;
+    }
+    .copy-section {
+        padding: 6px;
+        mat-card.mat-card {
+            width: 100%;
+        }
+    }
+    .address-to-copy {
+        //   background-color: #cccc;
+        border-radius: 3px;
+        margin-left: 7px;
+        font-size: 15;
+        line-height: 20px;
+    }
+    .address {
+        margin-top: 9px;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 10px;
+
+    }
+    .rotation-loading {
+        animation: rotating 3s linear infinite;
+    }
+}

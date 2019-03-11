@@ -1,0 +1,35 @@
+<div id="dashboard-project">
+    <div class="widget-group" fxLayout="row" fxLayout.lt-md="column" [@animateStagger]="{value:'50'}" fxHide fxShow.gt-sm>
+
+        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+            <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                <div class="pt-8" fxLayout="column" fxLayoutAlign="center center">
+                    <div class="red-fg font-size-50 line-height-72">
+                        ${{ available | prettify : 'pretty' }}
+                    </div>
+                </div>
+                <div class="py-16" fxLayout="row" fxLayoutAlign="center center">
+                    <div class="h3">
+                      AVAILABLE BALANCE <br>
+                      <label class="minimum">(Minimum withdrawal is $25)</label>
+                    </div>
+                </div>
+            </div>
+        </fuse-widget>
+
+        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+            <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                <div class="pt-8" fxLayout="column" fxLayoutAlign="center center">
+                    <div class="red-fg font-size-50 line-height-72">
+                        ${{ paid | prettify : 'pretty'}}
+                    </div>
+                </div>
+                <div class="py-16" fxLayout="row" fxLayoutAlign="center center">
+                    <div class="h3">PAID</div>
+                </div>
+            </div>
+        </fuse-widget>    
+    </div>
+
+
+</div>

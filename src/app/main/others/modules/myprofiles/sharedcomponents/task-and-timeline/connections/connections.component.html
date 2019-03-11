@@ -1,0 +1,77 @@
+<div class="content-holder">
+    <mat-progress-bar mode="buffer" *ngIf="loadingTimeline"></mat-progress-bar>
+    <header>
+    <div class="mat-title px-16 pointer" (click)="back()">
+            <mat-icon aria-label="Example icon-button with a heart icon">arrow_back</mat-icon>
+            &nbsp;Connections
+        </div>
+      <div class="search-input-wrapper">
+        <mat-form-field floatLabel="never">
+          <input id="search" [(ngModel)]="searchKey" matInput placeholder="Search" (keyup.enter)="searchList(searchKey)">
+        </mat-form-field>
+        <mat-icon class="secondary-text" (click)="searchList(searchKey)">search</mat-icon>
+      </div>
+    </header>
+ 
+
+    
+
+
+  <div class="example-container">
+      <div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+          <mat-progress-bar mode="buffer" *ngIf="isLoadingResults"></mat-progress-bar>
+          <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+              Ative Task Kryptonia's API rate limit has been reached. It will be reset in one minute.
+          </div>
+      </div>
+     
+      <div class="example-table-container" >
+
+              <mat-table class="example-table" #table 
+                          [dataSource]="data" matSort 
+                          matSortActive="created"
+                          matSortDisableClear matSortDirection="asc"
+                          [@animateStagger]="{value:'50'}"
+                          fusePerfectScrollbar>
+                        
+        
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <img src="https://kimg.io/avatar/{{row.avatar}}" onError="this.src='assets/images/avatars/profile.jpg'" class="avatar w-28 h-28" />
+                        <span>
+                            <a (click)="navigateUsers(row.username, row.user_id)" class="user-followers-links"><strong>{{ row.name }}</strong></a>
+                        </span>
+                      
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="option">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                            <button mat-button [matMenuTriggerFor]="menu">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu">
+                                        <button mat-button ><img src="assets/svg/leaderboard/followgray.svg" class="avatar button-menu custom-size" />Follow</button> <br>                                 
+                                        <button mat-button><img src="assets/svg/leaderboard/giftgold.svg" class="avatar  button-menu custom-size" />Gift Coin</button>  <br>                                   
+                                        <button mat-button><img src="assets/svg/leaderboard/leaderboardgray.svg" class="avatar button-menu  custom-size" />Leaderboard</button> <br>                                    
+                                        <button mat-button><img src="assets/svg/Completers/cancel.svg" class="avatar button-menu custom-size"/>Block</button>
+                                            
+                                </mat-menu>
+                    </mat-cell>
+                </ng-container>
+         
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;" class="contact"
+                       [@animate]="{value:'*',params:{y:'100%'}}">
+                  </mat-row>
+              </mat-table>
+
+          </div>
+
+      <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+  </div>
+
+  </div>

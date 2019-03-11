@@ -1,0 +1,43 @@
+@import "src/@fuse/scss/fuse";
+
+.classic-tab {
+
+    .result-info {
+        padding-bottom: 16px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);   
+    }
+
+    .results {
+
+        .result-item {
+            margin-top: 32px;
+            max-width: 512px;
+
+            .title {
+                font-size: 17px;
+                font-weight: 500;
+                cursor: pointer;
+            }
+
+            .url {
+                margin-bottom: 4px;
+            }
+
+            .excerpt {
+                display: block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            &:last-child {
+                padding-bottom: 32px;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+                max-width: 100%;
+            }
+        }
+    }
+
+    .pager{
+        float: right;
+    }
+}

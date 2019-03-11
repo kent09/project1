@@ -1,0 +1,23 @@
+<div class="content-holder">
+  <div class="close" (click)="onNoClick()"><mat-icon>close</mat-icon></div>
+  <div class="mat-subheading-2 mb-12">
+    <a [routerLink]="[ '/others/profile', data.username ]" (click)="onNoClick()"><b>{{ data.name }}</b></a>
+  </div>
+  <div class="mb-12">
+      <span class="mr-4">Registered Date:</span>
+      <span>{{ data.registered_date | date:'short' }}</span>
+  </div>
+  <div class="reward mb-12">
+    <span>Rewards:</span>
+    <span class="display-flex">
+      <img class="avatar w-16 h-16 mr-4 ml-8" src="assets/images/logos/rewardLogo.png" alt="reward">
+      <b>{{ data.reward | prettify : 'pretty'}}</b>
+    </span>
+  </div>
+
+  <div class="status">
+    <span class="mr-8">Status:</span>
+    <span class="{{data.status}}">{{data.status}}</span>
+  </div>
+</div>
+    

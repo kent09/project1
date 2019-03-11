@@ -1,0 +1,30 @@
+<!-- <div class="confirm-dialog">
+
+    <mat-card class="example-card-logout-confirm">
+        <mat-card-header>
+            <mat-card-title>Are you sure you want to logout ?</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image  src="assets/images/logout.png">
+        <mat-card-content>
+            <p>
+                We are a fully Decentralized Network.
+                Thank you for using kryptonia
+            </p>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-button class="mat-accent mr-16" (click)="matDialogRef.close(true)">Confirm</button>
+            <button mat-button (click)="matDialogRef.close(false)">Cancel</button>
+        </mat-card-actions>
+    </mat-card>
+</div> -->
+<div class="confirm-dialog">
+    <div class="mat-title">Are you sure you want to logout ?</div>
+    <div class="img-holder">
+        <img class="w-100-p"  src="assets/images/logos/logout.png" alt="kryptonia">
+    </div>
+    <div class="btn-holder">
+        <button class="mat-accent w-100-p pointer" (click)="matDialogRef.close(false)">No, take me back</button>
+        <a class="confirm pointer" (click)="matDialogRef.close(true)">Yes, I want to logout</a>
+    </div>
+    <footer>We are a fully Decentralized Network. Thank you for using Kryptonia</footer>
+</div>

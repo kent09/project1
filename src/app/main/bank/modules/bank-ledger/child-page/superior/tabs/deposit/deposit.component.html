@@ -1,0 +1,99 @@
+<div class="deposit">
+    <div class="filter py-16">
+        <div class="search-input-wrapper">
+            <mat-form-field floatLabel="never">
+            <input id="search" matInput placeholder="Search" (keyup.enter)="onSearchChange($event.target.value)">
+            </mat-form-field>
+            <mat-icon class="secondary-text">search</mat-icon>
+        </div>
+        <div class="calendar">
+            <mat-form-field>
+            <input matInput [matDatepicker]="dp3" placeholder="Select Date" 
+            (dateInput)="addEvent($event.value)" (dateChange)="addEvent( $event.value)" [(ngModel)]="myDate">
+            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+
+  <div class="example-loading-shade"  *ngIf="isLoadingResults || isRateLimitReached">
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoadingResults"></mat-progress-bar>
+        <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">Please try to reload!</div>
+  </div>
+
+  <div class="example-table-container">
+
+      <mat-table class="example-table" #table 
+                                  [dataSource]="data" matSort 
+                                  matSortActive="created"
+                                  matSortDisableClear matSortDirection="asc"
+                                  [@animateStagger]="{value:'50'}"
+                                  fusePerfectScrollbar>
+
+      <ng-container matColumnDef="block">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="title" fxLayout="row" fxHide fxShow.gt-xs>Block Height</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxLayout="row" fxHide fxShow.gt-xs>
+              {{ row.block }}
+          </mat-cell>
+          
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="title">Amount</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+              {{ row.amount }}
+          </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tx_id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="title" fxLayout="row" fxHide fxShow.gt-xs>TX ID</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxLayout="row" fxHide fxShow.gt-xs>
+                <b class="small-name text-boxed">
+                        {{ row.tx_id  }}
+                </b>
+          </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="date_received">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="title" fxLayout="row" fxHide fxShow.gt-sm>Date Received</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxLayout="row" fxHide fxShow.gt-sm>
+              {{ row.date_received | date }}
+          </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="title" fxLayout="row" fxHide fxShow.gt-xs>Status</mat-header-cell>
+          <mat-cell *matCellDef="let row" fxLayout="row" fxHide fxShow.gt-xs>
+            <div class="chip {{row.status}}">{{ row.status }}</div>
+          </mat-cell>
+      </ng-container>
+        <ng-container matColumnDef="option">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="title" fxHide fxShow.lt-sm>Option</mat-header-cell>
+            <mat-cell *matCellDef="let row" fxHide fxShow.lt-sm>
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="showDetail(row)">
+                        <mat-icon>details</mat-icon>
+                        <span>Details</span>
+                    </button>
+                </mat-menu>
+            </mat-cell>
+        </ng-container>
+
+
+      <mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="contact" 
+          matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+      </mat-row>
+  </mat-table>
+    <div *ngIf="!data" class="no-record">
+        <p>{{ no_record }}</p>
+    </div>
+
+  </div>
+  
+  <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+  
+</div>

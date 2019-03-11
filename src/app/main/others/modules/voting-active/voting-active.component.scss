@@ -1,0 +1,56 @@
+@import "src/@fuse/scss/fuse";
+    table {
+        width: 100%;
+    }
+
+    .custom-margins {
+        margin-top: 20px !important;
+    }
+    .main-header{
+        .general{
+            font-size: 20px;
+
+            .active{
+                color: #27AE60;
+                font-weight: 400;
+            }
+        }
+
+    }
+
+    .search {
+        height: 36px;
+        border-radius: 21px;
+        line-height: 36px;
+        padding: 8px;
+        background: #ffffff;
+        font-size: 13px;
+        @include mat-elevation(1);
+
+        .icon {
+            margin: 0;
+            color: rgba(0, 0, 0, 0.54);
+        }
+
+        input {
+            padding-left: 12px;
+            height: 36px;
+            color: rgba(0, 0, 0, 0.54);
+            border: none;
+        }
+    }
+    .header-holder {
+        display: flex;
+        align-items: center; 
+        @include media-breakpoint('lt-sm') {
+            display: block;
+        }
+        .filter-section{
+            display: flex;
+            align-items: center;
+        }
+        .mat-card-content {
+            margin-left: auto;
+        }
+    }
+

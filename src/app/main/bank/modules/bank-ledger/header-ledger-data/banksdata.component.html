@@ -1,0 +1,244 @@
+<div id="dashboard-project">
+
+    <div class="widget-group" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" [@animateStagger]="{value:'50'}"
+        fxHide fxShow.lt-md>
+
+        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100">
+            <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                <ul>
+                    <li>
+                        <div>
+                            <span class="label">Total:</span>
+                            <span *ngIf="bankBalanceData" class="result red-fg">
+                                {{ bankBalanceData.total }}
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="label">Available:</span>
+                            <span *ngIf="bankBalanceData" class="result red-fg">
+                                {{ bankBalanceData.available }}
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="label">On Hold:</span>
+                            <span *ngIf="bankBalanceData" class="result red-fg">
+                                {{ bankBalanceData.on_hold }}
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="label">Pending Receive:</span>
+                            <span *ngIf="bankBalanceData" class="result red-fg">
+                                {{ bankBalanceData.pending_receive }}
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="label">Premined Coins:</span>
+                            <span *ngIf="bankBalanceData" class="result red-fg">
+                                {{ bankBalanceData.premined_coins  }}
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="label">Bonus Coins:</span>
+                            <span *ngIf="bankBalanceData" class="result red-fg">
+                                {{ bankBalanceData.bonus_coins }}
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </fuse-widget>
+    </div>
+
+
+    <div class="widget-group" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" [@animateStagger]="{value:'50'}"
+        fxHide fxShow.gt-sm>
+
+        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100"
+            fxFlex.gt-xs="50" fxFlex.gt-md="25">
+            <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                <div class="pt-8" fxLayout="column" fxLayoutAlign="center center">
+                    <div *ngIf="bankBalanceData" class="red-fg font-size-32 line-height-72">
+                        {{ bankBalanceData.total }}
+                         <!-- {{ bankBalanceData.total | prettify : 'pretty' }} -->
+                    </div>
+                </div>
+                <div class="py-16" fxLayout="row" fxLayoutAlign="center center">
+                    <div class="h3">Total</div>
+                </div>
+            </div>
+        </fuse-widget>
+
+        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100"
+            fxFlex.gt-xs="50" fxFlex.gt-md="25">
+            <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                <div class="pt-8" fxLayout="column" fxLayoutAlign="center center">
+                    <div *ngIf="bankBalanceData" class="red-fg font-size-32 line-height-72">
+                        {{ bankBalanceData.available}}
+                    </div>
+                </div>
+                <div class="py-16" fxLayout="row" fxLayoutAlign="center center">
+                    <div class="h3">AVAILABLE</div>
+                </div>
+            </div>
+        </fuse-widget>
+
+        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100"
+            fxFlex.gt-xs="50" fxFlex.gt-md="25">
+            <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                <div class="pt-8" fxLayout="column" fxLayoutAlign="center center">
+                    <div *ngIf="bankBalanceData" class="red-fg font-size-32 line-height-72">
+                        {{ bankBalanceData.on_hold }}
+                    </div>
+                </div>
+                <div class="py-16" fxLayout="row" fxLayoutAlign="center center">
+                    <div class="h3">ON HOLD</div>
+                </div>
+            </div>
+        </fuse-widget>
+    </div>
+    <div class="widget-group" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" [@animateStagger]="{value:'50'}"
+        fxHide fxShow.gt-sm>
+        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100"
+            fxFlex.gt-xs="50" fxFlex.gt-md="25">
+            <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                <div class="pt-8" fxLayout="column" fxLayoutAlign="center center">
+                    <div *ngIf="bankBalanceData" class="red-fg font-size-32 line-height-72">
+                        {{ bankBalanceData.pending_receive }}
+                    </div>
+                </div>
+                <div class="py-16" fxLayout="row" fxLayoutAlign="center center">
+                    <div class="h3">PENDING RECEIVE</div>
+                </div>
+            </div>
+        </fuse-widget>
+
+        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100"
+            fxFlex.gt-xs="50" fxFlex.gt-md="25">
+            <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                <div class="pt-8" fxLayout="column" fxLayoutAlign="center center">
+                    <div *ngIf="bankBalanceData" class="red-fg font-size-32 line-height-72">
+                        {{ bankBalanceData.premined_coins  }}
+                    </div>
+                </div>
+                <div class="py-16" fxLayout="row" fxLayoutAlign="center center">
+                    <div class="h3">PREMINED COINS</div>
+                </div>
+            </div>
+        </fuse-widget>
+
+        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100"
+            fxFlex.gt-xs="50" fxFlex.gt-md="25">
+            <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                <div class="pt-8" fxLayout="column" fxLayoutAlign="center center">
+                    <div *ngIf="bankBalanceData" class="red-fg font-size-32 line-height-72">
+                        {{ bankBalanceData.bonus_coins }}
+                    </div>
+                </div>
+                <div class="py-16" fxLayout="row" fxLayoutAlign="center center">
+                    <div class="h3 ">BONUS COINS</div>
+                </div>
+            </div>
+        </fuse-widget>
+    </div>
+
+
+    <!-- <div class="widget-group copy-section address-section" [@animateStagger]="{value:'50'}">
+        <mat-card fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="space-between center"
+            fxLayoutAlign.sm="start" fxLayoutAlign.xs="start">
+
+            <div class=" address black-fg">
+                Integrated &nbsp;
+            </div>
+            <div *ngIf="bankBalanceData" class="black-fg address-to-copy">
+                {{ bankBalanceData.address }}
+            </div>
+            <mat-progress-bar mode="buffer" *ngIf="isLoading"></mat-progress-bar>
+            <button *ngIf="!isLoading" (click)="copyData('code', bankBalanceData.address)" mat-button mat-accent color="accent"
+                aria-label="Code">Copy Code
+                <mat-icon>content_copy</mat-icon>
+            </button>
+            <button *ngIf="!isLoading" mat-button mat-accent color="accent" aria-label="Code" (click)="resync()">Resync
+                Wallet
+                <mat-icon>autorenew</mat-icon>
+                <mat-progress-bar mode="buffer"></mat-progress-bar>
+            </button>
+        </mat-card>
+
+    </div> -->
+
+
+    <div class="widget-group copy-section address-section" [@animateStagger]="{value:'50'}">
+        <mat-card fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="space-between center"
+            fxLayoutAlign.sm="start" fxLayoutAlign.xs="start">
+            <mat-card-content>
+                <mat-progress-bar mode="buffer" *ngIf="isLoading"></mat-progress-bar>
+                <div class="standard">
+                    <div class="address black-fg">
+                        Standard &nbsp;
+                    </div>
+                    <div *ngIf="bankBalanceData" class="black-fg address-to-copy">
+                        {{ bankBalanceData.standard_address }}
+                    </div>
+                </div>
+
+                <div class="payment-id">
+                    <div class="address black-fg">
+                        Payment ID &nbsp;
+                    </div>
+                    <div *ngIf="bankBalanceData" class="black-fg address-to-copy">
+                        {{ bankBalanceData.payment_id }}
+                    </div>
+                </div>
+                <div class="integrated">
+                    <div class=" address black-fg">
+                        Integrated &nbsp;
+                    </div>
+                    <div *ngIf="bankBalanceData" class="black-fg address-to-copy">
+                        {{ bankBalanceData.address }}
+                    </div>
+                </div>
+
+                <div class="action-button">
+
+                    <div class="button-standard">
+                        <button mat-button *ngIf="!isLoading" (click)="StandardcopyData('code2',  bankBalanceData.standard_address)"
+                            mat-button mat-accent color="accent" aria-label="Code" title="Copy Standard Address">Copy Standard
+                            <mat-icon>file_copy</mat-icon>
+                        </button>
+                    </div>
+
+                    <div class="button-payment-id">
+                        <button mat-button *ngIf="!isLoading" (click)="PaymentIDcopyData('code3',  bankBalanceData.payment_id)"
+                            mat-button mat-accent color="accent" aria-label="Code" title="Copy Payment ID">Copy Payment ID
+                            <mat-icon>code</mat-icon>
+                        </button>
+                    </div>
+                    <div class="copy-integrated">
+                        <button mat-button *ngIf="!isLoading" (click)="copyData('code', bankBalanceData.address)"
+                            mat-button mat-accent color="accent" aria-label="Code" title="Copy Integrated Address">Copy Integrated
+                            <mat-icon>content_copy</mat-icon>
+                        </button>
+                    </div>
+                    <div class="button-resync">
+                        <button mat-button *ngIf="!isLoading" mat-button mat-accent color="accent" aria-label="Code"
+                            (click)="resync()">Resync
+                            Wallet
+                            <mat-icon>autorenew</mat-icon>
+                            <mat-progress-bar mode="buffer"></mat-progress-bar>
+                        </button>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

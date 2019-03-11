@@ -1,0 +1,413 @@
+@import "src/@fuse/scss/fuse";
+
+#checkout {
+
+    .content {
+        flex: 1 0 auto;
+        .bundle-form {
+            min-width: 150px;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .bundle-full-width {
+            width: 100%;
+        }
+            .widget-group{ 
+            
+           
+            .fuse-widget-front{
+                width: 137%;
+
+                                               
+            .h-400 {
+
+                padding-top: 6px !important;
+                margin-left: 10px !important;
+                
+                .plan_name{
+
+                    .type, .detail, .monthly{
+                        color: #262626;
+                        font-size: 16px;
+                        font-weight:500;
+                    }
+                    .badge{
+                        img{
+                            width: 22%;
+                            float: right;
+                            margin-top: -37px;
+                            margin-right: 20px;
+                        }
+                    }
+                    
+                    .price{
+                        color: #4267b2;
+                        float: right;
+                        margin-right: 17px;
+                        margin-top: -44px;
+                        font-size: 16px;
+                    }
+                    .priceby{
+                        color: #8D8585;
+                        float: right;
+                        margin-right: 17px;
+                        margin-top: -44px;
+                        font-size: 16px;
+                    }
+                    .terms{
+                        color: #8D8585;
+                        text-indent: 20px;
+                        line-height: 200%;
+                    }
+                    .charged{
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: normal;
+                        font-size: 16px;
+                        color: #262626;
+                    }
+                    .mode{
+
+                        .charged{
+                            font-style: normal;
+                            font-weight: 500;
+                            line-height: normal;
+                            font-size: 16px;
+                            color: #262626;
+                        }   
+                        .option{
+                            float: right;
+                            display: block;
+                            margin-top: -19px;
+
+                            .example-margin {
+                                margin: 0 10px;
+                              }
+                        }                      
+                    }
+                    .payment-option{
+                        margin-bottom: 21px;
+                        margin-top: 20px;
+                        .charged{
+                            font-style: normal;
+                            font-weight: 500;
+                            line-height: normal;
+                            font-size: 16px;
+                            color: #262626;
+                        }
+
+                        .bundle{
+                            float: right;
+                            margin-top: -49px;
+                            padding-right: 10px;
+
+                        }
+                       
+                    }
+                }
+                img{
+                    width: 90%;
+                }
+                .line{
+                    border: 1px solid #E8E8E8;
+                }
+
+                .sub-detail{
+                    .subtotal{
+                        color: #8D8585;
+                    }
+                    .amount{
+                        float: right;
+                        margin-right: 17px;
+                        margin-top: -44px;
+                        font-size: 16px;
+                    }
+                }
+                .charge-detail{
+                    .subtotal{
+                        color: #8D8585;
+                    }
+                    .amount{
+                        float: right;
+                        margin-right: 17px;
+                        margin-top: -44px;
+                        font-size: 16px;
+                    }
+                }
+                .Total-detail{
+                    .total{
+                        color: #8D8585;
+                    }
+                    .amount{
+                        float: right;
+                        margin-right: 17px;
+                        margin-top: -44px;
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            .px-16 {
+                padding: 16px 16px  16px  16px  !important;
+                .h3{
+                    font-size: 16px !important;
+                    text-transform: uppercase !important;
+                    font-weight: 500 !important;
+
+                    img{
+                        height: 25px;
+                    }
+                } 
+
+                .time{
+                    .date{
+                        margin-top: 28px;
+                    }
+                }
+               
+
+            }
+            .invoice-table {
+                margin-top: 96px;
+                font-size: 15px;
+
+                .title {
+                    font-size: 17px;
+                }
+
+                .detail {
+                    margin-top: 8px;
+                    font-size: 12px;
+                    color: rgba(0, 0, 0, 0.54);
+                    max-width: 360px;
+                }
+            }
+            .footer {
+
+                margin-left: 17px;
+
+                .note {
+                    font-size: 15px;
+                    font-weight: 500;
+                    margin-bottom: 24px;
+                }
+
+                // IE10 fix
+                .logo, .small-note {
+                    -ms-flex: 0 1 auto;
+                }
+
+                .logo {
+                    width: 32px;
+                    min-width: 32px;
+                    margin-right: 24px;
+                }
+
+                .small-note {
+                    font-size: 12px;
+                    font-weight: 500;
+                    color: rgba(0, 0, 0, 0.54);
+                    line-height: 18px;
+                }
+            }
+
+            }   
+            
+            .fuse-widget-front2{
+                width: 60% !important;
+                margin-left: 206px !important;        
+                .h-400 {
+    
+                    padding-top: 6px !important;
+                    margin-left: 10px !important;
+       
+                    .plan_name{
+    
+                        .type, .detail, .monthly{
+                            color: #262626;
+                            font-size: 16px;
+                            font-weight:500;
+                        }
+                        .badge{
+                            img{
+                                width: 38%;
+                                float: right;
+                                margin-top: -37px;
+                                margin-right: 20px;
+                            }
+                        }
+                        
+                        .price{
+                            color: #4267b2;
+                            float: right;
+                            margin-right: 17px;
+                            margin-top: -44px;
+                            font-size: 16px;
+                        }
+                        .priceby{
+                            color: #8D8585;
+                            float: right;
+                            margin-right: 17px;
+                            margin-top: -44px;
+                            font-size: 16px;
+                        }
+                        .charged{
+                            font-style: normal;
+                            font-weight: 500;
+                            line-height: normal;
+                            font-size: 16px;
+                            color: #262626;
+                        }
+                        .mode{ 
+                            .option{
+                                float: right;
+                                display: block;
+                                margin-top: -19px;
+    
+                                .example-margin {
+                                    margin: 0 10px;
+                                  }
+                            }                      
+                        }
+
+                    }
+                    img{
+                        width: 90%;
+                    }
+                    .line{
+                        border: 1px solid #E8E8E8;
+                    }
+    
+                    .sub-detail{
+                        .subtotal{
+                            color: #8D8585;
+                        }
+                        .amount{
+                            float: right;
+                            margin-right: 17px;
+                            margin-top: -44px;
+                            font-size: 16px;
+                        }
+                    }
+                    .charge-detail{
+                        .subtotal{
+                            color: #8D8585;
+                        }
+                        .amount{
+                            float: right;
+                            margin-right: 17px;
+                            margin-top: -44px;
+                            font-size: 16px;
+                        }
+                    }
+                    .Total-detail{
+                        .total{
+                            color: #8D8585;
+                        }
+                        .amount{
+                            float: right;
+                            margin-right: 17px;
+                            margin-top: -44px;
+                            font-size: 16px;
+                        }
+                    }
+                    .payment-option {
+                        padding : 10px
+                    }
+                    .cta-button{
+                        
+                        width: 100%;
+                        height: 45px;
+                        margin-left: -4px;
+                        // background: #4268B3;
+                        font-size: 18px;
+                        // color: #FFFFFF;
+                        // box-shadow: none;
+                        // margin-right: 17px;
+                        margin-bottom: 10px;
+                    }
+                    .cancel{
+                        height: inherit;
+                        
+                    }
+                }
+    
+                .px-16 {
+                    padding: 16px 16px  16px  16px  !important;
+                    .h3{
+                        font-size: 16px !important;
+                        text-transform: uppercase !important;
+                        font-weight: 500 !important;
+    
+                        img{
+                            height: 25px;
+                        }
+                    } 
+    
+                    .time{
+                        .date{
+                            margin-top: 28px;
+                        }
+                    }
+                   
+                }
+                }     
+              
+        }    
+    }
+
+}
+
+.sub-content {
+    padding: 10px 0 50px 10px;
+    .price{
+        color: #4267b2;
+        float: right;
+        margin-right: 17px;
+        margin-top: -44px;
+        font-size: 16px;
+    }
+    .charged{
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        font-size: 16px;
+        color: #262626;
+    }
+    .terms{
+        color: #8D8585;
+        text-indent: 20px;
+        line-height: 200%;
+        padding-bottom: 10px
+    }
+    .payment-bundle {
+        width: 100%;
+    }
+    .mode{
+
+        .charged{
+            padding-left: 3px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            font-size: 16px;
+            color: #262626;
+        }   
+        .option{
+            float: right;
+            display: block;
+            margin-top: -19px;
+
+            .example-margin {
+                margin: 0 10px;
+              }
+        }                      
+    }
+    .bundle-dropdown {
+        text-align : right;
+        width:32%;
+        padding : 20px;
+        
+    }
+}

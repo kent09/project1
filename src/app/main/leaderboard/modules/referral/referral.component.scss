@@ -1,0 +1,125 @@
+@import "src/@fuse/scss/fuse";
+table {
+    width: 100%;
+}
+
+.header{
+
+    .username, .referrer-name, .total{
+        text-transform: uppercase;
+    }
+
+    .referrer-name a{ 
+        text-transform: lowercase;
+
+    }
+
+    .header-image{
+        .avatar{
+            background-size: cover;
+            height: 85px;
+            min-width: 85px;
+        
+        }
+    }
+
+    .leaderboard-button{
+        float: right;
+        margin-top: -59px;
+    }
+}
+.chip {
+    padding: 5px 10px;
+    border: 1px solid;
+    text-align: center;
+    border-radius: 20px;
+}
+.active {
+    color: #4caf50;
+}
+.avatar {
+    
+    margin-top: -9px;
+    margin-bottom: -6px;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: bolder;
+    color: #464646;
+}
+
+
+  
+  .header-image {
+    background-size: cover;
+    height: 85px;
+    min-width: 85px;;      
+  }
+.content{ 
+
+        .counter-referral{
+            h1 {
+                font-size: 18px;
+                float: left;
+                margin-left: 28px;
+                margin-top: 20px;
+                text-transform: uppercase;
+                @include media-breakpoint('xs') {
+                    float: none;
+                }
+                .total-earned{
+
+                    color: rgba(0, 0, 0, 0.54);
+                }
+            }
+        }
+        .sorting{
+            display: flex;
+            margin-right: 28px;
+            @include media-breakpoint('xs') {
+                display: block;
+                margin: 10px 15px;
+            }
+            .level {
+                margin-left: auto; 
+            }
+            .mat-form-field {
+                @include media-breakpoint('xs') {
+                    display: block;
+                }
+            }
+        }
+        .pointer {
+            cursor: pointer;
+        }
+
+}
+.mat-column-name, 
+.mat-column-referrer {
+    margin-right: 10px; 
+    div {
+        display: flex;
+        align-items: center;
+    }
+    a, a:not(.mat-button):not(.mat-raised-button):not(.mat-icon-button):hover {
+        color: #4267b2;
+        text-decoration: none;
+    }
+}
+.mat-column-task_points {
+    @include media-breakpoint('xs') {
+        justify-content: center;
+    }
+}
+.chip {
+    border: 1px solid;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+.mat-column-avatar {
+    flex: 0 1 70px;
+}
+.mat-column-button {
+    flex: 0 1 90px;
+}

@@ -1,0 +1,31 @@
+<div class="content-holder">
+    <div class="close" (click)="onNoClick()"><mat-icon>close</mat-icon></div>
+    <div class="mb-12">
+        <span class="mr-4">Purchased Date:</span> <br>
+        <span>{{ history.created_at | date }} </span>
+    </div>
+    <span class="display">
+        Membership Type:
+        <br>
+       <img class="avatar" src="assets/svg/badges/badge-{{history.role_info.slug}}.svg" alt="badge">
+    </span>
+    <div class="mb-12">
+        <span class="mr-4">Charge By:</span>
+        <span>{{ history.updated_at | date }} </span>
+    </div>
+    <div class="reward mb-12">
+      <span>Amount: &nbsp; </span>
+      <span class="display-flex">
+        <b> ${{ history.amount }}</b>
+      </span>
+    </div>
+    <div class="status">
+        <span class="mr-8">Status:</span>
+        <div class="{{ history.status_info.text}} chip">
+            {{ history.status_info.text}}
+          </div>
+      </div>
+  
+    
+  </div>
+      

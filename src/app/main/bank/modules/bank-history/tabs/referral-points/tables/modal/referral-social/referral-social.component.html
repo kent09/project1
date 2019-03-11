@@ -1,0 +1,38 @@
+<div class="content-holder">
+  <div class="close" (click)="onNoClick()"><mat-icon>close</mat-icon></div>
+  <div class="mat-subheading-2 mb-12">
+    <a [routerLink]="[ '/others/profile', data.username ]" (click)="onNoClick()"><b>{{ data.account_name }}</b></a>
+  </div>
+  <div class="mb-12">
+      <span class="mr-4">Connected Date:</span>
+      <span>{{ data.connected | date:'short' }}</span>
+  </div>
+  <div class="social-media mb-12">
+    <span class="mr-4">
+      Social Media Type:
+    </span>
+    <span>
+      <mat-icon *ngIf="data.social_media_type == 'global'">public</mat-icon>
+      <i *ngIf="data.social_media_type == 'facebook'" class="fb w-24 h-24"></i>
+      <i *ngIf="data.social_media_type == 'twitter'" class="twitter w-24 h-24"></i>
+      <i *ngIf="data.social_media_type == 'google-plus'" class="g-plus w-24 h-24"></i>
+      <i *ngIf="data.social_media_type == 'instagram'" class="instagram w-24 h-24"></i>
+      <i *ngIf="data.social_media_type == 'linkedin'" class="linkedin w-24 h-24"></i>
+      <i *ngIf="data.social_media_type == 'kblog'" class="kblog w-24 h-24"></i>
+      <i *ngIf="data.category == 'youtube'" class="youtube w-24 h-24"></i>
+      <i *ngIf="data.category == 'steemit'" class="steemit w-24 h-24"></i>
+    </span>
+  </div>
+  <div class="reward mb-12">
+    <span>Rewards:</span>
+    <span class="display-flex">
+      <img class="avatar w-16 h-16 mr-4 ml-8" src="assets/images/logos/rewardLogo.png" alt="reward">
+      <b>{{ data.reward | prettify : 'pretty'}}</b>
+    </span>
+  </div>
+
+  <div class="status">
+    <span class="mr-8">Status:</span>
+    <span class="{{data.status}}">{{data.status}}</span>
+  </div>
+</div>

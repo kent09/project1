@@ -1,0 +1,104 @@
+<div id="profile" class="page-layout simple tabbed">
+
+    <!-- HEADER -->
+    <div class="header p-24" 
+        [ngStyle]="{'background-image': (taskDetails.task.image) ? 'url('+ getTaskImg(taskDetails.task.image)+')' : 'url(/assets/images/backgrounds/header-bg.png)'}" 
+        fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between end">
+
+        <div class="user-info" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start center">
+            <img class="profile-image avatar huge" [src]="avatarImagePath(taskDetails.task.user_id)" onError="this.src='assets/images/avatars/profile.jpg'"
+                [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+            <div class="name" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                <span class="toUpperCase">{{taskDetails.author_name}}</span>
+                <br>
+                <small class="small-name">
+                  Member since:
+                    <span class="member"> {{taskDetails.author_register_date | date}}</span>
+                </small>
+                <br>
+                <div class="actions socials" 
+                    [@animate]="{value:'*',params:{delay:'200ms'}}" 
+                    *ngIf="taskDetails.fb_connect || 
+                        taskDetails.twitter_connect || 
+                        taskDetails.instagram_connect ||
+                        taskDetails.steemit_connect">
+                    
+                   <a *ngIf="taskDetails.fb_connect.connected" href="{{taskDetails.fb_connect.link}}">
+                       <img alt="facebook" src="assets/svg/socials/fb.svg">
+                    </a>
+                    <!-- <a *ngIf="taskDetails.google_connect.connected" href="{{taskDetails.google_connect.link}}">
+                            <img  alt="google" src="assets/svg/socials/google-plus-color.svg">
+                    </a> -->
+                    <a  *ngIf="taskDetails.twitter_connect.connected" href="{{taskDetails.twitter_connect.link}}">
+                            <img alt="twitter" src="assets/svg/socials/twitter-color.svg">
+                    </a>
+                    <a  *ngIf="taskDetails.instagram_connect.connected" href="{{taskDetails.instagram_connect.link}}">
+                            <img alt="instagram" src="assets/svg/socials/instagram.svg">
+                    </a>
+                    <a *ngIf="taskDetails.steemit_connect.connected" href="{{taskDetails.steemit_connect.link}}">
+                            <img alt="steemit" src="/assets/svg/socials/steemit.svg">
+                    </a>
+                    
+
+                </div>
+                <br>
+            </div>
+        </div>
+
+        <div class="actions" fxLayout="row" fxLayoutAlign="end center" [@animate]="{value:'*',params:{delay:'200ms'}}">
+
+            <button *ngIf="taskDetails.task.user_id != userinfo.user_id" mat-raised-button color="warn" aria-label="Follow" (click)="taskActions('giftcoin')">Gift Coin</button>
+            <button *ngIf="(taskDetails.task.user_id != userinfo.user_id) && !isfollower" mat-raised-button color="accent" aria-label="Follow" (click)="followAction(taskDetails.task.user_id,false)">Follow</button>
+            <button *ngIf="(taskDetails.task.user_id != userinfo.user_id) && isfollower" mat-raised-button color="accent" aria-label="Follow" (click)="followAction(taskDetails.task.user_id,true)">Unfollow</button>
+
+            <button mat-raised-button class="mat-green-bg btn-text-gift" [matMenuTriggerFor]="projectsMenu" aria-label="Select project">
+                Action
+                <mat-icon>more_vert</mat-icon>
+            </button>
+
+            <mat-menu #projectsMenu="matMenu">
+                <button mat-menu-item (click)="taskActions('previewtask')">
+                    <span>Preview Task</span>
+                </button>
+                <button (click)="apiCallHideTask()" *ngIf="!ismyTask && !taskDetails.completed" mat-menu-item>
+                    <span>Hide</span>
+                </button>
+                <button (click)="updateTask(taskDetails.task.slug)" *ngIf="ismyTask || isadmin" mat-menu-item>
+                    <span >Edit</span>
+                </button>
+                <button *ngIf="ismyTask || isadmin" mat-menu-item (click)="taskActions('deactivatetask')">
+                    <span>Deactivate</span>
+                </button>
+            </mat-menu>
+        </div>
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <mat-tab-group dynamicHeight="true" [selectedIndex]="selectedIndex">
+
+
+            <mat-tab label="About">
+                <profile-about (showCompleter)="showCompleters()" [requirements]=taskDetails></profile-about>
+            </mat-tab>
+             
+            <mat-tab label="List of Completers" *ngIf="taskDetails.task.user_id == userinfo.user_id">
+                    <app-completer-list [slug]="slug"></app-completer-list>
+            </mat-tab>
+
+            <mat-tab label="List of Revoked Completers" *ngIf="taskDetails.task.user_id == userinfo.user_id">
+                    <revoke-completer-list  [slug]="taskDetails.task.id" ></revoke-completer-list>
+            </mat-tab>
+            <mat-tab label="Related Task" *ngIf="mobile">
+                    <app-related-task></app-related-task>
+            </mat-tab>
+
+        </mat-tab-group>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>

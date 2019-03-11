@@ -1,0 +1,155 @@
+<div id="checkout" class="page-layout simple fullwidth grey-100-bg">
+
+    <!-- CONTENT -->
+    <div class="content p-24 w-100-p">
+
+        <div class="widget-group" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="start start" [@animateStagger]="{value:'50'}">
+
+            <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100"
+                fxFlex.gt-sm="50">
+                <!-- Front -->
+                <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+
+                    <div class="px-16 border-bottom" fxLayout="row" fxLayoutAlign="space-between center">
+                        <div class="h3">You are about to subscribe a Plan</div> <br>
+                    </div>
+                    <div class="sub-content">
+                        <div class="plan_name">
+                            <h2 class="type">{{membership.title}}</h2>
+                            <span class="price"> 
+                                <span style="text-decoration: line-through;">${{membership.price}}</span>
+                                 <p>${{discounted | number : '0.1-2'}}</p>
+                            </span>
+                            <div class="terms" fxLayout="column">
+                                <div class="term" *ngFor="let item of membership.perks">
+                                    {{item}}
+                                </div>
+                            </div>
+
+                            <div class="payment-option">
+
+                                <table class="payment-bundle">
+                                    <tr>
+                                        <td>
+                                            <div class="charged">How would like to be charged?</div>
+                                        </td>
+                                        <td class="bundle-dropdown">
+                                            <!-- <div class="bundle"> -->
+                                            <!--<form>
+                                                         <mat-form-field class="bundle-full-width">
+                                                        <input type="text" placeholder="Bundle" aria-label="Bundle"
+                                                            matInput [formControl]="myControl" [matAutocomplete]="auto">
+                                                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                                            <mat-option *ngFor="let option of filteredOptions | async"
+                                                                [value]="option">
+                                                                {{ option.bundle }}
+                                                            </mat-option>
+                                                        </mat-autocomplete>
+                                                    </mat-form-field>
+                                                </form> -->
+
+                                            <mat-form-field>
+                                                <mat-select placeholder="Bundle" (selectionChange)="change($event)" style="height: 50px;">
+                                                    <mat-option *ngFor="let option of options" [value]="option.month">
+                                                        {{option.label}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                            <!-- </div> -->
+                                        </td>
+                                    </tr>
+                                </table>
+
+
+                            </div>
+
+                            <div class="mode">
+                                <div class="charged">Mode of Payments</div>
+                                
+                                <div class="option">
+                                    <mat-radio-group [(ngModel)]="modePayment">
+                                        <mat-radio-button class="example-margin" value="Paypal">Paypal</mat-radio-button>
+                                        <!-- <mat-radio-button class="example-margin" value="BTC">BTC (Bal 0.0253)</mat-radio-button> -->
+                                    </mat-radio-group>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- / Front -->
+
+            </fuse-widget>
+            <!-- / Front -->
+
+            <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100"
+                fxFlex.gt-sm="50">
+                <!-- Front -->
+                <div class="fuse-widget-front2 mat-white-bg mat-elevation-z2">
+                        <!-- <img src="/assets/svg/kryptonia-new.svg" fxLayoutAlign="start center"> -->
+
+                    <div class="px-16 border-bottom" fxLayout="row" fxLayoutAlign="space-between center">
+                        <div class="h3">
+                            <img src="/assets/images/logos/kryptonia-word-logo.png" alt="logo">
+
+                        </div>
+                        <div class="time">
+                            <span class="date">{{date | date : 'longDate'}}</span>
+                            <mat-icon class="calendar">date_range</mat-icon>
+                        </div>
+                    </div>
+                    <div class="h-400">
+
+                        <div class="plan_name">
+                            <h2 class="type">{{membership.title}}</h2>
+                            <p class="badge"><img src="/assets/svg/badges/badge-{{membership.slug}}.svg" alt="badge"></p>
+                            <div class="final" fxLayout="column">
+                                <div class="charge" >
+                                    <p class="monthly">Charged by {{bundle}} Month/s</p>
+                                    <p class="priceby">$ {{subtotal | number : '0.1-2'}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="line">
+                        <h2 class="detail">Purchase Details</h2>
+                        <div class="sub-detail">
+                            <p class="subtotal">SUBTOTAL</p>
+                            <p class="amount">$ {{subtotal | number : '0.1-2'}}</p>
+                        </div>
+                        <div class="charge-detail">
+                            <p class="subtotal">CHARGE</p>
+                            <p class="amount">$0</p>
+                        </div>
+                        <div class="Total-detail">
+                            <p class="total">TOTAL</p>
+                            <p class="amount">$ {{subtotal | number : '0.1-2'}}</p>
+                        </div>
+                        <div class="payment-option">
+                                <button *ngIf="payLoading" mat-raised-button class="cta-button" disabled>PLEASE WAIT...</button>
+                            <button *ngIf="!payLoading" mat-raised-button color="accent" class="cta-button btn" (click)="confirm()" >CONFIRM</button><br>
+                            
+                            
+                            <a class="cta-button cancel" mat-button [routerLink]="['/others/account-settings']" [queryParams]="{ p: '6'}">CANCEL</a>
+                            <!-- <a class="cancel" fxLayoutAlign="start center"[routerLink]="['/others/account-settings']" [queryParams]="{ p: '6'}">Cancel</a> -->
+                        </div>
+                        
+
+
+                    </div>
+                </div>
+                <!-- / Front -->
+
+            </fuse-widget>
+
+
+
+        </div>
+
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>

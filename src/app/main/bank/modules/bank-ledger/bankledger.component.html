@@ -1,0 +1,10 @@
+<div id="dashboard-project" class="blank p-24 " fxLayout="row" >
+    <app-header-bitcoin-data class="bank-data" *ngIf="type == 'bitcoin'"></app-header-bitcoin-data>
+    <app-header-ledger-data class="bank-data" *ngIf="type == 'superiorcoin'"></app-header-ledger-data>
+    <app-header-membership-data class="bank-data" *ngIf="type == 'membership'"></app-header-membership-data>
+    <div class="widget-group copy-section" fxLayout="row" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+        <mat-card>
+            <router-outlet></router-outlet>
+        </mat-card>
+    </div>
+</div>

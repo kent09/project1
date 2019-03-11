@@ -1,0 +1,236 @@
+<section class="body" fusePerfectScrollbar [@animate]="{value:'*',params:{delay:'300ms',y:'25px'}}"> 
+  <header class="container" >
+    <div class="logo">
+      <!-- <img src="/assets/images/logos/kryptonia-word-logo.png" title="Kryptonia"> -->
+      <img src="/assets/svg/kryptonia-new.svg" width="250" height="auto" title="Kryptonia">
+      <div class="menu" (click)="nav()">
+        <mat-icon>menu</mat-icon>
+      </div>
+    </div>
+    <nav [class.active]="showFiller == true">                      
+      <ul>
+          <li><a [routerLink]="['coin/sales']" class="pointer">Buy Superior Coin</a></li>
+        <li><a [routerLink]="['/membership/pricing']" class="pointer">Membership</a></li>
+        <li *ngIf="myUserInfo.user_id"><a class="pointer" [routerLink]="'/task/alltask'"> Dashboard</a></li>
+        
+        <li *ngIf="myUserInfo.user_id"><a class="pointer" [routerLink]="'/others/faq'">FAQ</a></li>
+        <li *ngIf="!myUserInfo.user_id"><a class="login" (click)="navigateRoute('/auth/login')">Sign in</a></li>
+        <li *ngIf="myUserInfo.user_id"><a class="login" (click)="logOut()">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section class="feature">
+    <div class="container">
+      <div class="title">Where Jobs, Skills & Internet Marketers Connect</div>
+      <div class="subtitle"><strong>80% of our Customers</strong> are <strong>Internet Marketers</strong> that spend less than <strong>ONE DOLLAR</strong> per task!</div>
+      <div class="subtitle pt-0">Kryptonia will help your business <strong>triple its sales</strong> solely from online traffic and it provides you with the opportunity to <strong>grow relationships</strong> with your target audience.</div>
+      <div class="subtitle pt-0">But don’t just take our word for it</div>
+      <div class="form-holder" *ngIf="!myUserInfo.user_id">
+        <form>
+          <input type="email" placeholder="Enter your email address"  name="regEmail" [(ngModel)]="regEmail" required>
+          <button type="submit"  (click)="navigateRegister()" >Get started!</button>
+        </form>
+        <a (click)="navigateRoute('/auth/login')">Already have an account? Sign in here.</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="container">
+      <div class="title"><strong>It's as <span class="txt-blue">easy</span> as 1, 2, 3!</strong></div>
+      <ul class="step-wrapper">
+        <li>
+          <img src="/assets/images/landing-page/step-1.svg" title="Login To Kryptonia">
+          <div>LOGIN TO KRYPTONIA</div>
+          <p>Uncover new growth opportunities and start earning now.</p>
+        </li>
+        <li>
+          <img src="/assets/images/landing-page/step-2.svg" title="CREATE YOUR FIRST TASK">
+          <div>CREATE YOUR FIRST TASK</div>
+          <p>Promote and boost up your own websites, blogs and social media activities. Let's create your growth strategy together.</p>
+        </li>
+        <li>
+          <img src="/assets/images/landing-page/step-3.svg" title="Earn Superior Coin">
+          <div>EARN SUPERIOR COIN</div>
+          <p>Click and complete the tasks created by other users.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="whatis">
+    <div class="container">
+      <div class="title"><strong>What is <span class="txt-blue">kryptonia.io</span></strong></div>
+      <p>Kryptonia.io is the first social platform that allows you to earn Superior Coins, the cryptocurrency with the greatest projection in the financial market, through simple tasks, blogging and promoting your projects at a very low cost. Now you can enter the new cryptocurrency market in a very simple way and make money in the process.</p>
+      <div class="title pt-16"><strong>Why choose us?</strong></div>
+      <ol>
+        <li>Kryptonia helps get the word out about your business. But even more important than the exposure, it provides you with the opportunity to grow relationships with your target audience.</li>
+        <li>Your fans, followers, and connections are people who know your organization, have likely done business with you in the past, and will be most likely to tell their friends about you.</li>
+        <li>Kryptonia gives you the power to learn more about your audience, their interests, and collect feedback.</li>
+        <li>Kryptonia guarantees a return of investment.</li>
+        <li>Kryptonia enables Internet Marketers and digital agencies to connect with freelancers all over the world.</li>
+        <li>Kryptonia is cost-effective.</li>
+        <li>Advertising is cheaper than traditional advertising, so you don't have to spend a lot of money to reach more people, increase your audience and grow your business inside the community.</li>
+        <li>Kryptonia is a place to earn real money for average people and get paid to read articles, upvote steemit posts, like facebook posts, follow or re-tweet twitter posts and etc.</li>
+      </ol>
+      <!-- <div class="go-pro">
+        Want More?  > GO PRO!
+      </div> -->
+    </div>
+  </section>
+  
+  <section class="user-list">
+    <div class="container py-24">
+      <ngx-carousel
+        [inputs]="carouselTile">
+  
+          <ngx-tile NgxCarouselItem *ngFor="let list of featuredTaskCreatorList">
+              <div class="img-holder">
+                  <a [routerLink]="[ '/others/profile/', list.username ]">
+                    <!-- <div class="img" [ngStyle]="{'background-image': 'url('+Tile.color_image+')'}"></div> -->
+                    <img src="https://kimg.io/avatar/{{list.user_id}}"  onError="this.src='assets/images/avatars/profile.jpg'" class="avatar w-200 h-200 m-0" />
+                  </a>
+              </div>
+              <div class="name">
+                  <a [routerLink]="[ '/others/profile/', list.username ]">{{list.name}}</a>
+              </div>
+              <div class="featured-creator">FEATURED CREATOR</div>
+              <div class="total">
+                Total Task Created: <span class="txt-blue">{{ list.total_tasks_post }}</span>
+              </div>
+              <div class="total">
+                Total Reward Spent: <span class="txt-blue">{{ list.total_rewards_spent }}</span>
+              </div>
+          </ngx-tile>
+  
+            <button NgxCarouselPrev class='leftRs'>&lt;</button>
+            <button NgxCarouselNext class='rightRs'>&gt;</button>
+      </ngx-carousel>
+    </div>
+  </section>
+  
+  <section class="testimonial">
+    <div class="title">
+      <strong><span class="txt-blue">{{countNewlyRegistered}}</span> just joined last week.</strong>
+    </div>
+    <p>here’s what they’re saying...</p>
+    <div class="container">
+      <ngx-carousel
+        [inputs]="carouselTile">
+  
+          <ngx-tile NgxCarouselItem *ngFor="let testimonials of testimonialsList">
+            <div class="item-msg">
+              <div class="word">{{testimonials.title}}</div>
+              <div class="msg">
+                  <strong>{{testimonials.content}}</strong>
+              </div>
+              <div class="author">-{{testimonials.name}}</div>
+            </div>
+          </ngx-tile>
+  
+            <button NgxCarouselPrev class='leftRs'>&lt;</button>
+            <button NgxCarouselNext class='rightRs'>&gt;</button>
+      </ngx-carousel>
+    </div>
+  </section>
+
+  <section class="post-now">
+    <div class="container">
+      <div class="left-holder">
+        <div class="title"><strong>Your post has value.</strong></div>
+        <p>Kblog.io is a Superior Coin Community website. A social media platform where people can interact and form connections around the world.</p>
+        <a href="https://kblog.io">Start blogging now</a>
+      </div>
+      <div class="right-holder">
+        <div class="frame-img">
+          <div class="info">
+            <img src="https://kimg.io/avatar/{{topBlogger_id}}"  onError="this.src='assets/images/avatars/profile.jpg'" class="avatar w-200 h-200 m-0" />
+            <div class="name">{{topBloggerName}}</div>
+            <a href="https://kblog.io/@{{topBlogger_username}}/profile/content/timeline">FEATURED BLOGGER</a>
+            <p>Blog Points Earned: <span class="txt-blue">{{topBloggerPoints | number : '1.2-2'}}</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="hr">
+    <div class="container">
+      <hr>
+    </div>
+  </section>
+  <section class="intro-kyp">
+    <div class="container">
+      <div class="left-holder">
+        <div class="title">
+            <strong>Introducing Kryptonia.exchange. Easy to use for trading!</strong>
+        </div>
+        <p>
+          It provides reliability, high-security environment and high liquidity.
+        </p>
+        <a routerLink="#">Coming Soon</a>
+      </div>
+      <div class="right-holder">
+        <div class="title">
+            <strong>Top Quality, Hand-Picked Professionals.</strong>
+        </div>
+        <p>Bring your Ideas to life. The highest paying most in-demand FREELANCE jobs.</p>
+        <a routerLink="#">Coming Soon</a>
+      </div>
+    </div>
+  </section>
+  <section class="sponsore">
+    <div class="title">
+        <strong>Trusted by businesses worldwide</strong>
+    </div>
+    <div class="container">
+      <ul>
+        <li *ngFor="let business of businessData"  matTooltip="{{businessData.business_name}}">
+          <img src="{{businessData.business_logo}}" alt="">
+        </li>
+      </ul>
+    </div>
+  </section>
+  <section class="social">
+    <div class="title">
+      <strong>Connect with us</strong>
+    </div>
+    <div class="container">
+      <ul>
+        <li>
+          <a href="https://www.facebook.com/Kryptoniaio/"><img src="/assets/images/landing-page/social/fb.svg" alt="facebook"></a>
+        </li>
+        <li>
+          <a href="https://discord.gg/GTQNzZa"><img src="/assets/images/landing-page/social/discord.svg" alt="discord"></a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/kryptonia.io/"><img src="/assets/images/landing-page/social/ig.svg" alt="instagram"></a>
+        </li>
+        <!-- <li>
+          <a href="#"><img src="/assets/images/landing-page/social/slack.svg" alt="slack"></a>
+        </li> -->
+        <li>
+          <a href="https://steemit.com/@kryptonia"><img src="/assets/images/landing-page/social/steemit.svg" alt="steemit"></a>
+        </li>
+        <li>
+          <a href="https://t.me/superiorcoin"><img src="/assets/images/landing-page/social/telegram.svg" alt="telegram"></a>
+        </li>
+        <li>
+          <a href="https://twitter.com/KRYPT0N1A"><img src="/assets/images/landing-page/social/twitter.svg" alt="twitter"></a>
+        </li>
+      </ul>
+    </div>
+  </section>
+  
+  <footer>
+    <div class="container">
+      <p>
+        <i>Copyright &copy; 2016-2018 Kryptonia.io. All rights reserved.</i>
+      </p>
+      <p><i>Affiliated Sites: <a class="txt-blue" href="https://kblog.io">Kblog.io</a>, <a class="txt-blue" href="http://superior-coin.com/">Superior Coin</a></i></p>
+      <p>
+        <i>Enjoy the rest of your <span class="txt-blue">{{ today | date:'EEEE'}}</span>!</i>
+      </p>
+    </div>
+  </footer>
+</section>

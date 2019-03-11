@@ -1,0 +1,41 @@
+<div class="content-holder">
+  <div class="close" (click)="onNoClick()"><mat-icon>close</mat-icon></div>
+  <div class="mat-subheading-2 mb-12">
+      <a [routerLink]="[ '/task/taskdetails', data.slug ]" (click)="onNoClick()"><b>{{ data.task_title }}</b></a>
+  </div>
+  <div class="name mb-12">
+    <span class="mr-4">Direct Ref. Name:</span>
+    <span><a [routerLink]="[ '/other/profile', data.username ]">{{ data.name}}</a></span>
+  </div>
+  <div class="mb-12 date">
+      <span class="mr-4">Date Completed:</span>
+      <span>{{ data.completed_date | date:'short' }}</span>
+  </div>
+  <div class="social-media mb-12">
+    <span class="mr-4">
+      Category
+    </span>
+    <span>
+      <mat-icon *ngIf="data.social_media_type == 'global'">public</mat-icon>
+      <i *ngIf="data.social_media_type == 'facebook'" class="fb w-24 h-24"></i>
+      <i *ngIf="data.social_media_type == 'twitter'" class="twitter w-24 h-24"></i>
+      <i *ngIf="data.social_media_type == 'google-plus'" class="g-plus w-24 h-24"></i>
+      <i *ngIf="data.social_media_type == 'instagram'" class="instagram w-24 h-24"></i>
+      <i *ngIf="data.social_media_type == 'linkedin'" class="linkedin w-24 h-24"></i>
+      <i *ngIf="data.social_media_type == 'kblog'" class="kblog w-24 h-24"></i>
+      <i *ngIf="data.category == 'youtube'" class="youtube w-24 h-24"></i>
+      <i *ngIf="data.category == 'steemit'" class="steemit w-24 h-24"></i>
+    </span>
+  </div>
+  <div class="point mb-12">
+    <span class="mr-4">Points:</span>
+    <span>
+      <b>{{ data.points | prettify : 'pretty'}}</b>
+    </span>
+  </div>
+
+  <div class="status">
+    <span class="mr-8">Status:</span>
+    <span class="{{data.status}}">{{data.status}}</span>
+  </div>
+</div>

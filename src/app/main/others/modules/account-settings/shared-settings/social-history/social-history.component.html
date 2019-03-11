@@ -1,0 +1,65 @@
+<mat-card id="social-history" class="page-layout w-100-p m-24 p-16 p-sm-24" fusePerfectScrollbar [@animate]="{value:'*',params:{delay:'300ms',y:'100%'}}">
+  <header>
+    <div class="mat-headline pt-16">
+      <a [routerLink]="[ '/others/account-settings']"><mat-icon>arrow_back</mat-icon> Social Connects</a>
+    </div>
+    <div class="sort">
+      <mat-form-field class="mr-8">
+        <mat-select [(value)]="selected">
+          <mat-option value="option">Linked/Soft Unlinked</mat-option>
+          <mat-option value="option2">Hard Unlinked</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="search mr-16">
+        <mat-form-field >
+          <input matInput placeholder="Search..">
+        </mat-form-field>
+        <mat-icon>search</mat-icon>
+      </div>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+  </header>
+  <div class="table-holder">
+    <mat-table [dataSource]="dataSource">
+      <!-- Item Column -->
+      <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef>Social Media Type</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.type}} </mat-cell>
+      </ng-container>
+  
+      <!-- Cost Column -->
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.status}} </mat-cell>
+      </ng-container>
+
+      <!-- Cost Column -->
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.date}} </mat-cell>
+      </ng-container>
+
+      <!-- Cost Column -->
+      <ng-container matColumnDef="option">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <div>
+            <button class="pointer"><mat-icon>assignment</mat-icon></button>
+          </div>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator></mat-paginator>
+
+  </div>
+</mat-card>

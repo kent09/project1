@@ -1,0 +1,170 @@
+@import "src/@fuse/scss/fuse";
+
+fuse-sidebar {
+
+    &.navbar-fuse-sidebar {
+        overflow: hidden;
+
+        &.folded:not(.unfolded) {
+
+            navbar {
+
+                navbar-vertical-style-2 {
+
+                    .navbar-header {
+                        padding: 0 13px;
+
+                        .logo {
+
+                            .logo-text {
+                                opacity: 0;
+                                transition: opacity 200ms ease;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+navbar {
+
+    &.vertical-style-2 {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        width: 100%;
+        height: 100%;
+
+        &.right-navbar {
+
+            .toggle-sidebar-opened {
+
+                mat-icon {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+
+    navbar-vertical-style-2 {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+
+        .navbar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            min-height: 64px;
+            padding: 0 16px 0 24px;
+            transition: padding 200ms ease;
+            background-color: #4267b2;
+            @include mat-elevation(1);
+
+            .logo {
+                color: #ffffff;
+                display: flex;
+                align-items: center;
+                a, a:not(.mat-button):not(.mat-raised-button):not(.mat-icon-button):hover {
+                    color: #ffffff;
+                    text-decoration: none;
+                }
+                .logo-icon {
+                    width: 38px;
+                    height: 38px;
+                }
+
+                .logo-text {
+                    margin-left: 8px;
+                    font-size: 20px;
+                    font-weight: 300;
+                    letter-spacing: 0.4px;
+                }
+            }
+            .mat-icon-button {
+                color: #c1c6e2
+            }
+        }
+
+        .navbar-content {
+            flex: 1 1 auto;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            .group-items {
+                .mat-accent-bg {
+                    background-color: #3d84c6 !important;
+                }
+            }
+        }
+
+    }
+}
+.sup {
+    background-image: url(/assets/images/logos/rewardLogo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    margin-right: 16px;
+    opacity: 0.7;  
+}
+.kblog {
+    background-image: url(/assets/images/logos/kblog-logo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    margin-right: 16px;
+    opacity: 0.7;  
+}
+.group-items .nav-link {
+    display: flex;
+    padding: 0 24px;
+    height: 48px;
+    align-items: center;
+    color: #464646;
+    .nav-link-title {
+        white-space: nowrap;
+        -webkit-transition: opacity 300ms ease;
+        -moz-transition: opacity 300ms ease;
+        -ms-transition: opacity 300ms ease;
+        -o-transition: opacity 300ms ease;
+        transition: opacity 300ms ease;
+    }
+}
+.logo-icon {
+    display: none;
+}
+.group-items a:not(.mat-button):not(.mat-raised-button):not(.mat-icon-button):hover {
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.navbar-fuse-sidebar.folded {
+    .logo-icon {
+        display: block;
+    }
+    .group-items .nav-link {
+        .nav-link-title {
+            opacity: 0;
+        }
+    }
+    
+}
+.navbar-fuse-sidebar.unfolded {
+    .logo-icon {
+        display: none;
+    }
+}
+.navbar-fuse-sidebar.folded.unfolded {
+    .logo-icon {
+        display: none;
+    }
+    .group-items .nav-link {
+        .nav-link-title {
+            opacity: 1;
+        }
+    }
+}

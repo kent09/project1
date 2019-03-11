@@ -1,0 +1,31 @@
+:host {
+
+    .content {
+
+        form {
+            width: 100%;
+            max-width: 800px !important;
+
+        }
+
+        .form-errors-model {
+            flex: 1;
+
+            code {
+                background: none !important;
+            }
+        }
+
+        
+        .btc-add, .paypal-add{
+            font-size: 16px !important;
+            font-weight: 700 !important;
+            color: #039be5 !important;
+            margin: 5px 5px !important;
+        }
+
+       
+
+ 
+    }
+}

@@ -1,0 +1,213 @@
+<div id="timeline-task-analytics" class="page-layout blank grey-100-bg">
+
+    <div class="content">
+        <div class="left mr-lg-32">
+            <div class="fuse-card auto-width p-16">                  
+                <!--  -->
+                <!-- FOLLOWERS AND CONNECTIONS -->
+                <!-- <router-outlet></router-outlet> -->
+                
+                    <app-shared-connections [ngClass]="{'hidden': childrenLinks !== 'timeline', 'showHidden': childrenLinks == 'timeline'}"  [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"></app-shared-connections>
+                    <app-connections [userNames]="username" [ngClass]="{'hidden': childrenLinks !== 'connections' , 'showHidden': childrenLinks == 'connections'}"  [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"></app-connections>
+                    <app-followers (followerToTimeline)="viewChildrenLink($event)" [userNames]="username" [ngClass]="{'hidden': childrenLinks !== 'followers' , 'showHidden': childrenLinks == 'followers'}"  [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"></app-followers>
+                    <app-following (followingToTimeline)="viewChildrenLink($event)" [userNames]="username" [ngClass]="{'hidden': childrenLinks !== 'following' , 'showHidden': childrenLinks == 'following'}"  [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"></app-following>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="fuse-card p-16 myprofile-data" *ngIf="userInfo">
+                <mat-progress-bar mode="buffer" *ngIf="loadingTimeline"></mat-progress-bar>
+                <div class="user-info" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+                    fxLayoutAlign.gt-sm="start center">
+                    <a [routerLink]="[ '/others/profile', userInfo.username ]">
+                        <img [src]="avatarImagePath(userInfo.user_id)" onError="this.src='assets/images/avatars/profile.jpg'"  class="profile-image avatar huge"  [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}"/> </a>
+                        
+                    <div class="name" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                        <div class="toUpperCase limitString">{{userInfo.name}}</div>
+                        <div class="small-name">
+                            <a [routerLink]="['/others/profile/'+userInfo.username+'/']" >@{{userInfo.username}}</a>
+                        </div>
+                        <div *ngIf="userInfo.membership" class="pt-16">
+                            <img src="/assets/svg/badges/badge-{{userInfo.membership}}.svg" alt="badge">
+                        </div>
+                    </div>
+
+                    <div class="menu" *ngIf="myUserInfo.username !== userInfo.username">
+                        <button mat-icon-button [matMenuTriggerFor]="menu" class="arrow">
+                            <mat-icon>keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item [routerLink]="[ '/leaderboard', userInfo.username ]">
+                                <mat-icon>star</mat-icon>
+                                <span>Leaderboard</span>
+                            </button>
+                            <button mat-menu-item (click)="openBlockDialog()">
+                                <mat-icon>block</mat-icon>
+                                <span>Block</span>
+                            </button>
+                        </mat-menu>
+                    </div>
+                </div>          
+                <mat-divider></mat-divider>
+                <div *ngIf="usersocialConnect" class="actions socials" [@animate]="{value:'*',params:{delay:'200ms'}}">
+                    <span *ngFor="let socialItem of usersocialConnect">
+                        <img (click)="openLinkSocial('kblog', socialItem.account_id)" *ngIf="socialItem.social === 'kblog'"
+                            alt="kblog" alt="kblog" src="assets/svg/socials/kblog.svg">
+                        <img (click)="openLinkSocial('facebook', socialItem.account_id)" *ngIf="socialItem.social === 'facebook'"
+                            alt="facebook" alt="facebook" src="assets/svg/socials/fb.svg">
+                        <img (click)="openLinkSocial('linkedin', socialItem.account_id)" *ngIf="socialItem.social === 'linkedin'"
+                            alt="linkedin" alt="linkedin" src="assets/svg/socials/linkedin-color.svg">
+                        <img (click)="openLinkSocial('instagram', socialItem.account_name)" *ngIf="socialItem.social === 'instagram'" 
+                            alt="instagram" src="assets/svg/socials/instagram.svg">
+                      
+                        <img (click)="openLinkSocial('steemit', socialItem.account_id)" *ngIf="socialItem.social === 'steemit'"
+                            alt="steemit" alt="steemit" src="assets/svg/socials/steemit.svg">
+                        <img (click)="openLinkSocial('twitter', socialItem.account_id)" *ngIf="socialItem.social === 'twitter'"
+                            alt="twitter" alt="twitter" src="assets/svg/socials/twitter-color.svg">
+                    </span>
+                </div>
+            </div>
+            <div class="fuse-card p-16 mt-8" *ngIf="userInfo.username != this._getUserProfile.userInfo">
+                <div class="action-buttons-follow">
+                    <button (click)="openGiftDialog()">
+                        <img src="assets/svg/leaderboard/giftblue.svg" alt="gift">
+                    </button>
+                    &nbsp;&nbsp;
+                    <button (click)="followUnfollow()">
+                            <img *ngIf="userInfo.is_follower" src="assets/svg/leaderboard/followingblue.svg" alt="unfollow">
+                            <img *ngIf="!userInfo.is_follower" src="assets/svg/leaderboard/followgray.svg" alt="follow">
+                    </button>
+                    <button (click)="hookServiceChat()">
+                        <img src="assets/svg/message.svg" alt="gift">
+                    </button>
+                </div>
+            </div>
+            <div class="fuse-card p-16 about-data">
+                <div class="about-me">
+                    <div class="mat-title">About</div>
+                    <div class="text-info mb-16">
+                        {{userInfo.about}}
+                    </div>
+                    <div class="mat-title">Location</div>
+                    <div class="location mb-16">
+                        <div class="flex-align-center">
+                            <!-- <mat-icon>add_location</mat-icon> -->
+                            <span>{{ userInfo.location }} ,{{ userInfo.country }}</span> 
+                        </div>
+                    </div>
+                    <div class="mat-title">Joined Date</div>
+                    <div class="date">
+                        <div class="flex-align-center">
+                            <!-- <mat-icon>perm_contact_calendar</mat-icon> -->
+                            <span>{{ userInfo.join_date | date }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fuse-card p-16 myprofile-code-copy">
+                <div class="my-codes-to py-16 px-4">
+                    <div class="mat-title">{{ userInfo.ref_code }}</div>
+                    <a [href]="userInfo.ref_link" class="linkg mb-8" target="_blank">{{ userInfo.ref_link
+                        }}</a>
+                    <div>
+                        <button mat-raised-button color="accent" (click)="copyData('code', userInfo.ref_code)">Copy Code</button>
+                        &nbsp;&nbsp;
+                        <button mat-raised-button color="accent" (click)="copyData('link', userInfo.ref_link)">Copy Link</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="fuse-card p-16 profile-box groups" fxLayout="column">
+                <header class="mat-accent-bg" fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="title">Followers & Connections</div>
+                </header>
+                <div class="content-follow">
+
+                    <div class="group list-item-follow p-customs" fxLayout="row" fxLayoutAlign="space-between center">
+
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <div>
+                                <div class="category">FOLLOWERS</div>
+                            </div>
+                        </div>
+                        <mat-chip-list >
+                                <mat-chip  color="warn" selected="true" *ngIf="countFollowersData">
+                                    <a (click)="viewChildrenLink('followers');">
+                                        {{ countFollowersData }}
+                                    </a>
+                                </mat-chip>
+                                <mat-chip color="warn" selected="true" *ngIf="!countFollowersData">0</mat-chip>
+                        </mat-chip-list>
+
+                    </div>
+
+                    <div class="group list-item-follow p-customs" fxLayout="row" fxLayoutAlign="space-between center">
+
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <div>
+                                <div class="category">FOLLOWING</div>
+                            </div>
+                        </div>
+                        <mat-chip-list>
+                                <mat-chip color="warn" selected="true" *ngIf="countFollowingsData">
+                                    <a (click)="viewChildrenLink('following');">
+                                        {{ countFollowingsData }}
+                                    </a>
+                                </mat-chip>
+                                <mat-chip color="warn" selected="true" *ngIf="!countFollowingsData">0</mat-chip>
+                        </mat-chip-list>
+
+                    </div>
+
+                    <div class="group list-item-follow p-customs" fxLayout="row" fxLayoutAlign="space-between center">
+
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <div>
+                                <div class="category">CONNECTIONS</div>
+                            </div>
+                        </div>
+                        <mat-chip-list>
+                                <mat-chip color="warn" selected="true" *ngIf="countConnectionsData">
+                                    <a (click)="viewChildrenLink('connections')">
+                                        {{ countConnectionsData }}</a>
+                                </mat-chip>
+                                <mat-chip color="warn" selected="true" *ngIf="!countConnectionsData">0</mat-chip>
+                        </mat-chip-list>
+
+                    </div>
+
+                    <div class="group list-item-follow p-customs" fxLayout="row" fxLayoutAlign="space-between center">
+
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <div>
+                                <div class="category">ACTIVITY SCORE</div>
+                            </div>
+                        </div>
+                        <mat-chip-list>
+                                <mat-chip color="warn" selected="true" *ngIf="countActivityScoreData">{{ countActivityScoreData }}</mat-chip>
+                                <mat-chip color="warn" selected="true" *ngIf="!countActivityScoreData">0</mat-chip>
+                        </mat-chip-list>
+
+                    </div>
+
+                    <div class="group list-item-follow p-customs" fxLayout="row" fxLayoutAlign="space-between center">
+
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <div>
+                                <div class="category">REPUTATION SCORE</div>
+                            </div>
+                        </div>
+                        <mat-chip-list>
+                                <mat-chip color="warn" selected="true" *ngIf="countReputationScoreData">{{ countReputationScoreData }}</mat-chip>
+                                <mat-chip color="warn" selected="true" *ngIf="!countReputationScoreData">0</mat-chip>
+                        </mat-chip-list>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>

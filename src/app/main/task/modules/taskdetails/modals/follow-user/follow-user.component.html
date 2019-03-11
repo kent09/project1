@@ -1,0 +1,20 @@
+<div class="follow-user-dialog">
+
+    <mat-card class="example-card-logout-confirm">
+        <mat-card-header>
+            <mat-card-title>Deactivate Task?</mat-card-title>
+        </mat-card-header>
+        <mat-icon class="follow-users">person_add</mat-icon>
+        <!-- <img mat-card-image src="assets/svg/k.svg"> -->
+        <mat-card-content>
+
+            <p class="mat-subheading-2">
+                would you like to follow  <b>{{ userInfo.author_name}}</b>?
+            </p>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-button class="mat-accent mr-16" (click)="followUser()">Yes</button>
+            <button mat-button (click)="matDialogRef.close(false)">Cancel</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

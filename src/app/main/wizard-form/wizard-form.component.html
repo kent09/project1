@@ -1,0 +1,228 @@
+<div id="wizard-form" fxFlexFill fxLayout="column">
+    <div id="register-form-wrapper" fxFlexFill fxLayout="column" fxLayoutAlign="space-between">
+        <mat-card>
+            <!-- HORIZONTAL STEPPER EXAMPLE -->
+            <mat-horizontal-stepper [linear]="true" #stepper>
+
+                <mat-step [stepControl]="horizontalStepperStep1">
+                    <form [formGroup]="horizontalStepperStep1">
+
+                        <ng-template matStepLabel>Social Connect</ng-template>
+
+                        <div class="first-steps" fxLayout="row" fxLayoutAlign="start center" fxFlexFill [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+
+                            <div class="social-width">
+                                <div class="socials-centers">
+
+                                    <button mat-fab (click)="patchValueSocial('facebook')" [ngClass]="{'active': socialBtn ==='facebook'}">
+                                        <i class="fab fa-facebook-f sg-white"></i>
+                                    </button>
+                                    <button mat-fab [ngClass]="{'disabled': true}" matTooltip="Twitter connect is not yet active." matTooltipPosition="above">
+                                        <i class="fab fa-twitter sg-white"></i>
+                                    </button>
+                                    <button mat-fab (click)="patchValueSocial('linkedin')" [ngClass]="{'active': socialBtn ==='linkedin'}">
+                                        <i class="fab fa-linkedin-in sg-white"></i>
+                                    </button>
+                                    <!-- <button mat-fab (click)="patchValueSocial('google')" [ngClass]="{'active': socialBtn ==='google'}">
+                                        <i class="fab fa-google-plus-g sg-white"></i>
+                                    </button> -->
+                                </div>
+                            </div>
+
+
+                            <mat-form-field style="display:none;">
+                                <input matInput formControlName="social" required>
+                            </mat-form-field>
+
+
+                        </div>
+                        <br>
+                        <div class="info-message" fxLayout="column" fxLayoutAlign="start center">
+                            <div class="message-box">
+                                NOTE: Your account will be automatically authorized if you have connected at least one or more social mail accounts. Please
+                                contact
+                                <a class="pointer clr-txt-red">support@superior-coin.com</a> for manual authorization if unable to connect any social media
+                                accounts, or
+                                <a class="pointer clr-txt-red">click here</a> to request no.
+                            </div>
+                        </div>
+                        <br>
+
+                        <div fxLayout="row" fxLayoutAlign="end center" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                            <button mat-raised-button matStepperNext (click)="nextStep()" type="button" color="accent" [disabled]="!socialBtn || isFacebookLoggingIn">
+                                Next
+                            </button>
+                            &nbsp;&nbsp;
+                            <button mat-raised-button matStepperNext (click)="close()" type="button" color="accent">
+                                Close
+                            </button>
+                            
+                            
+                        </div>
+                        
+                    </form>
+                    <br><br>
+                    <mat-progress-bar mode="indeterminate" *ngIf="isFacebookLoggingIn"></mat-progress-bar>
+                </mat-step>
+              
+                <!-- <mat-step [stepControl]="horizontalStepperStep2">
+
+
+                    <form name="create-taskForm" enctype="multipart/form-data" (ngSubmit)="saveTask(stepper)" [formGroup]="horizontalStepperStep2" novalidate>
+                        <ng-template matStepLabel>Create Task</ng-template>
+                        <mat-progress-bar *ngIf="isSavingTask" mode="indeterminate"></mat-progress-bar>
+
+                        <mat-card>
+                            <div class="message-box info width-100">
+                                Create Your Firt Task some fields are required.
+                            </div>
+                            <div fxLayout="column" fxLayoutAlign="center" fxFlexFill [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                                <mat-form-field class="width-100" appearance="outline">
+                                    <mat-label>Task Title</mat-label>
+                                    <input matInput placeholder="Placeholder" formControlName="taskTitle">
+                                    <mat-icon matPrefix>assignment</mat-icon>
+                                    <mat-error>
+                                        Task Title is required
+                                    </mat-error>
+                                </mat-form-field>
+                                <br>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Task Description</mat-label>
+                                    <textarea matInput placeholder="Task Description" formControlName="taskDescription"></textarea>
+                                    <mat-error>
+                                        Task Description is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <br>
+
+                            <div class="firstLine" fxLayout="row" fxLayoutAlign="space-between center" fxLayout.xs="column" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                                <mat-form-field class="width-100" appearance="outline">
+                                    <mat-label>Task URL link</mat-label>
+                                    <input matInput placeholder="Placeholder" formControlName="taskLinkURl">
+                                    <mat-icon matPrefix>collections_bookmark</mat-icon>
+                                    <mat-error>
+                                        Task URL is required
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="width-100" appearance="outline">
+                                    <mat-label>Image Attached</mat-label>
+                                    <input matInput placeholder="Placeholder" formControlName="taskImageAttach" onclick="document.getElementById('fileToUpload').click()">
+                                    <mat-icon matPrefix>art_track</mat-icon>
+                                    <mat-error>
+                                        Image is required
+                                    </mat-error>
+
+                                    <input id="fileToUpload" accept="image/*" (change)="onFileChanged($event)" formControlName="taskImageFile" type="file" style="display:none;">
+                                </mat-form-field>
+
+                                <mat-form-field class="width-100" appearance="outline">
+                                    <input matInput placeholder="Category" value="Global" aria-label="Category" formControlName="taskCategory" [matAutocomplete]="auto"
+                                        [formControl]="categoryCtrl">
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let category of filteredSocials | async" [value]="category.name">
+                                            <img class="example-option-img" aria-hidden [src]="category.icon" height="25" width="30">
+                                            <span class="category-named">{{category.name}}</span>
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="firstLine" fxLayout="row" fxLayoutAlign="space-between center" fxLayout.xs="column" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                                <mat-form-field class="width-100" appearance="outline">
+                                    <mat-label>Reward</mat-label>
+                                    <input matInput placeholder="Placeholder" (blur)="checkingTotal(horizontalStepperStep2)" formControlName="taskReward">
+                                    <mat-icon matPrefix>brightness_low</mat-icon>
+                                    <mat-error>
+                                        Reward is required
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="width-100" appearance="outline">
+                                    <mat-label>Total Task Completer</mat-label>
+                                    <input matInput placeholder="Placeholder" (blur)="checkingTotal(horizontalStepperStep2)" formControlName="taskCompleter">
+                                    <mat-icon matPrefix>grade</mat-icon>
+                                    <mat-error>
+                                        Total Task is required
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field class="width-100" appearance="outline">
+                                    <input matInput placeholder="Placeholder" formControlName="taskBudget" readonly>
+                                    <mat-icon matPrefix>account_balance_wallet</mat-icon>
+
+                                </mat-form-field>
+
+                            </div>
+                            <br>
+                            <div fxLayout="column" fxLayoutAlign="center" fxFlexFill [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                                <mat-checkbox name="terms" aria-label="Attachment Required" formControlName="taskCheckAttachmentRequired">
+                                    <span>Attachment Required</span>
+                                    <mat-icon class="icons-checkbox-infos accent-fg">info</mat-icon>
+                                </mat-checkbox>
+                                <mat-checkbox name="terms" aria-label="Only Followers can Complete" formControlName="taskCheckFollowers">
+                                    <span>Only Followers can Complete</span>
+                                </mat-checkbox>
+                                <div *ngIf="horizontalStepperStep2.get('taskCheckFollowers').value" fxLayout="row" fxLayoutAlign="space" fxLayout.xs="column"
+                                    [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                                    <mat-form-field>
+                                        <input matInput type="number" placeholder="Minimum Reputaiton" formControlName="reputation">
+                                    </mat-form-field>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <mat-form-field>
+                                        <input matInput type="number" placeholder="Minimum Activity Score" formControlName="activity_score">
+                                    </mat-form-field>
+                                </div>
+                                <mat-checkbox name="terms" aria-label="Attachment Required" formControlName="taskCheckReputationActivity">
+                                    <span>Reputation and Activity Score Option</span>
+                                </mat-checkbox>
+                                <mat-checkbox name="terms" aria-label="Attachment Required" formControlName="taskCheckCanComplete">
+                                    <span>Only my connection can complete</span>
+                                    <mat-icon class="icons-checkbox-infos accent-fg">info</mat-icon>
+                                </mat-checkbox>
+                            </div>
+
+                            <mat-card-actions align="end">
+                                <button mat-raised-button color="warn" type="button" class="submit-button" aria-label="Reset" [disabled]="categoryCtrl.invalid">
+                                    Reset Fields
+                                </button>
+
+                                <button mat-raised-button color="accent" class="submit-button" aria-label="Create" [disabled]="horizontalStepperStep2.invalid">
+                                    Create Task
+                                </button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </form>
+
+
+
+
+                </mat-step>
+
+                <mat-step>
+
+                    <ng-template matStepLabel>Done</ng-template>
+
+                    <div class="h2 m-16" fxLayout="row" fxLayoutAlign="center center">
+                   
+                            <div class="logo">
+                                    <img src="assets/svg/k.svg">
+                                </div>
+                    </div>
+
+                    <div class="pt-24" fxLayout="row" fxLayoutAlign="center center">
+                   
+                        <button mat-raised-button type="button" color="accent" (click)="finishWizardStepper()">
+                            Finish
+                        </button>
+                    </div>
+
+                </mat-step> -->
+
+            </mat-horizontal-stepper>
+            <!-- / HORIZONTAL STEPPER EXAMPLE -->
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,183 @@
+<div class="page-layout create-task p-24" fusePerfectScrollbar>
+    <div class="content">
+        <mat-progress-bar *ngIf="isSavingTask" mode="indeterminate"></mat-progress-bar>
+
+        <mat-card>
+            <div class="message-box info width-100">
+                Create New Task some fields are required.
+            </div>
+            <br>
+            <form name="create-taskForm" enctype="multipart/form-data" (ngSubmit)="saveTask()" [formGroup]="createTaskForm"
+                novalidate>
+
+                <div class="firstLine" fxLayout="row" fxLayoutAlign="space-between center" fxLayout.sm="column"
+                    fxLayout.xs="column" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    <mat-form-field class="width-100" appearance="outline">
+                        <mat-label>Task Title</mat-label>
+                        <input matInput placeholder="Placeholder" formControlName="taskTitle">
+                        <!-- <mat-icon matPrefix>assignment</mat-icon> -->
+                        <mat-error>
+                            Task Title is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="width-100" appearance="outline">
+                        <mat-label>Running Days (days)</mat-label>
+                        <input matInput type="number" min="2" placeholder="Running Days (days)" formControlName="running_days">
+                        <mat-error>
+                            Minimum of 2 days
+                        </mat-error>
+                    </mat-form-field>
+
+                </div>
+
+                <div fxLayout="column" fxLayoutAlign="center" fxFlexFill [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    <ngx-wig formControlName="taskDescription" [placeholder]="'Enter task description'"></ngx-wig>
+                </div>
+
+                <br>
+
+                <div class="firstLine" fxLayout="row" fxLayoutAlign="space-between center" fxLayout.sm="column"
+                    fxLayout.xs="column" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    <mat-form-field class="width-100" appearance="outline">
+                        <mat-label>Task URL link</mat-label>
+                        <input matInput placeholder="Placeholder" formControlName="taskLinkURl">
+                        <!-- <mat-icon matPrefix>collections_bookmark</mat-icon> -->
+                        <mat-error>
+                            Task URL is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="width-100" onclick="document.getElementById('fileToUpload').click()"
+                        appearance="outline">
+                        <mat-label>Image Attached</mat-label>
+                        <input matInput placeholder="Placeholder" formControlName="taskImageAttach">
+                        <!-- <mat-icon matPrefix>art_track</mat-icon> -->
+                        <mat-error>
+                            Image is required
+                        </mat-error>
+
+                        <input id="fileToUpload" accept="image/*" (change)="onFileChanged($event)" formControlName="taskImageFile"
+                            type="file" style="display:none;">
+                    </mat-form-field>
+
+                    <mat-form-field class="width-100" appearance="outline">
+                        <input matInput placeholder="Category" value="Global" aria-label="Category" formControlName="taskCategory"
+                            [matAutocomplete]="auto" [formControl]="categoryCtrl">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let category of filteredSocials | async" [value]="category.name">
+                                <img class="example-option-img" aria-hidden [src]="category.icon" height="25" width="30">
+                                <span class="category-named">{{category.name}}</span>
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                </div>
+                <br>
+                <br>
+                <br>
+                <div class="firstLine" fxLayout="row" fxLayoutAlign="space-between center" fxLayout.sm="column"
+                    fxLayout.xs="column" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    <mat-form-field class="width-100" appearance="outline" *ngIf="createTaskForm.get('freeTaskOption').value">
+                        <mat-label>Reward</mat-label>
+                        <input matInput placeholder="Placeholder" (blur)="checkingTotal(createTaskForm)"
+                            formControlName="taskReward" readonly>
+                    </mat-form-field>
+
+                    <mat-form-field class="width-100" appearance="outline" *ngIf="!createTaskForm.get('freeTaskOption').value">
+                        <mat-label>Reward</mat-label>
+                        <input matInput placeholder="Placeholder" (blur)="checkingTotal(createTaskForm)"
+                            formControlName="taskReward">
+                        <mat-error>
+                            Reward is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="width-100" appearance="outline">
+                        <mat-label>Total Task Completer</mat-label>
+                        <input matInput placeholder="Placeholder" (blur)="checkingTotal(createTaskForm)"
+                            formControlName="taskCompleter">
+                        <!-- <mat-icon matPrefix>grade</mat-icon> -->
+                        <mat-error>
+                            Total Task Completer is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="width-100" appearance="outline">
+                        <mat-label>Total Budget</mat-label>
+                        <input matInput placeholder="Total Budget" formControlName="taskBudget" readonly>
+                    </mat-form-field>
+
+                </div>
+
+                <div class="taskcharge">
+                    <label name="taskFeeCharge">Task Fee Charge: {{origTaskFeeCharge}}% = {{ lblTaskFeeCharge }}</label>
+
+                </div>
+
+                <!--   <div class="firstLine" fxLayout="row" fxLayoutAlign="space-between center" fxLayout.sm="column" fxLayout.xs="column" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    <mat-form-field class="width-100" appearance="outline">
+                        <mat-label>Task Fee Charge</mat-label>
+                        <input matInput placeholder="Fee Charge" formControlName="taskFeeCharge" readonly>
+     
+                    </mat-form-field>
+                </div>
+ -->
+                <br>
+                <div *ngIf="showRequirement" fxLayout="column" fxLayoutAlign="center" fxFlexFill [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    <mat-checkbox name="terms" *ngIf="showFreetask" aria-label="Free Tasks" formControlName="freeTaskOption"
+                        (change)="setFreeTaskReward(createTaskForm)">
+                        <span>Free Tasks : <b>{{ freeTasks }}</b></span>&nbsp; <mat-icon class="icons-checkbox-infos accent-fg"
+                            title="The free tasks are the number of completers that you wish to use. ">info</mat-icon>
+                    </mat-checkbox>
+
+                    <mat-checkbox name="terms" *ngIf="attachmentRequired != 0" aria-label="Attachment Required"
+                        formControlName="taskCheckAttachmentRequired">
+                        <span>Attachment Required</span>&nbsp;
+                        <mat-icon class="icons-checkbox-infos accent-fg" title="A completer must upload an attachment regarding to your task detail">info</mat-icon>
+                    </mat-checkbox>
+
+                    <mat-checkbox name="terms" *ngIf="onyFollowers != 0" aria-label="Followers can Complete"
+                        formControlName="taskCheckFollowers">
+                        <span>Only Followers can Complete</span>
+                    </mat-checkbox>
+                    <mat-checkbox name="terms" *ngIf="onlyReferrals != 0" aria-label="Only for referrals"
+                        formControlName="taskCheckReferrals">
+                        <span>Only Referrals can Complete</span>
+                    </mat-checkbox>
+                    <mat-checkbox name="terms" *ngIf="reputationOption != 0" aria-label=">Reputation and Activity Score Option Only"
+                        formControlName="taskCheckReputationActivity">
+                        <span>Reputation and Activity Score Option</span>
+                    </mat-checkbox>
+                    <div *ngIf="createTaskForm.get('taskCheckReputationActivity').value" fxLayout="row" fxLayoutAlign="space"
+                        fxLayout.xs="column" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                        <mat-form-field>
+                            <input matInput type="number" placeholder="Minimum Reputation" formControlName="reputation">
+                        </mat-form-field>
+                        &nbsp;&nbsp;&nbsp;
+                        <mat-form-field>
+                            <input matInput type="number" placeholder="Minimum Activity Score" formControlName="activity_score">
+                        </mat-form-field>
+                    </div>
+                    <mat-checkbox name="terms" *ngIf="onlyConnection != 0" aria-label="Only my connection can complete"
+                        formControlName="taskCheckCanComplete">
+                        <span>Only my connection can complete</span> &nbsp;
+                        <mat-icon class="icons-checkbox-infos accent-fg" title="Connections are two-way relationships between you (as a follower) and your follower. Only users with whom you have connections can complete the task.">info</mat-icon>
+                    </mat-checkbox>
+                </div>
+
+                <mat-card-actions align="end">
+                    <button mat-raised-button color="warn" type="button" class="submit-button" aria-label="Reset"
+                        [disabled]="categoryCtrl.invalid">
+                        Reset Fields
+                    </button>
+
+                    <button mat-raised-button color="accent" class="submit-button" aria-label="Create" [disabled]="createTaskForm.invalid || isSavingTask">
+                        Create Task
+                    </button>
+                </mat-card-actions>
+            </form>
+
+        </mat-card>
+    </div>
+</div>

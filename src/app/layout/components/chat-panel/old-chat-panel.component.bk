@@ -1,0 +1,419 @@
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
+import { takeUntil, filter } from 'rxjs/operators';
+import { FuseSidebarService } from '@fuse/components/sidebar/sidebar.service';
+import { FusePerfectScrollbarDirective } from '@fuse/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
+import { ChatPanelService } from 'app/layout/components/chat-panel/chat-panel.service';
+import { GlobalsService } from 'app/globals/globals.service';
+import { ChatService } from './chat-service/chat.services';
+import { AuthService } from 'app/main/login/auth/auth.service';
+import { Router, NavigationEnd } from "@angular/router";
+
+@Component({
+    selector: 'chat-panel',
+    templateUrl: './chat-panel.component.html',
+    styleUrls: ['./chat-panel.component.scss'],
+    encapsulation: ViewEncapsulation.None
+})
+export class ChatPanelComponent implements OnInit, AfterViewInit, OnDestroy {
+    contacts: any[];
+    chatDatas = [];
+    userInfo: any;
+    selectedContact: any;
+    sidebarFolded: boolean;
+    user: any;
+    selectedContactUser: any;
+    chatMessage: any;
+    isMyMessage: any;
+    isLoadingChats: boolean = false;
+    offset: number = 0;
+
+    @ViewChild('replyForm')
+    set replyForm(content: NgForm) {
+        this._replyForm = content;
+    }
+
+    @ViewChild('replyInput')
+    set replyInput(content: ElementRef) {
+        this._replyInput = content;
+    }
+
+    @ViewChildren(FusePerfectScrollbarDirective)
+    private _fusePerfectScrollbarDirectives: QueryList<FusePerfectScrollbarDirective>;
+
+    // Private
+    private _chatViewScrollbar: FusePerfectScrollbarDirective;
+    private _replyForm: NgForm;
+    private _replyInput: ElementRef;
+    private _unsubscribeAll: Subject<any>;
+
+    /**
+     * Constructor
+     *
+     * @param {ChatPanelService} _chatPanelService
+     * @param {HttpClient} _httpClient
+     * @param {FuseSidebarService} _fuseSidebarService
+     */
+    constructor(
+        private _chatPanelService: ChatPanelService,
+        private _httpClient: HttpClient,
+        private _fuseSidebarService: FuseSidebarService,
+        private _globals: GlobalsService,
+        private _chatServices: ChatService,
+        private _auth: AuthService,
+        private router: Router,
+    ) {
+        // Set the defaults
+        this.selectedContact = null;
+        this.sidebarFolded = true;
+        this.userInfo = this._auth.userInfo;
+        // Set the private defaults
+        this._unsubscribeAll = new Subject();
+    }
+
+    avatarImagePath(id: any): any {
+        return this._globals.avatarImagePath(id);
+    }
+
+    populateChatList() {
+        // Load the contacts
+        this.isLoadingChats = true;
+        this._chatPanelService.loadContacts(20).then(() => {
+            const decodedData = this._globals.parseJwt(this._chatPanelService.newUser.data);         
+            this.contacts = decodedData;
+            this.user = this._chatPanelService.user;
+            setTimeout(() => {
+                if (decodedData) {
+                    this.isLoadingChats = false;
+                }
+            }, 500);
+
+        });
+    }
+
+    // -----------------------------------------------------------------------------------------------------
+    // @ Lifecycle hooks
+    // -----------------------------------------------------------------------------------------------------
+
+    /**
+     * On init
+     */
+    ngOnInit(): void {
+
+        this._unsubscribeAll = new Subject();
+        this.router.events.pipe(
+            filter((event: Event) => event instanceof NavigationEnd),
+            takeUntil(this._unsubscribeAll)
+        ).subscribe((res: any) => {
+            if (res.url !== '/') {
+                this.populateChatList();
+                this._unsubscribeAll.next();
+                this._unsubscribeAll.complete();
+            }
+
+        });
+
+        // Subscribe to the foldedChanged observable
+        this._fuseSidebarService.getSidebar('chatPanel').foldedChanged
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((folded) => {
+                this.sidebarFolded = folded;
+            });
+
+
+        this._chatServices.messages.subscribe(msg => {
+            
+            const messages = JSON.parse(msg);
+            if ('toggle' in messages) {
+                const foundUser = this.contacts.find((contactUser) => {
+                    return contactUser.user_id == messages.user_id;
+                });
+                this.toggleChat(foundUser);
+                return;
+            } else {
+
+                if (this.selectedContact == null) {
+                    if (this.contacts) {
+                        const foundUsers = this.contacts.find((contactUser) => {
+                            return contactUser.user_id == messages.from;
+                        });
+                        this.selectedContact = foundUsers;
+                    }
+                    // this.toggleChat(foundUsers);
+                }
+                setTimeout(() => {
+
+                    // this.unfoldSidebarTemporarily();
+                    this.isMyMessage = messages.who;
+                    if (this.contacts) {
+                        if (messages.who == this.userInfo.user_id) {
+                            const increment = this.contacts.map((contactUser) => {
+                                if (contactUser.user_id == messages.from) {
+                                    contactUser.unread += 1;
+                                }
+                                return contactUser;
+                            });
+
+                            this.contacts = increment;
+                        }
+                    }
+                    
+                    if (messages.who == this.userInfo.user_id) {
+                        if (Array.isArray(this.chatDatas)) {
+                            
+                            this.chatDatas.push(messages);
+                        } else {
+                            this.chatDatas = []
+                            this.chatDatas.push(messages);
+                        }
+                    }
+                   
+                    if (messages.who == this.userInfo.user_id) {
+                        let audioPlayer = <HTMLVideoElement>document.getElementById('message-sound');
+                        audioPlayer.play();
+                    }
+                    this._prepareChatForReplies();
+                }, 200)
+            }
+
+        })
+
+        var oToBeRead = document.getElementById("contacts-list");
+        oToBeRead.addEventListener('scroll', (event: any) => {
+            var element = event.target;
+            if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+                this.offset += 20;
+                this.loadMoreUser(this.offset);
+            }
+        });
+
+    }
+
+    loadMoreUser(offset: number) {
+        this.isLoadingChats = true;
+        this._chatPanelService.loadContacts(offset).then(() => {
+
+            const decodedData = this._globals.parseJwt(this._chatPanelService.newUser.data);
+            this.contacts = decodedData;
+            this.user = this._chatPanelService.user;
+            setTimeout(() => {
+                if (decodedData) {
+                    this.isLoadingChats = false;
+                }
+            }, 500);
+
+        });
+    }
+
+    /**
+     * After view init
+     */
+    ngAfterViewInit(): void {
+        this._chatViewScrollbar = this._fusePerfectScrollbarDirectives.find((directive) => {
+            return directive.elementRef.nativeElement.id === 'messages';
+        });
+    }
+
+    /**
+     * On destroy
+     */
+    ngOnDestroy(): void {
+        // Unsubscribe from all subscriptions
+        this._unsubscribeAll.next();
+        this._unsubscribeAll.complete();
+    }
+
+    // -----------------------------------------------------------------------------------------------------
+    // @ Private methods
+    // -----------------------------------------------------------------------------------------------------
+    /**
+     * Prepare the chat for the replies
+     */
+    private _prepareChatForReplies(): void {
+        setTimeout(() => {
+            // Reset the reply form
+            this._replyForm.reset();
+
+            // Focus to the reply input
+            // this._replyInput.nativeElement.focus();
+
+            // Scroll to the bottom of the messages list
+            if (this._chatViewScrollbar) {
+                this._chatViewScrollbar.update();
+                setTimeout(() => {
+                    this._chatViewScrollbar.scrollToBottom(0);
+                });
+            }
+        });
+    }
+
+    // -----------------------------------------------------------------------------------------------------
+    // @ Public methods
+    // -----------------------------------------------------------------------------------------------------
+
+    /**
+     * Fold the temporarily unfolded sidebar back
+     */
+    foldSidebarTemporarily(): void {
+        this._fuseSidebarService.getSidebar('chatPanel').foldTemporarily();
+    }
+
+    /**
+     * Unfold the sidebar temporarily
+     */
+    unfoldSidebarTemporarily(): void {
+        this._fuseSidebarService.getSidebar('chatPanel').unfoldTemporarily();
+    }
+
+    /**
+     * Toggle sidebar opened status
+     */
+    toggleSidebarOpen(): void {
+        this._fuseSidebarService.getSidebar('chatPanel').toggleOpen();
+    }
+
+    /**
+     * Decide whether to show or not the contact's avatar in the message row
+     *
+     * @param message
+     * @param i
+     * @returns {boolean}
+     */
+    shouldShowContactAvatar(message, i): boolean {
+        return (
+            message.from != this.userInfo.user_id &&
+            ((this.chatDatas[i + 1] && this.chatDatas[i + 1].message != this.userInfo.user_id) || !this.chatDatas[i + 1])
+        );
+    }
+
+    /**
+     * Check if the given message is the first message of a group
+     *
+     * @param message
+     * @param i
+     * @returns {boolean}
+     */
+    isFirstMessageOfGroup(message, i): boolean {
+
+        return (i === 0 || this.chatDatas[i - 1] && this.chatDatas[i - 1].who !== message.from);
+    }
+
+    /**
+     * Check if the given message is the last message of a group
+     *
+     * @param message
+     * @param i
+     * @returns {boolean}
+     */
+    isLastMessageOfGroup(message, i): boolean {
+        return (i === this.chatDatas.length - 1 || this.chatDatas[i + 1] && this.chatDatas[i + 1].who === message.who && this.chatDatas[i + 1].from !== message.from);
+    }
+
+    /**
+     * Toggle chat with the contact
+     *
+     * @param contact
+     */
+    toggleChat(contact): void {
+        // If the contact equals to the selectedContact,
+        // that means we will deselect the contact and
+        // unload the chat
+        if (this.selectedContact && contact.user_id === this.selectedContact.user_id) {
+            // Reset
+            this.resetChat();
+        }
+        // Otherwise, we will select the contact, open
+        // the sidebar and start the chat
+        else {
+
+            const increment = this.contacts.map((contactUser) => {
+                if (contactUser.user_id == contact.user_id) {
+                    contactUser.unread = null;
+                }
+                return contactUser;
+            });
+
+            this.contacts = increment;
+
+            // Unfold the sidebar temporarily
+            this.unfoldSidebarTemporarily();
+
+            // Set the selected contact
+            this.selectedContact = contact;
+
+            // Load the chat
+            this._chatPanelService.getChat(contact.user_id).then((chat) => {
+                if (chat.code == 200) {
+                    const decodedData = this._globals.parseJwt(chat.data);
+                    const isChated = decodedData && decodedData.length > 1 ? decodedData : [];
+                    this.chatDatas = isChated;
+                } else {
+                    this.chatDatas = [];
+                }
+
+                // Prepare the chat for the replies
+                this._prepareChatForReplies();
+            });
+        }
+    }
+
+    /**
+     * Remove the selected contact and unload the chat
+     */
+    resetChat(): void {
+        // Set the selected contact as null
+        this.selectedContact = null;
+
+        // Set the chat as null
+        this.chatDatas = null;
+    }
+
+    /**
+     * Reply
+     */
+    reply(event): void {
+        event.preventDefault();
+
+        if (!this._replyForm.form.value.message) {
+            return;
+        }
+        const socketReceiver: any = {
+            from: this.userInfo.user_id,
+            who: this.selectedContact.user_id,
+            message: this._replyForm.form.value.message,
+            time: new Date().toISOString()
+        }
+        const socketReceiverThread = {
+            channel: 'chat',
+            data: JSON.stringify(socketReceiver)
+        }
+        /*START FIRED TO SERVER */
+        socketReceiver.avatar = this.avatarImagePath(this.userInfo.user_id);
+
+        if (Array.isArray(this.chatDatas)) {
+                            
+            this.chatDatas.push(socketReceiver);
+        } else {
+            this.chatDatas = []
+            this.chatDatas.push(socketReceiver);
+        }
+
+        this._chatServices.sendMsg(socketReceiverThread);
+        /*END FIRED TO SERVER */
+
+        /*START SAVED TO SERVER */
+        const paramsSave = {
+            msg: this._replyForm.form.value.message,
+            receiver: this.selectedContact.user_id,
+            sender: this.userInfo.user_id,
+        }
+
+        this._chatPanelService.updateChat(paramsSave).then(response => {
+
+        });
+        /*END SAVED TO SERVER */
+
+    }
+}

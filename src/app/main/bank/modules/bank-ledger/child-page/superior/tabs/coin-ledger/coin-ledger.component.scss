@@ -1,0 +1,59 @@
+@import "src/@fuse/scss/fuse";
+
+.ledger{
+    .filter {
+        display: flex;
+        // float: right;
+
+        @include media-breakpoint('lt-md') {
+            display: block;
+        }
+       
+        .search-input-wrapper {
+            margin-left: auto; 
+            align-items: center;
+            display: flex;
+            margin-right: 28px;
+            @include media-breakpoint('xs') {
+                margin-right: 0;
+            }
+            .mat-form-field {
+                @include media-breakpoint('xs') {
+                    width: 100%;
+                }
+            }
+        }
+        .calendar {
+            .mat-form-field {
+                @include media-breakpoint('xs') {
+                    width: 100%;
+                }
+            }
+        }
+
+        .ending_balance{
+            margin-top: 25px;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+    }
+    .mat-column-txn_type {
+        display: flex;
+    }
+
+    .chip {
+        border: 1px solid;
+        padding: 5px 10px;
+        border-radius: 20px;
+        display: inline-block;
+    }
+    .debit  {
+        color: #4caf50;
+    }
+
+    .credit  {
+        color: #f44336;
+    }
+
+}

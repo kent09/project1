@@ -1,0 +1,23 @@
+<div id="task-rewards-container" class="blank p-24" fxLayout="row">
+        <!-- <app-header-history-data class="bank-data"></app-header-history-data> -->
+        
+        <div class="widget-group copy-section mat-elevation-z2 " fxLayout="column" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+            <mat-card >
+                    <div class="px-16 py-8" fxLayout="row" fxLayoutAlign="space-between center">
+                            <mat-form-field>
+                                <mat-select [(value)]="selected" class="simplified" aria-label="Change range">
+                                    <mat-option *ngFor="let tab of tabBank" [value]="tab.value">
+                                        {{tab.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="p-16" fxLayout="row">
+                            <app-bank-completion-reward *ngIf="selected =='d-0'"></app-bank-completion-reward>
+                            <app-bank-revoke-reward *ngIf="selected =='w-1'"></app-bank-revoke-reward>
+                            <app-bank-widthrawal-reward *ngIf="selected =='c-2'"></app-bank-widthrawal-reward>
+                        </div>
+            </mat-card>
+        </div>
+    </div>
+    

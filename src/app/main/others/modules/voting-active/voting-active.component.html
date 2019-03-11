@@ -1,0 +1,80 @@
+<div class="page-layout blank p-24" fusePerfectScrollbar>
+    <mat-card class="header-info mt-4 custom-margins">
+        <div class="header-holder">
+            <mat-card-header class="main-header">
+                <mat-card-title class="general">VOTE POLL: <span class="active">ACTIVE</span></mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="filter-section">
+    
+               <!-- SEARCH -->
+               <div class="search-wrapper"  fxLayout="row" fxLayoutAlign="start center">
+    
+                  <div class="search" fxLayout="row" fxLayoutAlign="start center">
+    
+                    <mat-icon (click)="search(searchText)">search</mat-icon>
+    
+                    <input [(ngModel)]="searchText" type="text" placeholder="Search" >
+    
+                  </div>
+              </div>
+              <!-- / SEARCH -->
+                <button mat-button [matMenuTriggerFor]="menu">
+                    <mat-icon>settings</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item class="button-menu" routerLink="/others/voting-active">Active</button>
+                    <button mat-menu-item class="button-menu" routerLink="/others/voting-ended">Ended</button>
+    
+                </mat-menu>
+                
+            </mat-card-content>
+        </div>
+
+
+        <div class="content">
+                <table mat-table [dataSource]="dataSource">
+
+                    <!-- Items Column -->
+                    <ng-container matColumnDef="items">
+                        <th mat-header-cell *matHeaderCellDef class="title"> Items </th>
+                        <td mat-cell *matCellDef="let active">{{active.items}} </td>
+                    </ng-container>
+
+                    <!-- Voters Column -->
+                    <ng-container matColumnDef="voters">
+                        <th mat-header-cell *matHeaderCellDef class="title"  fxHide fxShow.gt-sm> Voters </th>
+                        <td mat-cell *matCellDef="let active"  fxHide fxShow.gt-sm><span>{{active.voters}}</span></td>
+                    </ng-container>
+
+                    <!-- Started Date Column -->
+                    <ng-container matColumnDef="start_date">
+                        <th mat-header-cell *matHeaderCellDef class="title"  fxHide fxShow.gt-sm> Started Date </th>
+                        <td mat-cell *matCellDef="let active"  fxHide fxShow.gt-sm> {{active.start_date}} </td>
+                    </ng-container>
+
+                    <!-- Ended Date Column -->
+                    <ng-container matColumnDef="end_date" >
+                        <th mat-header-cell *matHeaderCellDef class="title" fxHide fxShow.gt-sm>Ended Date </th>
+                        <td mat-cell *matCellDef="let active" fxHide fxShow.gt-sm> {{active.end_date}} </td>
+                    </ng-container>
+
+                     <!-- Ended Date Column -->
+                     <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef class="title"> </th>
+                        <td mat-cell *matCellDef="let active">                         
+                            <button mat-button routerLink="/others/voting-analytic/{{active.poll_id}}/{{active.voters}}">VIEW</button>                       
+                            <button mat-button (click)="openModal(active)" >VOTE</button>                       
+                        </td>
+                    </ng-container>
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+           
+        </div>
+
+    </mat-card>
+
+</div>

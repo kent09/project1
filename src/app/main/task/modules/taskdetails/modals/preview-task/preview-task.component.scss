@@ -1,0 +1,41 @@
+@import "src/@fuse/scss/fuse";
+app-preview-task {
+  .other-task-cool{
+    max-width: 100%;
+  }
+  .page-layout-other-task{
+    max-width: 584px;
+    width: 1800px;
+  }
+  .img-tag {
+      width: 100%
+  }
+  .img-tag-default {
+    width: 75%
+  }
+  .groups {
+    .content {
+        .group {
+            margin-bottom: 16px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+            .logo {
+                border: 1px solid rgba(0, 0, 0, 0.12);
+                margin-right: 16px;
+            }
+            .name {
+                font-weight: 500;
+                font-size: 15px;
+            }
+            .category,
+            .members {
+                color: rgba(0, 0, 0, 0.54);
+            }
+            .members {
+                margin-top: 16px;
+            }
+        }
+    }
+}
+}

@@ -1,0 +1,114 @@
+<div id="mail-confirm" fxLayout="column">
+    <div id="mail-confirm-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
+        <div id="mail-confirm-form">
+            <header>
+                <div class="logo">
+                  <!-- <img src="/assets/images/logos/kryptonia-word-logo.png" title="Kryptonia"> -->
+                  <a [routerLink]="['/']" class="pointer"><img src="/assets/svg/kryptonia-new.svg" width="250" height="auto" title="Kryptonia"></a>
+                  <div class="menu" (click)="nav()">
+                    <mat-icon>menu</mat-icon>
+                  </div>
+                </div>
+                <nav [class.active]="showFiller == true">                      
+                  <ul>
+                    <li *ngIf="myUserInfo.user_id"><a class="pointer" [routerLink]="'/task/alltask'"> Dashboard</a></li>                  
+                    <li *ngIf="myUserInfo.user_id"><a class="pointer" [routerLink]="'/others/faq'">FAQ</a></li>
+                    <li *ngIf="!myUserInfo.user_id"><a class="membership" (click)="navigateRoute('/membership/pricing')">Membership</a></li>
+                    <li *ngIf="!myUserInfo.user_id"><a class="login" (click)="navigateRoute('/auth/login')">Sign in</a></li>
+                    <li *ngIf="myUserInfo.user_id"><a class="login" (click)="logOut()">Logout</a></li>
+                  </ul>
+                </nav>
+              </header>
+
+              <div class="container">
+                <div class="left">
+                  <div class="title">
+                    buy <span>superior coin</span> the <span>fastest</span> way!
+                  </div>
+                  <div class="small-text">
+                    Quick and safe exchange with great Customer Support that reacts in very short time
+                  </div>
+                </div>
+                <div class="right">
+                    <mat-form-field class="full-width">
+                      <input type="number" matInput placeholder="ENTER SUP AMOUNT" [(ngModel)]="amount" />
+                    </mat-form-field>
+                    <div class="equv" clickOutside (clickOutside)="showCoin = false">
+                      <mat-form-field class="full-width">
+                        <input matInput placeholder="EQUIVALENT" value="0.0000" disabled>
+                      </mat-form-field>
+                      <div class="currency-select">
+                        <button class="text-switch pointer" (click)="showCoin = !showCoin">
+                          <i class="cc {{selectedCoins.icon}}"></i>
+                          <span>{{selectedCoins.coin}}</span>
+                          <mat-icon>keyboard_arrow_down</mat-icon>
+                        </button>
+                      </div>
+                      <div class="droplist" *ngIf="showCoin">
+                        <button class="close pointer" (click)="showCoin = !showCoin">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                        <div class="search-holder">
+                          <mat-icon>search</mat-icon>
+                          <input type="text" [(ngModel)]="query" placeholder="Type a currency or ticker">
+                        </div>
+                        <ul>
+                          <li *ngFor="let coinsList of coins | search:'icon,name':query">
+                            <button class="pointer" [class.selected]="coinsList.name === selectedCoins.name"
+                            (click)="onSelect(coinsList)">
+                              <i class="cc {{coinsList.icon}}"></i>
+                              <span>{{coinsList.coin}}</span>
+                              {{coinsList.name}}
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="button">
+                      <button class="pointer" (click)="process()">BUY NOW!</button>
+                    </div>
+                </div>
+              </div>
+
+
+
+            
+          
+          <!-- <div class="container"> 
+            <mat-vertical-stepper [linear]="isLinear" #steppers>
+              <mat-step [stepControl]="firstFormGroup">
+                <form [formGroup]="firstFormGroup">
+                  <ng-template matStepLabel>Fill out your name</ng-template>
+                  <mat-form-field>
+                    <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+                  </mat-form-field>
+                  <div>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step [stepControl]="secondFormGroup">
+                <form [formGroup]="secondFormGroup">
+                  <ng-template matStepLabel>Fill out your address</ng-template>
+                  <mat-form-field>
+                    <input matInput placeholder="Address" formControlName="secondCtrl" required>
+                  </mat-form-field>
+                  <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step>
+                <ng-template matStepLabel>Done</ng-template>
+                You are now done.
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button (click)="stepper.reset()">Reset</button>
+                </div>
+              </mat-step>
+            </mat-vertical-stepper>
+          </div> -->
+        <!-- </div> -->
+    </div>
+</div>

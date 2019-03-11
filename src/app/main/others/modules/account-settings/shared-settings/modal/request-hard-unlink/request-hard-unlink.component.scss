@@ -1,0 +1,12 @@
+.content-holder {
+    width: 350px;
+    position: relative;
+    .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    .pointer {
+        cursor: pointer;
+    }
+}

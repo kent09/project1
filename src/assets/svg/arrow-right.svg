@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="12px" viewBox="0 0 8 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/Arrowleft2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M0.744,0.744 C0.546269243,0.941509577 0.435166648,1.20952284 0.435166648,1.489 C0.435166648,1.76847716 0.546269243,2.03649042 0.744,2.234 L5.291,6.791 C5.47860853,6.9790834 5.73334548,7.08478757 5.999,7.08478757 C6.26465452,7.08478757 6.51939147,6.9790834 6.707,6.791 L11.257,2.233 C11.6678999,1.82210015 11.6678999,1.15589985 11.257,0.745 C10.8461001,0.334100146 10.1798999,0.334100146 9.769,0.745 L5.999,4.521 L2.231,0.745 C2.03387243,0.547696841 1.76640467,0.436838307 1.4875,0.436838307 C1.20859533,0.436838307 0.941127565,0.547696841 0.744,0.745 L0.744,0.744 Z" id="path-1"></path>
+    </defs>
+    <g id="🚧-首页设计" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="2_首页_2560" transform="translate(-1665.000000, -948.000000)">
+            <g id="Group-62" transform="translate(0.000000, -48.000000)">
+                <g id="Group-47" transform="translate(320.000000, 976.000000)">
+                    <g id="Group-20" transform="translate(547.000000, 14.000000)">
+                        <g id="Group-2" transform="translate(790.000000, 0.000000)">
+                            <g id="Icons/Arrowleft2">
+                                <g id="Icons/Checkmark" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(6.000000, 8.000000)">
+                                    <g id="checkmark" transform="translate(0.000000, 0.000000)">
+                                        <mask id="mask-2" fill="white">
+                                            <use xlink:href="#path-1"></use>
+                                        </mask>
+                                        <use id="Shape" fill="#7F8FA4" fill-rule="nonzero" xlink:href="#path-1"></use>
+                                        <g id="Icons/Color/Blue" mask="url(#mask-2)" fill="#357CE1">
+                                            <g transform="translate(-6.000000, -8.000000)" id="Color/Icon/Blue">
+                                                <rect x="0" y="-4.54747351e-13" width="24" height="24" rx="3"></rect>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

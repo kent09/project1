@@ -1,0 +1,86 @@
+<div class="example-container">
+    <div class="example-loading-shade"
+         *ngIf="isLoadingResults || isRateLimitReached">
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoadingResults"></mat-progress-bar>
+      <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+        Please try to reload!
+      </div>
+    </div>
+  
+    <div class="example-table-container">
+
+        <mat-table class="example-table here" #table 
+                                    [dataSource]="data" matSort 
+                                    matSortActive="created"
+                                    matSortDisableClear matSortDirection="asc"
+                                    [@animateStagger]="{value:'50'}"
+                                    fusePerfectScrollbar>
+
+        <ng-container matColumnDef="social_media_type">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Social Media Type</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <!-- {{ row.social_media_type }} -->
+
+                <i class="fb w-24 h-24" *ngIf="row.social_media_type == 'facebook'"></i>
+                <i class="twitter w-24 h-24" *ngIf="row.social_media_type == 'twitter'"></i>
+                <i class="g-plus w-24 h-24" *ngIf="row.social_media_type == 'google-plus'"></i>
+                <i class="instagram w-24 h-24" *ngIf="row.social_media_type == 'instagram'"></i>
+                <i class="linkedin w-24 h-24" *ngIf="row.social_media_type == 'linkedin'"></i>
+                <i class="kblog w-24 h-24" *ngIf="row.social_media_type == 'kblog'"></i>
+                <i class="youtube w-24 h-24" *ngIf="row.social_media_type == 'youtube'"></i>
+                <i class="steemit w-24 h-24" *ngIf="row.social_media_type == 'steemit'"></i>
+
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="account_username">
+            <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Social Account Name</mat-header-cell>
+            <mat-cell *matCellDef="let row" fxHide fxShow.gt-sm>
+                {{ row.account_username }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="connected_date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Connected Date</mat-header-cell>
+            <mat-cell *matCellDef="let row" fxHide fxShow.gt-sm>
+                <b class="small-name">
+                    {{ row.connected_date | date  }}
+                </b>
+            </mat-cell>
+        </ng-container>
+    
+
+
+        <ng-container matColumnDef="reward" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Rewards</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+               <p class="phone text-truncate">
+                    <img class="avatar w-24 h-24"  [alt]="SAMPLE" [src]="'assets/images/logos/rewardLogo.png'" />
+                </p>
+                <b class="text-truncate font-weight-600 reward-label">{{ row.reward }}</b>
+            </mat-cell>
+        </ng-container>
+
+ 
+        <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Status</mat-header-cell>
+                <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs>
+                    <div class="chip {{ row.status }}">
+                        {{ row.status }}
+                    </div>
+                </mat-cell>
+                
+        </ng-container>
+
+            
+        <mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="contact" 
+            matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+        </mat-row>
+    </mat-table>
+
+  
+    </div>
+  
+    <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+  </div>

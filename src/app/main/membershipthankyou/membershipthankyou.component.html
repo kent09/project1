@@ -1,0 +1,48 @@
+<div id="mail-confirm" fxLayout="column" *ngIf="membership">
+
+    <div id="mail-confirm-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
+ 
+        <div id="mail-confirm-form">
+ 
+            <div class="title">THANK YOU!</div>
+ 
+            <div class="logo">
+                <!-- <mat-icon class="mat-accent s-96">email</mat-icon> -->
+                <img src="/assets/svg/check.svg" alt="">
+            </div>
+
+            <div>
+                <p>
+                   You are now a &nbsp;&nbsp;<img src="/assets/svg/badges/badge-{{membership.slug}}.svg" alt="badge">&nbsp;&nbsp;  member
+                </p>
+                <p>
+                    As a {{membership.slug}} member, you are entitled to these following perks :
+                </p>
+            </div>
+ 
+            <div class="perks">
+              <table>
+                <tr>
+                  <td *ngFor="let perks of new_perks">
+                      <mat-list>
+                          <mat-list-item *ngFor="let item of perks">
+                            <mat-icon mat-list-icon color="accent">done_outline</mat-icon>
+                            <p class="perks-item" mat-line>{{item}}</p>
+                          </mat-list-item>
+                        </mat-list>
+                  </td>
+                </tr>
+              </table>
+               
+            </div>
+
+            <div class="message">
+                <a mat-raised-button [routerLink]="'/task'" color="accent">Get Started!</a>
+                
+            </div>
+ 
+        </div>
+ 
+    </div>
+ 
+ </div>

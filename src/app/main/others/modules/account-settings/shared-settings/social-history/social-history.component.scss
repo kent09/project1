@@ -1,0 +1,24 @@
+#social-history {
+    .pointer {
+        cursor: pointer;
+    }
+    .sort {
+        display: flex;
+        .search {
+            display: flex;
+            align-items: center;
+            margin-left: auto; 
+        }
+    }
+    .mat-column-option {
+        flex: 0 1 100px;
+    }
+    .mat-headline a,
+    a:not(.mat-button):not(.mat-raised-button):not(.mat-icon-button):hover {
+        color: rgba(0, 0, 0, 0.87);
+        text-decoration: none;
+    }
+    .mat-headline .mat-icon {
+        color: #4267b2;
+    }
+}

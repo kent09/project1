@@ -1,0 +1,36 @@
+@import "src/@fuse/scss/fuse";
+:host {
+    table {
+        width: 100%;
+    }
+    
+    .avatar {
+        margin-top: -9px;
+        margin-bottom: -6px;
+    }
+    
+    .title {
+        font-size: 14px;
+        font-weight: 700px;
+    }
+    
+    .main-header {
+        .general {
+            font-size: 16px;
+            .top {
+                font-size: 16px;
+            }
+        }
+        .leaderboard-earnings {
+            font-size: 16px;
+        }
+        .revoke,
+        .block {
+            height: 32px;
+            width: 32px;
+        }
+    
+    
+    }
+    
+}

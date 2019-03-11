@@ -1,0 +1,268 @@
+@import "src/@fuse/scss/fuse";
+
+#timeline-task-analytics {
+    .main-widget {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .hidden {
+        display: none;
+        transition: 1s;
+       
+    }
+
+    .showHidden {
+        transition: 1s;
+        left: 0;
+    }
+
+
+    .timeline-content {
+        .avatar.small {
+            margin: 0 5px 0 0;
+        }
+    }
+    .content {
+        display: flex;
+        flex: 1 1 auto;
+        padding: 32px;
+        min-width: 0;
+
+        @include media-breakpoint-down('md') {
+            flex-direction: column;
+        }
+        @include media-breakpoint('lt-lg') {
+            flex-direction: column-reverse;
+        }
+
+        .left {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+            min-width: 0;
+
+            .widget {
+                flex: 1 1 auto;
+                min-width: 0;
+            }
+
+            .mat-tab-label-container {
+                .mat-tab-labels {
+                    justify-content: left;
+                }
+            }
+        }
+
+        .right {
+            flex: 0 0 auto;
+            width: auto;
+            min-width: 320px;
+            max-width: 100%;
+
+            @include media-breakpoint-down('md') {
+                flex: 1 0 100%;
+                margin-top: 32px;
+                width: 100%;
+                min-width: 0;
+                max-width: none;
+            }
+
+            .fuse-card {
+                @include media-breakpoint-down('md') {
+                    width: 100%;
+                    min-width: 0;
+                    max-width: none;
+                }
+
+                height: auto !important;
+            }
+
+            .user-info {
+                padding-bottom: 10px;
+                .gift-coin {
+                    .avatar.small {
+                        margin: 0 5px 0 0;
+                    }
+                }
+                .menu {
+                    margin-left: auto;
+                }
+            }
+
+            .about-data {
+                margin-top: 10px;
+
+                .mat-title {
+                    margin-bottom: 5px;
+                    font-size: 1.2em;
+                }
+
+                .flex-align-center {
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+
+        .action-buttons-follow {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            button {
+                height: 60px;
+                cursor: pointer;
+                img {
+                    height: 100%;
+                }
+            }
+        }
+    }
+
+
+    .myprofile-data {
+        .profile-image {
+            margin-right: 24px;
+
+            @include media-breakpoint('sm') {
+                margin: 0 0 16px 0;
+            }
+        }
+
+        .toUpperCase {
+            text-transform: uppercase;
+
+            &.limitString {
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        .name {
+            color: #000000;
+
+            @include media-breakpoint('sm') {
+                margin-bottom: 32px;
+            }
+        }
+
+        .small-name {
+            .counter-badge {
+                color: red;
+                font-weight: bold;
+                margin-left: 5px;
+            }
+        }
+
+        .actions {
+            &.socials {
+                img {
+                    width: 35px;
+                    margin: 10px 3px 5px;
+                    box-shadow: #cecece 2px 2px;
+                    border-radius: 100%;
+                    cursor: pointer;
+                }
+            }
+
+            button {
+                text-transform: none;
+                padding: 0 16px;
+                height: 32px;
+                line-height: 32px;
+                margin: 0 0 0 8px;
+                color: #FFFFFF !important;
+            }
+
+            .btn-text-gift {
+                color: white;
+            }
+        }
+    }
+
+    .myprofile-code-copy {
+        margin-top: 10px;
+
+        .my-codes-to {
+            background-color: #cccccc;
+            text-align: center;
+
+            .mat-title {
+                margin-bottom: 0;
+            }
+
+            .linkg {
+                display: block;
+                font-size: 1.3rem;
+            }
+        }
+    }
+
+    .profile-box {
+        margin-top: 10px;
+        @include mat-elevation(2);
+
+        header {
+            padding: 16px;
+
+            .title {
+                font-size: 17px;
+                color: #FFFFFF;
+                font-weight: normal;
+            }
+
+            .more {
+                cursor: pointer;
+            }
+        }
+
+        .content {
+            padding: 16px;
+            background-color: #FFF;
+        }
+
+        .list-item-follow {
+            border-bottom: solid 1px rgba(0, 0, 0, .12);
+            width: 100%;
+
+            &.p-customs {
+                padding: 9px !important;
+            }
+
+            .mat-chip-list a {
+                color: #FFFFFF;
+            }
+
+            .mat-chip-list a:hover {
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+
+        footer {
+            padding: 8px;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            background-color: rgba(0, 0, 0, 0.06);
+        }
+
+        &.info-box {
+            .info-line {
+                margin-bottom: 24px;
+
+                .title {
+                    font-size: 15px;
+                    font-weight: 500;
+                    padding-bottom: 4px;
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    .traveler-guides {
+        margin-top: 10px;
+    }
+}

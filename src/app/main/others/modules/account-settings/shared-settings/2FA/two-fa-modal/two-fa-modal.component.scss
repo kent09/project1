@@ -1,0 +1,26 @@
+.content-holder {
+    position: relative;
+    width: 550px;
+    .close {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+    }
+    /deep/ .mat-step-header .mat-step-label.mat-step-label-selected {
+        color: #4267b2;
+    }
+    .btn-holder {
+        display: flex;
+        align-items: center;
+        span {
+            margin-left: auto;
+            margin-right: 10px; 
+        }
+        .submit {
+            margin-left: auto;
+        }
+    }
+
+}

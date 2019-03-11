@@ -1,0 +1,81 @@
+<div class="ledger" fxLayout="column">
+        <div class="example-container">
+          <br>
+          <h1 class="pl-16">User Sessions</h1>
+          <br>
+            <div class="example-loading-shade"
+                 *ngIf="isLoadingResults || isRateLimitReached">
+                <mat-progress-bar *ngIf="isLoadingResults"></mat-progress-bar>
+              <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+                Please try to reload!
+              </div>
+            </div>
+          
+            <div class="example-table-container">
+        
+                <mat-table class="example-table" #table 
+                                            [dataSource]="data" matSort 
+                                            matSortActive="created"
+                                            matSortDisableClear matSortDirection="asc"
+                                            [@animateStagger]="{value:'50'}"
+                                            fusePerfectScrollbar>
+        
+                <ng-container matColumnDef="ip">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>IP Address</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        {{ row.ip_address }}
+                    </mat-cell>
+                    
+                </ng-container>
+        
+                <ng-container matColumnDef="action" >
+                    <mat-header-cell *matHeaderCellDef mat-sort-header  >Action</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        {{ row.action }}
+                    </mat-cell>
+                </ng-container>
+        
+                <ng-container matColumnDef="loc">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm> Location</mat-header-cell>
+                    <mat-cell *matCellDef="let row" fxHide fxShow.gt-sm >
+                        <b class="small-name text-boxed">
+                            {{ row.location  }}
+                        </b>
+                    </mat-cell>
+                </ng-container>
+        
+                <ng-container matColumnDef="model">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm >Model Used</mat-header-cell>
+                    <mat-cell *matCellDef="let row"fxHide fxShow.gt-sm>
+                        {{ row.model_used  }}
+                    </mat-cell>
+                </ng-container>
+        
+                <ng-container matColumnDef="date">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header  fxHide fxShow.gt-sm>Date </mat-header-cell>
+                    <mat-cell *matCellDef="let row" fxHide fxShow.gt-sm>
+                        {{ row.date | date  }}
+                    </mat-cell>
+                </ng-container>
+        
+                <ng-container matColumnDef="browser">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header  fxHide fxShow.gt-sm >Browser Information</mat-header-cell>
+                    <mat-cell *matCellDef="let row" fxHide fxShow.gt-sm>
+                        {{ row.browser_information  }}
+                    </mat-cell>
+                </ng-container>
+        
+                <mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" class="contact" 
+                    matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+                </mat-row>
+            </mat-table>
+            <div *ngIf="!data" class="no-record">
+                    <p>{{ no_record }}</p>
+                </div>
+            <mat-paginator [length]="resultsLength" [pageSize]="5"></mat-paginator>
+            </div>
+          
+            
+          </div>
+      </div>

@@ -1,0 +1,29 @@
+@import "src/@fuse/scss/fuse";
+
+$default-anchor-color: #4267b2;
+$default-font-color: #464646;
+
+.content-holder {
+    header {
+        display: flex;
+        align-items: center;
+    }
+    .search-input-wrapper {
+        display: flex;
+        align-items: center;
+        margin-left: auto; 
+    }
+    .mat-form-field {
+        margin-left: auto; 
+    }
+    .mat-column-name {
+        a {
+            color: $default-anchor-color;
+            text-transform: capitalize;
+            cursor: pointer;
+        }
+        a:not(.mat-button):not(.mat-raised-button):not(.mat-icon-button):hover {
+            text-decoration: none;
+        }
+    }
+}

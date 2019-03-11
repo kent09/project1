@@ -1,0 +1,72 @@
+<div id="account-settings" class="page-layout carded fullwidth inner-scroll" [class.member-tab]="!addClass" [ngClass]="{'p-16 p-sm-24' : addClass }" fusePerfectScrollbar [@animate]="{value:'*',params:{delay:'300ms',y:'100%'}}">
+
+
+    <mat-card>
+        <mat-tab-group [color]="'white'" [backgroundColor]="'accent'" (selectedTabChange)="tabChanged($event)" [selectedIndex]="selectedIndex">
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">account_circle</mat-icon>
+                    &nbsp; Account 
+                </ng-template>
+
+                <app-tab-accounts></app-tab-accounts>
+            </mat-tab>
+
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">lock</mat-icon>
+                    &nbsp; Change Password
+                </ng-template>
+
+               <app-tab-password></app-tab-password>
+
+            </mat-tab>
+
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">phonelink_lock</mat-icon>
+                    &nbsp; 2FA Authentication
+                </ng-template>
+
+                <app-tab-2FA></app-tab-2FA>
+            </mat-tab>
+
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">supervisor_account</mat-icon>
+                    &nbsp; Social Media Connection
+                </ng-template>
+
+                <app-tab-social-media></app-tab-social-media>
+            </mat-tab>
+
+
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">vpn_lock</mat-icon>
+                    &nbsp; User Session
+                </ng-template>
+
+                <app-tab-user-session></app-tab-user-session>
+            </mat-tab>
+
+            <mat-tab>
+                    <ng-template mat-tab-label>
+                        <mat-icon class="example-tab-icon">block</mat-icon>
+                        &nbsp; Blocked Users
+                    </ng-template>
+    
+                    <app-blocked-users></app-blocked-users>
+            </mat-tab>
+             <!-- <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">camera_front</mat-icon>
+                    &nbsp; Membership Plan
+                </ng-template>
+                <app-tab-user-verification></app-tab-user-verification>
+            </mat-tab>  -->
+        </mat-tab-group>
+
+    </mat-card>
+
+</div>

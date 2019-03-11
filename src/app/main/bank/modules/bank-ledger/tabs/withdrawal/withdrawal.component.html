@@ -1,0 +1,64 @@
+<div class="page-layout create-task p-24" fusePerfectScrollbar>
+    <div class="content">
+        <mat-progress-bar *ngIf="isWithdrawing"  mode="indeterminate"></mat-progress-bar>
+          
+        <mat-card>
+            <div class="message-box info width-100">
+                SUPERIOR COIN WITHDRAWAL.
+            </div>
+            <br>
+            <form name="withdraw-forms" enctype="multipart/form-data"  [formGroup]="withdrawalForm" novalidate>
+
+                <div fxLayout="column" fxLayoutAlign="center" fxFlexFill [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    <mat-form-field class="width-100" appearance="outline">
+                        <mat-label>Superior Coin Receiver Address</mat-label>
+                        <input matInput formControlName="receiverAddress">
+                        <mat-icon matPrefix>send</mat-icon>
+                        <mat-error>
+                            Receiver Address is required
+                        </mat-error>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="width-100" appearance="outline">
+                        <mat-label>Payment ID:</mat-label>
+                        <input matInput  formControlName="paymentId">
+                        <mat-icon matPrefix>assignment_ind</mat-icon>
+                        <mat-error>
+                            Payment ID is required
+                        </mat-error>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="width-100" appearance="outline">
+                        <mat-label>Superior Coin Amount</mat-label>
+                        <input matInput  formControlName="suppAmount">
+                        <mat-icon matPrefix>assignment</mat-icon>
+                        <mat-error>
+                            Superior Coin is required
+                        </mat-error>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput placeholder="Task Description" formControlName="description"></textarea>
+                        <mat-icon matPrefix>assignment</mat-icon>
+                        <mat-error>
+                            Description is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+             
+                <br>
+                <mat-card-actions align="end">
+                    <button mat-raised-button color="warn" type="button" class="submit-button" aria-label="Reset" [disabled]="withdrawalForm.invalid">
+                        Reset Fields
+                    </button>
+
+                    <button mat-raised-button color="accent" class="submit-button" aria-label="Create" [disabled]="withdrawalForm.invalid">
+                        Withdraw
+                    </button>
+                </mat-card-actions>
+            </form>
+
+        </mat-card>
+    </div>
+</div>

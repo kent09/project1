@@ -1,0 +1,39 @@
+.content-holder {
+    width: 100%;
+    max-width: 350px;
+    font-size: 16px; 
+    position: relative;
+    .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    .mat-subheading-2 {
+        a {
+            display: block;
+            padding-right: 30px;
+            line-height: normal;
+            margin-bottom: 10px;
+        }
+    }
+    a {
+        color: #4267b2;
+    }
+    .reward {
+        display: flex;
+    }
+    .display-flex {
+       
+
+        img{
+            width: 133px;
+            height: 56px;
+        }
+    }
+    .status {
+        text-transform: capitalize;
+        .complete {
+            color: #4caf50;
+        } 
+    }
+}

@@ -1,0 +1,65 @@
+<div class="content-holder" *ngIf="!data.verified">
+  <div class="close" (click)="onNoClick()"><mat-icon>close</mat-icon></div>
+  <mat-horizontal-stepper #stepper>
+    <mat-step>
+        <ng-template matStepLabel>SCAN QR CODE</ng-template>
+        <div class="content-wrapper">
+          <div class="mat-title">Step 1</div>
+          <p class="mat-subheading-2">
+            Open up your 2FA mobile app and scan the following QR barcode:
+          </p>
+          <div class="qr-img text-center">
+            <img [src]="data.image" alt="code">
+          </div>
+          <p class="mat-subheading-2">
+            If you 2FA mobile app does not support QR barcodes, enter in the following number: <strong class="warn">{{data.secret}}</strong> 
+          </p>
+        </div>
+        <div class="btn-holder mt-12">
+          <span>I have scanned the QR code</span>
+          <button mat-raised-button color="accent" matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>ENABLE GOOGLE AUTHENTICATION</ng-template>
+        <div class="content-wrapper">
+          <div class="mat-title">Step 2</div>
+          <form>
+            <mat-form-field class="w-100-p">
+              <input matInput placeholder="Key (Optional)" name="key"  [(ngModel)]="key">
+            </mat-form-field>
+            <mat-form-field class="w-100-p">
+              <input type="password" matInput placeholder="Login Password" name="pw" [(ngModel)]="pw" >
+            </mat-form-field>
+            <mat-form-field class="w-100-p">
+              <input matInput placeholder="2FA Code" name="twoFAcode" [(ngModel)]="twoFAcode">
+            </mat-form-field>
+          </form>
+        </div>
+        <div class="btn-holder mt-12">
+          <button mat-raised-button color="grey" matStepperPrevious>Prev Step</button>
+          <button mat-raised-button color="accent" class="submit"  (click)="register2FA()">Enable Google Authentication</button>
+        </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
+
+<!-- Disable 2FA -->
+<div class="content-holder" *ngIf="data.verified">
+  <div class="close" (click)="onNoClick()"><mat-icon>close</mat-icon></div>
+  <mat-horizontal-stepper #stepper>
+    <mat-step>
+        <ng-template matStepLabel>DISABLE GOOGLE AUTHENTICATION</ng-template>
+        <div class="content-wrapper">
+          <form>
+            <mat-form-field class="w-100-p">
+              <input matInput placeholder="One-Time Password" name="OTP"  [(ngModel)]="OTP">
+            </mat-form-field>
+          </form>
+        </div>
+        <div class="btn-holder mt-12">
+          <button mat-raised-button color="accent" class="submit"  (click)="disable2FA()">Disable Google Authentication</button>
+        </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

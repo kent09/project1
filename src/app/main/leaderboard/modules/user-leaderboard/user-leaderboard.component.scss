@@ -1,0 +1,54 @@
+@import "src/@fuse/scss/fuse";
+.page-layout {
+    .header {
+        display: flex;
+        align-items: center;
+        @include media-breakpoint('lt-md') {
+            flex-direction: column; 
+        }
+        .header-image {
+            height: auto;
+            width: auto;
+        }
+    }
+    .mat-card-header-text {
+        .mat-card-title {
+            a {
+                text-transform: lowercase;
+            }
+        }
+    }
+    .leaderboard-button {
+        margin-left: auto; 
+        @include media-breakpoint('lt-md') {
+            margin-left: 0; 
+            padding: 15px 0 0;
+        }
+        .avatar {
+            filter: grayscale(100%);
+            -webkit-transition: all 200ms linear;
+            -moz-transition: all 200ms linear;
+            -ms-transition: all 200ms linear;
+            -o-transition: all 200ms linear;
+            transition: all 200ms linear;
+        }
+        .mat-button {
+            @include media-breakpoint('xs') {
+                min-width: unset;
+                padding: 0 10px;
+                margin: 0;
+            }
+        }
+        .mat-button:hover {
+            .avatar {
+                filter: grayscale(0);
+            }
+        }
+        .active {
+            background-color: #e0e0e0; 
+            .avatar {
+                filter: grayscale(0);
+            }
+        }
+    }
+}

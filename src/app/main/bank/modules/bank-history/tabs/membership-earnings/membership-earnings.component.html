@@ -1,0 +1,102 @@
+<div id="membership" class="blank p-24" fxLayout="row">
+
+
+  <div class="widget-group copy-section mat-elevation-z2" fxLayout="column" [@animateStagger]="{value:'50'}"
+    fusePerfectScrollbar>
+    <mat-card>
+        <div class="example-container">
+          <div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+            <mat-progress-bar mode="indeterminate" *ngIf="isLoadingResults"></mat-progress-bar>
+            <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+              Please try to reload!
+            </div>
+          </div>
+
+          <div class="example-table-container">
+
+            <mat-table class="example-table" #table [dataSource]="data" matSort matSortActive="created"
+              matSortDisableClear matSortDirection="asc" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+
+              <ng-container matColumnDef="level" fxHide fxShow.gt-xs>
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Level</mat-header-cell>
+                <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs>
+                  {{ row.level }}
+                </mat-cell>
+
+              </ng-container>
+
+              <ng-container matColumnDef="referral_name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Referral Name</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                  <a [routerLink]="[ '/others/profile', row.referral_username]">
+                        <b>{{ row.referral_name }}</b>
+                  </a>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="membership_type">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs >Membership Type</mat-header-cell>
+                <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs>
+                  <img class="avatar" src="assets/svg/badges/badge-{{ row.membership_type }}.svg" alt="badge">
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="purchased_date">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Purchased Date</mat-header-cell>
+                <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs>
+                  <b class="small-name">
+                    {{ row.purchase_date | date }}
+                  </b>
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="earnings">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Earnings</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                  <b class="text-truncate font-weight-600 reward-label">$ {{ row.earnings }}</b>
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Status</mat-header-cell>
+                <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs>
+                  <div class="{{row.status}} chip">
+                    {{ row.status }}
+                  </div>
+                
+                </mat-cell>
+
+              </ng-container>
+
+
+              <ng-container matColumnDef="option">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.lt-sm></mat-header-cell>
+                  <mat-cell *matCellDef="let row" fxHide fxShow.lt-sm>
+                      <button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+                      <mat-menu #menu="matMenu">
+                          <button mat-menu-item (click)="openDialog(row)">
+                              <mat-icon>details</mat-icon>
+                              Details
+                          </button>
+                      </mat-menu>
+                  </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;" class="contact" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+              </mat-row>
+            </mat-table>
+
+
+          </div>
+
+          <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+        </div>
+ 
+    </mat-card>
+  </div>
+
+
+
+
+
+</div>

@@ -1,0 +1,97 @@
+@import "src/@fuse/scss/fuse";
+
+app-shared-active-task {
+    width: 100%;
+    display: flex;
+    flex: 1 1 auto;
+    .mat-table {
+      width: 100%;
+      height: auto;
+      .mat-column-user {
+       /*    flex: 0 2 104px; */
+          justify-content: center;
+      }
+    //   .mat-column-title {
+    //       flex: 0 2 204px;
+    //       justify-content: center;
+    //   }
+      .mat-column-created_at {
+         /*  flex: 2 0 100px; */
+          .list-unique {
+              list-style: none;
+              padding: 0;
+          }
+      }
+      .mat-column-reward {
+          .reward-label {
+              font-size: 16px;
+          }
+      }
+      .mat-column-buttons {
+          flex: 0 1 80px;
+      }
+      .mat-sort-header-button,
+      .mat-header-cell {
+          font-weight: bolder;
+          font-size: 16px;
+          color: rgb(70, 70, 70);
+      }
+      .mat-row {
+          position: relative;
+          cursor: pointer;
+          padding: 0;
+          .mat-cell {
+              min-width: 0;
+            //   margin-top: -10px;
+              &.mat-column-detail-button {
+                  flex: 0 1 auto;
+                //   padding: 0 24px 0 0;
+                  @include media-breakpoint('gt-md') {
+                      display: none;
+                  }
+              }
+          }
+      }
+  }
+    #activetask-tab {
+        width: 100%;
+        .example-container {
+            width: 100%;
+        }
+        .custom-fuse-width {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+
+        .mat-column-user {
+            flex: 0 1 130px;
+            padding: 15px 0;
+        }
+        .mat-column-reward {
+            flex: 0 1 100px;
+        }
+        .mat-column-created_at {
+            flex: 0 1 125px;
+            padding: 15px 0;
+        }
+
+        .table-content-active-task {
+            width: 100%;
+            .example-table-container{
+              width: 100% !important;
+              .active-task-table{
+                width: 100% !important;
+              }
+            }
+        }
+        .reward {
+            display: flex;
+            align-items: center;
+        }
+        .mat-header-row {
+            min-height: 44px;
+        }
+     
+    }
+}
+

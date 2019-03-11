@@ -1,0 +1,65 @@
+@import "src/@fuse/scss/fuse";
+#profile {
+    .header {
+        height: 320px;
+        min-height: 320px;
+        max-height: 320px;
+        background: url('/assets/images/backgrounds/header-bg.png') no-repeat 0 45%;
+        background-size: cover;
+        .profile-image {
+            margin-right: 24px;
+            @include media-breakpoint('sm') {
+                margin: 0 0 16px 0;
+            }
+        }
+        .toUpperCase{
+            text-transform: uppercase;
+            font-size: 34px;
+        }
+        .name {
+           
+            // color: #FFFFFF;
+            color: #000000;
+            @include media-breakpoint('sm') {
+                margin-bottom: 32px;
+            }
+        }
+        .small-name {
+            font-size: 15px;
+            .member{
+                font-weight: bold;
+                margin-left: 5px;
+            }
+        }
+        .actions {
+            &.socials {
+                img {
+                    width: 23px;
+                    margin: 3px;
+                    box-shadow: rgb(51, 51, 51) 2px 2px;
+                    border-radius: 100%;
+                }
+            }
+            button {
+                text-transform: none;
+                padding: 0 16px;
+                height: 32px;
+                line-height: 32px;
+                margin: 0 0 0 8px;
+                color: #FFFFFF !important;
+            }
+            .btn-text-gift {
+                color: white;
+            }
+        }
+    }
+    .content {
+        flex: 1;
+        mat-tab-group {
+            height: 100%;
+            .mat-tab-body-wrapper {
+                flex-grow: 1;
+            }
+        }
+    }
+}

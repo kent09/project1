@@ -1,0 +1,11 @@
+@import "src/@fuse/scss/fuse";
+.content-holder {
+    font-size: 16px;
+    position: relative;
+    .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,23 @@
+
+.user-session{
+    .filter {
+        display: inline-flex;
+        float: right;
+       
+        .search-input-wrapper {
+            align-items: center;
+            display: flex;
+            margin-right: 28px;
+        }
+    }
+
+    .example-container{
+        .sessions{
+            text-transform: uppercase;
+            font-size: 25px;
+            margin-top: 6px;
+            font-weight: 700;
+        }
+
+    }
+}

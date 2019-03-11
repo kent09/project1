@@ -1,0 +1,117 @@
+#mail-confirm {
+    #mail-confirm-form {
+        .container {
+            max-width: 100%;
+            padding: 0;
+            .full-width {
+                width: 100%;
+            }
+
+            .full-width.ng-invalid.ng-touched,
+            .full-width.full-width.ng-invalid.mat-form-field-invalid {
+                border-color: #f44336;
+            }
+            form.ng-invalid {
+                .button {
+                    button {
+                        background-color: #b3b4b4;
+                        border-color: #b3b4b4;
+                    }
+                }
+            }
+            h2 {
+                text-align: left;
+            }
+            .mat-stepper-vertical {
+                width: 100%;
+            }
+            .holder {
+                display: flex;
+            }
+            .right {
+                padding-right: 50px; 
+                .droplist {
+                    border: 1px solid;
+                    max-height: 160px;
+                    ul {
+                        max-height: 115px;
+                    }
+                }
+            }
+            .detail {
+                ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    text-align: left;
+                    font-size: 16px;
+                }
+                li {
+                    margin-bottom: 10px; 
+                    .text-label {
+                        color: #b3b4b4;
+                    }
+                }
+            }
+            .holder1 {
+                max-width: 550px; 
+                .header {
+                    display: flex;
+                    margin-bottom: 10px; 
+                    align-items: center;
+                    h2 {
+                        margin: 10px 0;
+                    }
+                    .tranid {
+                        margin-left: auto;
+                        color: #b3b4b4;
+                        span {
+                            color: #000000;
+                        }
+                    }
+                }
+
+                .back {
+                    margin-left: auto;
+                    padding: 10px 30px;
+                    background-color: rgba(0, 0, 0, 0.04);
+                }
+                .back.hover {
+                    background-color: rgba(0, 0, 0, 0.08);
+                }
+                /deep/ #mat-checkbox-1 {
+                    .mat-checkbox-layout {
+                        white-space: unset;
+                        text-align: left;
+                    }
+                }
+                .content {
+                    display: flex;
+                    p {
+                        text-align: left;
+                        font-size: 16px;
+                        margin-top: 0;
+                    }
+                }
+                .qr-code {
+                    padding: 10px 15px;
+                }
+                .copy {
+                    padding: 4px 15px;
+                    border: 1px solid #33579e;
+                    color: #33579e;
+                    margin-left: 10px;
+                    border-radius: 6px; 
+                }
+            }
+            .w-wide {
+                max-width: 650px; 
+            }
+            .footer {
+                padding: 15px 0;
+                background-color: #eee;
+                margin-top: 10px;
+            }
+        }
+    }
+}

@@ -1,0 +1,33 @@
+.content-holder {
+    position: relative;
+    max-width: 550px;
+    .close {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        right: 0;
+        z-index: 10;
+    }
+    .mat-form-field {
+        width: 100%;
+    }
+    .address {
+        span:last-child {
+            border: 1px solid #C0C0C0;
+            display: block;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    }
+    .terms {
+        .mat-title, span {
+            color: #f44336;
+        }
+    }
+    .btn-holder {
+        display: flex;
+        .mat-warn {
+            margin-left: auto; 
+        }
+    }
+}

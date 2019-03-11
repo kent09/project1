@@ -1,0 +1,101 @@
+<div class="example-container">
+    <div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoadingResults"></mat-progress-bar>
+        <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+            Please try to reload!
+        </div>
+    </div>
+
+    <div class="example-table-container">
+
+        <mat-table class="example-table" #table [dataSource]="data" matSort matSortActive="created" matSortDisableClear matSortDirection="asc"
+            [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+
+            <ng-container matColumnDef="category">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Category</mat-header-cell>
+                    <mat-cell *matCellDef="let row" fxHide fxShow.gt-sm>
+                        <div class="category">
+                            <mat-icon *ngIf="row.category == 'global'">public</mat-icon>
+                            <i *ngIf="row.category == 'facebook'" class="fb w-24 h-24"></i>
+                            <i *ngIf="row.category == 'twitter'" class="twitter w-24 h-24"></i>
+                            <i *ngIf="row.category == 'googleplus'" class="g-plus w-24 h-24"></i>
+                            <i *ngIf="row.category == 'instagram'" class="instagram w-24 h-24"></i>
+                            <i *ngIf="row.category == 'linkedin'" class="linkedin w-24 h-24"></i>
+                            <i *ngIf="row.category == 'kblog'" class="kblog w-24 h-24"></i>
+                            <i *ngIf="row.category == 'youtube'" class="youtube w-24 h-24"></i>
+                            <i *ngIf="row.category == 'steemit'" class="steemit w-24 h-24"></i>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+            
+            <ng-container matColumnDef="avatar">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm></mat-header-cell>
+                    <mat-cell *matCellDef="let row" fxHide fxShow.gt-sm>
+                        <img [src]="avatarImagePath(row.user_id)" onError="this.src='assets/images/avatars/profile.jpg'" class="avatar w-28 h-28" alt="{{ row.name }}" />
+                    </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header fxHide fxShow.gt-xs>2nd Lvl Ref. Name</mat-header-cell>
+                <mat-cell *matCellDef="let row" mat-sort-header fxHide fxShow.gt-xs>
+                    <img src="{{PROFILEIMAGE}}/avatar/{{row.user_id}}" onError="this.src='assets/images/avatars/profile.jpg'" class="avatar" fxHide fxShow.gt-sm>
+
+                    <b class="text-truncate font-weight-600 reward-label">{{ row.name }}</b>
+                </mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="task_title">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Task Title</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <a [routerLink]="[ '/task/taskdetails', row.slug ]">
+                        <div class="mat-title mb-0">{{ row.task_title }}</div>
+                    </a>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="points">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Task Points</mat-header-cell>
+                <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs>
+                    <b class="small-name">
+                        {{ row.points | prettify : 'pretty' }}
+                    </b>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="completed_date">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md> Date Completed</mat-header-cell>
+                <mat-cell *matCellDef="let row" fxHide fxShow.gt-md>
+                    {{ row.completed_date | date }}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Status</mat-header-cell>
+                <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs>
+                    <div class="chip {{row.status}}">{{ row.status }}</div>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="option">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.lt-sm>Option</mat-header-cell>
+                <mat-cell *matCellDef="let row" fxHide fxShow.lt-sm>
+                    <button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="openDialog(row)">
+                            <mat-icon>details</mat-icon>
+                            Details
+                        </button>
+                    </mat-menu>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" class="contact" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+            </mat-row>
+        </mat-table>
+
+
+    </div>
+
+    <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+</div>

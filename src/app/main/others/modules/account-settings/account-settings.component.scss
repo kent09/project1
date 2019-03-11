@@ -1,0 +1,20 @@
+@import "src/@fuse/scss/fuse";
+
+app-account-settings {
+    height: auto;
+    .page-layout {
+        overflow: auto;
+    }
+    .mat-tab-header {
+        background: #4267b2 !important;
+        border-radius: 3px;
+    }
+    .mat-tab-body-content {
+        height: auto;
+    }
+    .member-tab {
+        .mat-card {
+            padding: 0;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+<div class="content-holder" *ngIf="data">
+  <div class="close" (click)="onNoClick()"><mat-icon>close</mat-icon></div>
+  <div class="mat-title">More Details</div>
+  <div class="content-wrapper">
+    
+    <div class="pb-12"><strong>SUP: </strong>{{data.amount}}</div>
+    <div class="pb-12"><strong>Address: </strong><span>{{data.receiver_address}}</span></div>
+    <div class="pb-12" *ngIf="data.payment_id"><strong>Payment ID: </strong><span>{{data.payment_id}}</span></div>
+    <div class="pb-12"><strong>Date: </strong>{{data.datetime | date:'medium'}}</div>
+    <div class="pb-12"><strong>Fee: </strong>3 SUP</div>
+    <div class="pb-12"><strong>Description: </strong>{{data.description}}</div>
+    <div class="pb-12"><strong>Status: </strong>{{data.status}}</div>
+  </div>
+  <!-- <div class="btn-holder">
+    <button mat-flat-button color="warn" (click)="onNoClick()">Close</button>
+  </div> -->
+</div>

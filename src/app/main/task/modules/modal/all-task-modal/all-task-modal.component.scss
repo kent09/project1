@@ -1,0 +1,66 @@
+.content-holder {
+    width: 100%;
+    max-width: 350px;
+    position: relative;
+    .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    a, a:not(.mat-button):not(.mat-raised-button):not(.mat-icon-button):hover {
+        color: #4267b2;
+        text-decoration: none;
+        display: block;
+    }
+    .mat-subheading-2 {
+        &>a {
+            padding-right: 30px;
+            line-height: normal;
+            margin-bottom: 10px;
+        }
+    }
+    .reward-category {
+        display: block;
+        align-items: center;
+        li {
+            display: flex;
+            align-items: center;
+        }
+    }
+    .display-flex {
+        display: flex;
+        align-items: center;
+    }
+    .category {
+        i {
+            display: block;
+            background-repeat: no-repeat;
+            background-size: contain;
+            margin-left: 10px;
+        }
+        .fb {
+            background-image: url(/assets/socials/fb.svg);
+        }
+        .twitter {
+            background-image: url(/assets/socials/twitter-color.svg);
+        }
+        .g-plus {
+            background-image: url(/assets/socials/google-plus-color.svg);
+        }
+        .instagram {
+            background-image: url(/assets/socials/instagram.svg);
+        }
+        .linkedin {
+            background-image: url(/assets/socials/linkedin-color.svg);
+        }
+        .kblog {
+            background-image: url(/assets/socials/kblog.svg);
+        }
+        .youtube {
+            background-image: url(/assets/socials/youtube.svg);
+        }
+        .steemit {
+            background-image: url(/assets/socials/steemit.svg);
+        }
+    }
+}

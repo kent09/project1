@@ -1,0 +1,42 @@
+<div id="mail-confirm" fxLayout="column">
+
+    <div id="mail-confirm-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
+ 
+        <div id="mail-confirm-form">
+ 
+            <div class="title">THANK YOU!</div>
+ 
+            <div class="logo">
+                <!-- <mat-icon class="mat-accent s-96">email</mat-icon> -->
+                <img src="/assets/svg/check.svg" alt="">
+            </div>
+
+            <div class="subtitle">
+                <p *ngIf="email">
+                    A confirmation e-mail has been sent to <b>{{email}}</b>.
+                </p>
+                <p *ngIf="!email">
+                    A confirmation e-mail has been sent to your email.
+                </p>
+                <p>
+                    Check your inbox and click on the confirmation link to confirm your email address.
+                </p>
+            </div>
+ 
+            <div>
+               <p>Thanks a bunch for filling that out. It means a lot to us, just like you do!
+                We appreciate you giving us a moment of your time today.
+              </p> 
+            </div>
+
+            <div class="message">
+                <a mat-raised-button [routerLink]="'/auth/login'" color="accent">Go back to login page</a>
+                <br><br>
+                <a class="linkz" [routerLink]="'/auth/login'">https://kryptonia.io/auth/login</a>
+            </div>
+ 
+        </div>
+ 
+    </div>
+ 
+ </div>

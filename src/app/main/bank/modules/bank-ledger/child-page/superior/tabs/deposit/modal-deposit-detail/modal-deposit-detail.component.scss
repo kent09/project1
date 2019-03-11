@@ -1,0 +1,24 @@
+@import "src/@fuse/scss/fuse";
+.content-holder {
+    font-size: 16px;
+    position: relative;
+    .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    &>div {
+        margin-bottom: 10px;
+        div:first-child,
+        span:first-child {
+            font-weight: 600;
+        }
+    }
+    .txid {
+        div:last-child {
+            word-break: break-all;
+            background: #efefef;
+            padding: 10px 5px 5px;
+        }
+    }
+}

@@ -1,0 +1,20 @@
+<div class="content-holder">
+  <div class="close" (click)="onNoClick()"><mat-icon>close</mat-icon></div>
+  <div class="mat-title">More Details</div>
+  <div class="pb-12">
+    <span><b>Type: </b></span>
+    <span>{{data.title}}</span>
+  </div>
+  <div class="pb-12">
+    <span><b>Date: </b></span>
+    <span>{{data.notif_datetime}}</span>
+  </div>
+  <div class="pb-12">
+    <span><b>Name: </b></span>
+    <span><a [routerLink]="[ '/other/profile', data.sender_username ]">{{data.sender_name}}</a></span>
+  </div>
+  <div>
+    <span class="pb-8"><b>Description: </b></span>
+    <div [innerHTML]="data.description"></div>
+  </div>
+</div>

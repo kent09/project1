@@ -1,0 +1,24 @@
+<div id="bonus-socials-project" class="blank p-24" fxLayout="row">
+    <!-- <app-header-history-data class="bank-data"></app-header-history-data> -->
+
+    <div class="widget-group copy-section mat-elevation-z2" fxLayout="column" [@animateStagger]="{value:'50'}"
+        fusePerfectScrollbar>
+        <mat-card>
+            <div class="px-16 py-8" fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-form-field>
+                    <mat-select [(value)]="selectedBonus" class="simplified" aria-label="Change range">
+                        <mat-option *ngFor="let tab of bonusCoin" [value]="tab.value">
+                            {{tab.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+
+            <div class="p-16" fxLayout="row">
+                <app-bank-monthly-bonus *ngIf="selectedBonus ==='monthly'"></app-bank-monthly-bonus>
+                <app-bank-social-connect *ngIf="selectedBonus ==='socialconnect'"></app-bank-social-connect>
+            </div>
+        </mat-card>
+    </div>
+</div>

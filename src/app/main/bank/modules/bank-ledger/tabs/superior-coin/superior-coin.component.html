@@ -1,0 +1,28 @@
+<div id="superior-coin-tab" class="blank p-24 " fxLayout="row">
+
+    <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100" fxFlex.gt-sm="50">
+
+        <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+
+            <div class="px-16 py-8 border-bottom" fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-form-field>
+                    <mat-select [(value)]="selected" class="simplified"  aria-label="Change range" >
+                        <mat-option *ngFor="let tab of tabBank" [value]="tab.value">
+                            {{tab.viewValue}}
+                          </mat-option>
+                    </mat-select>
+                </mat-form-field>
+              
+            </div>
+
+            <div class="p-16" fxLayout="row">
+                  <app-bank-table-deposit *ngIf="selected =='d-0'"></app-bank-table-deposit>
+                  <app-bank-table-withdrawal  *ngIf="selected =='w-1'" > </app-bank-table-withdrawal>
+                  <app-bank-table-coinledger  *ngIf="selected =='c-2'" > </app-bank-table-coinledger>
+            </div>
+
+        </div>
+
+    </fuse-widget>
+
+</div>

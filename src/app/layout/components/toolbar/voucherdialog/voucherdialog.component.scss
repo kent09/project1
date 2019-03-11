@@ -1,0 +1,58 @@
+
+$font : 'Montserrat';
+
+.subtitle {
+    margin-top : 0;
+    font-family : $font;
+
+}
+.title {
+    margin-bottom: 0;
+    font-family : $font;
+}
+.perks {
+    font-family: $font
+}
+.full-width {
+    width: 100% !important;
+    font-family: $font
+}
+.action-btn {
+    button {
+        font-family: $font;
+    }
+}
+.error {
+    margin-top: -10px;
+    font-family: $font;
+    color: red;
+    font-size: 12px
+}
+.checking {
+    margin-top: -10px;
+    font-family: $font;
+    font-size: 12px
+}
+.voucher-info {
+    font-family: $font;
+    p strong {
+        color : green;
+    }
+}
+.voucher-error {
+    font-family: $font;
+}
+
+.message {
+    font-family: $font;
+    font-size: 13px;
+    
+}
+.submessage {
+    font-family: $font;
+    font-size: 11px;
+    margin-top: -12px
+}
+.err-title {
+    color : red
+}

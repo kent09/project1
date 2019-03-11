@@ -1,0 +1,75 @@
+.content-holder {
+    position: relative;
+    font-size: 16px;
+    min-width: 250px;
+    .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    a {
+        color: #4267b2;
+        padding-right: 30px;
+        display: block;
+    }
+    .small {
+        font-size: 12px;
+    }
+    .reward-category {
+        list-style: none;
+        li {
+            display: flex;
+            align-items: center;
+        }
+    }
+    .expired, .revoked  {
+        color: #f44336;
+        text-transform: capitalize;
+    }
+    .inactive {
+        color: #ff9800;
+    }
+    .active, .completed {
+        color: #4caf50;
+        text-transform: capitalize;
+    }
+    .required {
+        list-style: none;
+        padding-left: 0; 
+    }
+    .display-flex {
+        display: flex;
+        align-items: center;
+    }
+    .category {
+        i {
+            display: block;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+        .fb {
+            background-image: url(/assets/socials/fb.svg);
+        }
+        .twitter {
+            background-image: url(/assets/socials/twitter-color.svg);
+        }
+        .g-plus {
+            background-image: url(/assets/socials/google-plus-color.svg);
+        }
+        .instagram {
+            background-image: url(/assets/socials/instagram.svg);
+        }
+        .linkedin {
+            background-image: url(/assets/socials/linkedin-color.svg);
+        }
+        .kblog {
+            background-image: url(/assets/socials/kblog.svg);
+        }
+        .youtube {
+            background-image: url(/assets/socials/youtube.svg);
+        }
+        .steemit {
+            background-image: url(/assets/socials/steemit.svg);
+        }
+    }
+}

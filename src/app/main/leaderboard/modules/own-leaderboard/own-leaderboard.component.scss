@@ -1,0 +1,105 @@
+@import "src/@fuse/scss/fuse";
+
+app-own-leaderboard {
+
+    table {
+        width: 100%;
+    }
+
+    .header {
+
+        .username,
+        .referrer-name,
+        .total {
+            text-transform: uppercase;
+        }
+
+        .referrer-name a {
+            text-transform: lowercase;
+
+        }
+
+        .header-image {
+            .avatar {
+                background-size: cover;
+                height: 85px;
+                min-width: 85px;
+
+            }
+        }
+
+        .leaderboard-button {
+            float: right;
+            margin-top: -59px;
+        }
+    }
+
+    .custom-margins {
+        margin-top:  20px !important; 
+    }
+
+    .avatar {
+
+        margin-top: -9px;
+        margin-bottom: -6px;
+    }
+
+    .title {
+        font-size: 16px;
+        font-weight: bolder;
+        color: #464646;
+    }
+
+
+    .header-image {
+        background-size: cover;
+        height: 85px;
+        min-width: 85px;
+        ;
+    }
+
+    .content {
+            .sorting {
+                display: flex;
+                // float: right;
+                margin-right: 28px;
+                @include media-breakpoint('xs') {
+                    display: block;
+                }
+                &::after {
+                    content: "";
+                    display: block;
+                    clear: both;
+                }
+                .range {
+                    margin-left: auto; 
+                }
+            }
+            .calendar{
+                // float: right;
+            }
+
+    }
+    .pointer {
+        cursor: pointer;
+    }
+    .mat-column-rank,
+    .mat-column-button,
+    .mat-column-country {
+        flex: 0 1 90px;
+    }
+    .mat-column-avatar {
+        flex: 0 1 50px;
+    }
+    .mat-column-country,
+    .mat-column-earned {
+        justify-content: center;
+    }
+    .mat-column-name {
+        margin-right: 15px;
+        a, a:not(.mat-button):not(.mat-raised-button):not(.mat-icon-button):hover {
+            color: #4267b2;
+            text-decoration: none;
+        }
+    }
+}

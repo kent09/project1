@@ -1,0 +1,47 @@
+<h2 mat-dialog-title class="title" *ngIf="membership !== null">
+  <strong>MEMBERSHIP VOUCHER</strong>
+</h2>
+<p class="subtitle">You are now one step away from being a premium member.</p>
+<mat-dialog-content>
+
+
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Voucher Code" (keypress)="checkLength($event)" [(ngModel)]="voucher" (ngModelChange)="checkVoucher($event)">
+  </mat-form-field>
+
+  <p *ngIf="hasError.status" class="error">
+    {{hasError.message}}
+  </p>
+ <p *ngIf="loading" class="checking">Checking voucher code. Please wait...</p>
+  <!-- <mat-list *ngIf="membership !== null">
+          <mat-list-item *ngFor="let item of membership.perks">
+            <mat-icon mat-list-icon color="accent">done_outline</mat-icon>
+            <p class="perks" mat-line>{{item}}</p>
+          </mat-list-item>
+        </mat-list> -->
+<div class="voucher-info" *ngIf="codeInfo">
+  <img src="/assets/svg/badges/badge-{{codeInfo.role.slug}}.svg" alt="badge">
+  <p><strong>{{codeInfo.duration.value }} {{codeInfo.duration.unit | uppercase}} - {{codeInfo.role.name | uppercase}} MEMBERSHIP VOUCHER</strong></p>
+  <p [class]="subtitle">Using this voucher will grant you {{codeInfo.duration.value}} {{codeInfo.duration.unit}} {{codeInfo.role.slug}} membership.</p>
+  <hr>
+</div>
+
+<div class="voucher-error" *ngIf="voucherError.status">
+  <p class="err-title">Membership Error!</p>
+  <p class="message">{{voucherError.message}}</p>
+  <p class="submessage">{{voucherError.submessage}}</p>
+</div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end" class="action-btn">
+  <button mat-flat-button [mat-dialog-close]="true">
+    <strong>Cancel</strong>
+  </button>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <button mat-flat-button *ngIf="codeInfo && !submitVoucher" (click)="useVoucher()">
+    <strong>Use voucher</strong> 
+    </button>
+    <button mat-flat-button [mat-dialog-close]="true" *ngIf="!codeInfo || submitVoucher" disabled>
+        <strong>Use voucher</strong> 
+        </button>
+</mat-dialog-actions>

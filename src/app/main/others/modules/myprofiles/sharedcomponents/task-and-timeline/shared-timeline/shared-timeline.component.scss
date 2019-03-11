@@ -1,0 +1,275 @@
+@import "src/@fuse/scss/fuse";
+// #timeline-unique-list{
+// Variables
+$bg-body: #f9f9f9;
+$red: #ee4d4d;
+$blue: #2b2e48;
+$primary-color: $red;
+$secondary-color: $blue;
+// Typography
+$base-font: helvetica,
+arial,
+tahoma,
+verdana;
+$base-font-title: "Dosis",
+arial,
+tahoma,
+verdana;
+$base-font-color: #726f77;
+// Timeline
+$timeline-color: #007ac7;
+
+// Mixins and Placeholders
+%clearfix {
+
+    &:after,
+    &:before {
+        content: '';
+        display: block;
+        width: 100%;
+        clear: both;
+    }
+}
+
+@mixin prefix($prop, $val) {
+
+    @each $prefix in '-webkit-',
+    '-moz-',
+    '-ms-',
+    '' {
+        #{$prefix}#{$prop}: $val;
+    }
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+// Header
+.timeline-unique-list {
+//   min-height: 750px;
+  height: 1000px;
+    .subtimeline-data {
+        // margin-left: -14px !important;
+        position: relative;
+        margin-top: 5px;
+        max-width: 100%;
+        border-bottom: 2px solid #e2e2e2;
+        // box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0), 0px 1px 5px 0px rgba(0, 0, 0, 0) !important;
+        .linkType{
+            color: cornflowerblue;
+            text-decoration: underline;
+            cursor: pointer; 
+        }
+        .user-info > div {
+            display: flex;
+            white-space: nowrap;
+            width: 85%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            @include media-breakpoint('sm') {
+                display: block; 
+                width: 100%;
+            }
+            @include media-breakpoint('xs') {
+                display: block;
+                width: 100%;
+            }
+            .time {
+                position: absolute;
+                right: 0;
+                font-size: 12px;
+                letter-spacing: -0.5px;
+                top: 0;
+                @include media-breakpoint('lt-sm') {
+                    position: relative;
+                    display: block;
+                    text-align: right;
+                }
+            }
+            &>a:first-of-type {
+                margin-right: 5px; 
+            }
+            .title a {
+                margin-left: 5px;
+                width: 170px;
+                white-space: nowrap; 
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: block; 
+            }
+        }
+        .gift-coin {
+            a {
+                margin-left: 5px;
+            }
+        }
+    }
+    .subtimeline-data:last-of-type {
+        border-bottom: none; 
+    }
+    
+    // Timeline
+    #timeline {
+        width: 100%;
+        margin: 30px auto 0;
+        position: relative;
+        padding: 0 10px;
+        @include prefix(transition, all .4s ease);
+
+        &:before {
+            content: "";
+            width: 3px;
+            height: 100%;
+            background: $timeline-color;
+            // left: 50%;
+            top: 0;
+            position: absolute;
+        }
+
+        &:after {
+            content: "";
+            clear: both;
+            display: table;
+            width: 100%;
+        }
+
+        .timeline-item {
+            margin-bottom: 50px;
+            position: relative;
+            @extend %clearfix;
+
+            .timeline-icon {
+                background: white;
+                width: 50px;
+                height: 50px;
+                position: absolute;
+                top: 0;
+                // left: 50%;
+                overflow: hidden;
+                margin-left: -23px;
+                border: solid #ebecf0 1px;
+                @include prefix(border-radius, 50%);
+                @include media-breakpoint('lt-sm') {
+                    display: none;
+                }
+                svg {
+                    position: relative;
+                    top: 14px;
+                    left: 14px;
+                }
+            }
+
+            .timeline-content {
+                width: 95%;
+                background: #fff;
+                padding: 20px 20px 5px;
+                box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+                @include prefix(border-radius, 5px);
+                @include prefix(transition, all .3s ease);
+
+                h2 {
+                    padding: 15px;
+                    background: $timeline-color;
+                    color: #fff;
+                    margin: -20px -20px 0 -20px;
+                    font-weight: 300;
+                    @include prefix(border-radius, 3px 3px 0 0);
+                }
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: 45%;
+                    top: 20px;
+                    width: 0;
+                    height: 0;
+                    border-top: 7px solid transparent;
+                    border-bottom: 7px solid transparent;
+                    border-left: 7px solid $timeline-color;
+                }
+
+                &.right {
+                    float: left;
+                    margin-left: 42px;
+                    @include media-breakpoint('lt-lg') {
+                        margin-left: 35px;
+                        margin-top: 0; 
+                    }
+                    @include media-breakpoint('lt-sm') {
+                        margin-left: 0;
+                    }
+                    &:before {
+                        content: '';
+                        // right: 45%;
+                        left: 35px;
+                        border-left: 0;
+                        border-right: 7px solid $timeline-color;
+                        @include media-breakpoint('lt-lg') {
+                            left: 28px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Buttons
+    .btn {
+        padding: 5px 15px;
+        text-decoration: none;
+        background: transparent;
+        color: lighten($primary-color, 10%);
+        display: inline-block;
+        position: relative;
+        text-transform: uppercase;
+        font-size: 10px;
+    }
+
+    @media screen and (max-width: 768px) {
+        #timeline {
+            margin: 30px;
+            padding: 0px;
+            width: 90%;
+            @include media-breakpoint('lt-sm') {
+                width: 100%;
+                margin: 0;
+            }
+
+            &:before {
+                left: 0;
+                @include media-breakpoint('lt-sm') {
+                    display: none;
+                }
+            }
+
+            .timeline-item {
+                .timeline-content {
+                    width: 90%;
+                    float: right;
+                    @include media-breakpoint('lt-sm') {
+                        width: 100%;
+                        margin-left: 0; 
+                    }
+                    &:before,
+                    &.right:before {
+                        left: 10%;
+                        margin-left: -6px;
+                        border-left: 0;
+                        border-right: 7px solid $timeline-color;
+                    }
+                }
+
+                .timeline-icon {
+                    left: 0;
+                }
+            }
+        }
+    }
+}
+
+// }

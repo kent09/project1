@@ -1,0 +1,37 @@
+<div class="content-holder">
+  <div class="close" (click)="onNoClick(false)"><mat-icon>close</mat-icon></div>
+  <div class="mat-headline">WITHDRAW  CONFIRMATION</div>
+  <div class="content-wrapper">
+    <div class="mat-title">You are about to withdraw SuperiorCoin with this Information</div>
+    <div class="address">
+      <span class="font-weight-600">SuperiorCoin Receiver Address: </span>
+      <span>{{rec_address}}</span>
+    </div>
+    <div class="pid">
+      <span class="font-weight-600">Payment ID: </span>
+      <span>{{payment_id}}</span>
+    </div>
+    <div class="amount mb-8">
+      <span class="font-weight-600">SuperiorCoin Amount: </span>
+      <span>{{coins}}</span>
+    </div>
+    <div class="t-fee mb-8">
+      <span class="font-weight-600">Transaction Fee: </span>
+      <span>{{totalCharge}} SUP</span>
+    </div>
+    <div class="description mb-8">
+      <span class="font-weight-600">Description: </span>
+      <p>{{description}}</p>
+    </div>
+  </div>
+  <div class="terms">
+    <div class="mat-title m-0 warn--fg">Terms of Service</div>
+    <p>Any Superiorcoin or other Cryptoncurrency that are transferred from this website to a third party or to your personal PC wallet are no longer in SuperiorCoin’s possession and as much SC makes no guarantees of its value or intergrity.</p>
+    <p>By clicking <span>SUBMIT</span> Button, You agree to all <span>Terms of Service</span></p>
+  </div>
+  <div class="btn-holder">
+    <button mat-flat-button color="warn" (click)="onNoClick(false)">CANCEL</button>
+    <button mat-flat-button color="accent" *ngIf="!issending" (click)="onNoClick(true)">SUBMIT</button>
+    <button mat-flat-button color="accent" *ngIf="issending" disabled>SUBMIT</button>
+  </div>
+</div>

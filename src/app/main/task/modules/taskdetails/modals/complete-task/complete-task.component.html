@@ -1,0 +1,59 @@
+<!-- <div class="complete-dialog">
+
+
+    <mat-card class="example-card-complete-task">
+        <mat-card-header>
+            <mat-card-title>ARE YOU SURE?</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form *ngIf="taskHasAttachement" name="create-taskForm" enctype="multipart/form-data" [formGroup]="createTaskForm"
+                novalidate>
+                <mat-form-field class="width-100" appearance="outline" onclick="document.getElementById('fileToUpload').click()">
+                    <mat-label>   Please upload attachment for this task</mat-label>
+                    <input matInput placeholder="Placeholder" formControlName="taskImageAttach" >
+                   <mat-icon matPrefix>art_track</mat-icon> -->
+                    <!-- <mat-error>
+                        Image is required
+                    </mat-error>
+
+                    <input id="fileToUpload" accept="image/*" (change)="onFileChanged($event)" formControlName="taskImageFile"
+                        type="file" style="display:none;">
+                </mat-form-field>
+
+            </form>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-button *ngIf="taskHasAttachement" class="mat-accent mr-16" (click)="saveTaskHasAttachment()">Save</button>
+            <button mat-button *ngIf="!taskHasAttachement" class="mat-accent mr-16" (click)="saveTaskNoAttachment()">Yes, Complete this task!</button>
+            <button mat-button (click)="matDialogRef.close(false)">Cancel</button>
+        </mat-card-actions>
+    </mat-card>
+</div> -->
+<div class="content-holder">
+    <div class="close" (click)="matDialogRef.close(false)"><mat-icon>close</mat-icon></div>
+    <div class="mat-title">
+        ARE YOU SURE?
+    </div>
+    <form *ngIf="taskHasAttachement" name="create-taskForm" enctype="multipart/form-data" [formGroup]="createTaskForm"
+                novalidate>
+        <mat-form-field class="w-100-p" appearance="outline" onclick="document.getElementById('fileToUpload').click()">
+            <mat-label>   Please upload attachment for this task</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="taskImageAttach" >
+            <!-- <mat-icon matPrefix>art_track</mat-icon> -->
+            <mat-error>
+                Image is required
+            </mat-error>
+
+            <input id="fileToUpload" accept="image/*" (change)="onFileChanged($event)" formControlName="taskImageFile" type="file" style="display:none;">
+        </mat-form-field>
+
+    </form>
+    <div class="btn-holder">
+        <button mat-flat-button color="accent" *ngIf="taskHasAttachement && !isSavingTask" (click)="saveTaskHasAttachment()">Save</button>
+        <button mat-flat-button color="accent" *ngIf="!taskHasAttachement && !isSavingTask" (click)="saveTaskNoAttachment()">Yes, Complete this task!</button>
+        
+        <button mat-flat-button color="accent" *ngIf="taskHasAttachement && isSavingTask" disabled>Save</button>
+        <button mat-flat-button color="accent" *ngIf="!taskHasAttachement && isSavingTask" disabled>Yes, Complete this task!</button>
+        <button mat-flat-button color="warn" (click)="matDialogRef.close(false)">Cancel</button>
+    </div>
+</div>

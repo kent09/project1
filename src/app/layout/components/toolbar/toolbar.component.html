@@ -1,0 +1,212 @@
+<mat-toolbar class="p-0 mat-elevation-z1 bg-force-white" id="bg-force-white">
+
+    <div fxFlex fxFill fxLayout="row" fxLayoutAlign="start center">
+
+        <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+
+            <button mat-icon-button class="navbar-toggle-button" *ngIf="!hiddenNavbar && !rightNavbar" (click)="toggleSidebarOpen('navbar')"
+                fxHide.gt-md>
+                <mat-icon class="secondary-text">menu</mat-icon>
+            </button>
+
+            <div class="toolbar-separator" *ngIf="!hiddenNavbar && !rightNavbar" fxHide.gt-md></div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" *ngIf="horizontalNavbar">
+                <div class="logo ml-16">
+                    <img class="logo-icon" src="assets/images/logos/fuse.svg">
+                </div>
+            </div>
+
+
+            <!-- kryptonia all coins Available-->
+            <div class="px-8 px-mat-16" fxHide fxShow.gt-sm>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <img class="avatar mr-0 mr-sm-16" src="assets/images/logos/rewardLogo.png">
+                    <span *ngIf="bankBalanceData" class="username mr-12" matTooltip="{{ bankBalanceData.available }} Available">
+                        {{ bankBalanceData.available | prettify : 'pretty' }} Available
+                    </span>
+                    <span *ngIf="!bankBalanceData" class="username mr-12" matTooltip="0 Available">
+                        0 Available
+                    </span>
+
+                </div>
+            </div>
+            <div class="px-8 px-mat-16" fxHide fxShow.gt-sm>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <img class="avatar mr-0 mr-sm-16" src="assets/images/logos/rewardLogo.png">
+                    <span *ngIf="bankBalanceData" class="username mr-12" matTooltip="{{ bankBalanceData.total }} Total">
+                        {{ bankBalanceData.total | prettify : 'pretty' }} Total
+                    </span>
+                    <span *ngIf="!bankBalanceData" class="username mr-12" matTooltip="0 Available">
+                        0 Total
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
+
+
+            <button (click)="waitToRenderHtmlEl()" mat-button [matMenuTriggerFor]="notifications" class="user-button">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <mat-icon *ngIf="countTotal !== 0" matBadge="{{countTotal}}" class="s-20" matBadgeColor="warn">public</mat-icon>
+                    <mat-icon *ngIf="countTotal == 0" class="s-20" matBadgeColor="warn">public</mat-icon>
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="username mr-12" fxHide fxShow.gt-sm>Notifications</span>
+                </div>
+            </button>
+
+            <button (click)="openVoucherDialog()" mat-button class="user-button">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <mat-icon class="s-20">card_giftcard</mat-icon>    
+                    &nbsp;&nbsp;&nbsp;
+                    <span class="username mr-12" fxHide fxShow.gt-sm>Membership Voucher</span>
+                </div>
+            </button>
+
+            <mat-menu #notifications="matMenu" [overlapTrigger]="false" class="notificationMenus">
+
+
+                <div class="timeline-sidebar-notification" fxLayout="column" fxFlex="100">
+
+                    <div class="profile-box-notifications latest-activity" fxLayout="column">
+
+                        <header class="mat-accent-bg" fxLayout="row" fxLayoutAlign="space-between center">
+                            <div class="title">Latest Notification</div>
+                            <div class="more secondary-text">
+                                <a [routerLink]="['//others/profile/',username]">See All</a>
+                            </div>
+                        </header>
+
+                        <div class="content" id="notification-lists" fxLayout="row wrap" fusePerfectScrollbar>
+                            <div class="activities" *ngIf="notificationsData">
+                                <div *ngFor="let notify of notificationsData; let i = index" class="activity" fxLayout="row"
+                                    fxLayoutAlign="start start">
+                                    <img [src]="avatarImagePath(notify.sender_id)" onError="this.src='assets/images/avatars/profile.jpg'"
+                                        class="avatar" />
+                                    <div fxLayout="column">
+                                        <div>
+                                            <span [routerLink]="[ '/others/profile',  notify.sender_username]" class="username">{{
+                                                notify.sender_name }} </span>
+                                            <span class="message"> {{ notify.title }}</span>
+                                        </div>
+                                        <span class="time secondary-text">{{ notify.notif_datetime }}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div *ngIf="!isLoadingNotifications" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="center center">
+                            <span (click)="waitToRenderHtmlEl(); $event.stopPropagation()" class="load-more">Load
+                                more..</span>
+                        </div>
+                        <div *ngIf="isLoadingNotifications" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="center center">
+                            <mat-progress-bar class="load-more-progress" mode="buffer"></mat-progress-bar>
+                        </div>
+
+                    </div>
+                </div>
+
+            </mat-menu>
+
+
+            <div class="toolbar-separator"></div>
+
+            <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <img class="avatar mr-0 mr-sm-16" [src]="avatarImagePath(userInfo.user_id)" onError="this.src='assets/images/avatars/profile.jpg'">
+                    <span class="username mr-12" fxHide fxShow.gt-sm>{{ userInfo.name }}</span>
+                    <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+                </div>
+            </button>
+
+            <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+
+                <button mat-menu-item *ngIf="bankBalanceData" fxHide fxShow.lt-md>
+                    <img class="coin mr-0 mr-sm-16" src="assets/images/logos/rewardLogo.png">
+                    <span class="username mr-12" matTooltip="{{ bankBalanceData.total }}">
+                        {{ bankBalanceData.total | prettify : 'pretty' }} Total
+                    </span>
+                </button>
+
+                <button mat-menu-item *ngIf="bankBalanceData" fxHide fxShow.lt-md>
+                    <img class="coin mr-0 mr-sm-16" src="assets/images/logos/rewardLogo.png">
+                    <span class="username mr-12" matTooltip="{{ bankBalanceData.available }}">
+                        {{ bankBalanceData.available | prettify : 'pretty' }} Available
+                    </span>
+                </button>
+
+                <button mat-menu-item [routerLink]="'/others/profile/'+userInfo.username+'/'">
+                    <mat-icon>account_circle</mat-icon>
+                    <span>My Profile</span>
+                </button>
+                <button [routerLink]="['/task/mytask']" routerLinkActive="router-link-active" mat-menu-item>
+                    <mat-icon>list</mat-icon>
+                    <span>My Task</span>
+                </button>
+                <button [routerLink]="['bank/bank-and-ledger/superiorcoin']" mat-menu-item>
+                    <mat-icon>account_balance</mat-icon>
+                    <span>Wallet | Bank</span>
+                </button>
+
+                <button [routerLink]="['/others/account-settings']" mat-menu-item>
+                    <mat-icon>settings</mat-icon>
+                    <span>Account Setting</span>
+                </button>
+
+                <button [routerLink]="['/leaderboard/referral']" mat-menu-item>
+                    <mat-icon>group_add</mat-icon>
+                    <span>Referrals</span>
+                </button>
+
+                <button [routerLink]="['/membership/pricing']" [queryParams]="{ p: '6'}" mat-menu-item>
+                    <mat-icon>stars</mat-icon>
+                    <span matBadge="&#10004;" matBadgeOverlap="false" matBadgeColor="warn">Upgrade</span>
+
+                </button>
+
+                <button (click)="logOut();" mat-menu-item class="">
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>Logout</span>
+                </button>
+
+            </mat-menu>
+
+            <div class="toolbar-separator"></div>
+
+            <fuse-search-bar (input)="search($event)" (keydown)="onKeydown($event)"></fuse-search-bar>
+
+            <div class="toolbar-separator"></div>
+
+
+            <div class="toolbar-separator" fxHide fxShow.gt-xs></div>
+
+            <button mat-icon-button fxHide.gt-md class="chat-panel-toggle-button" (click)="toggleSidebarOpen('chatPanel')"
+                aria-label="Toggle chat panel">
+                <mat-icon class="icon">chat</mat-icon>
+            </button>
+
+            <div class="toolbar-separator" fxHide.gt-md></div>
+
+
+            <!-- <button mat-icon-button
+    class="quick-panel-toggle-button"
+    (click)="toggleSidebarOpen('quickPanel')"
+    aria-label="Toggle quick panel">
+    <mat-icon class="icon">format_list_bulleted</mat-icon>
+</button> -->
+
+            <div class="toolbar-separator" *ngIf="!hiddenNavbar && rightNavbar" fxHide fxShow.gt-xs></div>
+
+            <button mat-icon-button class="navbar-toggle-button" *ngIf="!hiddenNavbar && rightNavbar" (click)="toggleSidebarOpen('navbar')"
+                fxHide.gt-md>
+                <mat-icon class="secondary-text">menu</mat-icon>
+            </button>
+
+        </div>
+
+    </div>
+
+</mat-toolbar>

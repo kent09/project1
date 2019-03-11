@@ -1,0 +1,54 @@
+<mat-card class="calculator-holder card">
+  <header class="mat-title"><i class="icon-cal"></i> Weight Calculator</header>
+  <div class="content-holder">
+    <div class="form">
+      <div class="item">
+        <div class="label">Following</div>
+        <mat-form-field class="follow">
+          <mat-select [(value)]="params.following">
+            <mat-option *ngFor="let item of following" [value]="item.value">
+              {{item.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="item">
+        <div class="label">Total Rewards</div>
+        <mat-form-field class="rewards">
+          <input matInput type="number" placeholder="Ex: 1000" [(ngModel)]="params.total_rewards">
+        </mat-form-field>
+      </div>
+      <div class="item">
+        <div class="label">Number of task today</div>
+        <mat-form-field class="task">
+          <input matInput type="number" placeholder="Ex: 1" [(ngModel)]="params.task_for_today">
+        </mat-form-field>
+      </div>
+      <div class="item">
+        <div class="label">Weight Type</div>
+        <div class="info">
+          <span class="txt-green">Max</span> if using kryptonia and superiorcoin as tags in steemit post, else is <span
+            class="txt-yellor">Min</span>
+        </div>
+        <mat-button-toggle-group name="weight" aria-label="Font Style" value="max" #weight="matButtonToggleGroup" (change)="onValChange(weight.value)">
+          <mat-button-toggle value="max" class="max">Max</mat-button-toggle>
+          <mat-button-toggle value="min" class="min">Min</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+    <div class="view">
+      <textarea [(ngModel)]="logs" disabled></textarea>
+    </div>
+  </div>
+  <footer>
+    <div class="note">
+      Note: New Weight may differ depending on current prices
+    </div>
+    <div class="btn-holder">
+      <button *ngIf="!loading" (click)="calculate()" class="btn btn-primary calc-btn">Calculate</button>
+      <button *ngIf="loading" [disabled]="true" class="btn btn-primary calc-btn">Calculate</button>
+      <!-- <button *ngIf="!loading" (click)="calculate()" class="calc-btn"><i class="icon-cal-white"></i> Calculate</button>
+      <button *ngIf="loading" disabled class="calc-btn"><i class="icon-cal-white"></i> Calculate</button> -->
+    </div>
+  </footer>
+</mat-card>

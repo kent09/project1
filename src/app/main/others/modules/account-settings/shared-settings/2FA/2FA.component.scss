@@ -1,0 +1,24 @@
+@import "src/@fuse/scss/fuse";
+
+
+#2FA-settings {
+  margin-top: 5px;
+    &.modern {
+        padding: 0;
+
+        .profile-container {
+            padding: 0;
+
+          .img-avatar-prof{
+            width: 250px !important; 
+          }
+        }
+    }
+    .form-structure{
+      margin-left: 50px;
+    }
+    .side-structure{
+      margin-left: 50px !important;
+    }
+
+}

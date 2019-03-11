@@ -1,0 +1,273 @@
+<div class="page-layout blank p-24" fusePerfectScrollbar>
+    <div class="content">
+
+        <mat-card>
+            <!-- SEARCH -->
+
+            <button mat-icon-button [matMenuTriggerFor]="filterMenu" aria-label="More">
+                <mat-icon class="secondary-text">filter_list</mat-icon>
+            </button>
+
+            <mat-menu #filterMenu="matMenu">
+                <button mat-menu-item aria-label="remove" (click)="filterByCategory('')">
+                    <span>All</span>
+                </button>
+                <button mat-menu-item aria-label="remove" (click)="filterByCategory('global')">
+                    <span>Global</span>
+                </button>
+                <button mat-menu-item aria-label="remove" (click)="filterByCategory('twitter')">
+                    <span>Twitter</span>
+                </button>
+                <button mat-menu-item aria-label="remove" (click)="filterByCategory('facebook')">
+                    <span>Facebook</span>
+                </button>
+                <button mat-menu-item aria-label="remove" (click)="filterByCategory('instagram')">
+                    <span>Instagram</span>
+                </button>
+                <button mat-menu-item aria-label="remove" (click)="filterByCategory('steemit')">
+                    <span>Steemit</span>
+                </button>
+                <button mat-menu-item aria-label="remove" (click)="filterByCategory('kblog')">
+                    <span>Kblog</span>
+                </button>
+                <button mat-menu-item aria-label="remove" (click)="filterByCategory('linkedin')">
+                    <span>Linkedin</span>
+                </button>
+                <button mat-menu-item aria-label="remove" (click)="filterByCategory('custom')">
+                        <span>Custom</span>
+                    </button>
+            </mat-menu>
+            <div class="search-input-wrapper mx-24 m-md-0" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+                <label for="search" class="mr-8">
+                    <mat-icon class="secondary-text">search</mat-icon>
+                </label>
+                <mat-form-field floatLabel="never" fxFlex="1 0 auto">
+                    <input (keyup.enter)="onSearchChange($event.target.value)" id="search" matInput #filter placeholder="Search">
+                </mat-form-field>
+            </div>
+            <!-- / SEARCH -->
+
+        </mat-card>
+
+
+        <div class="example-card mat-elevation-z8">
+            <div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+                <mat-progress-bar mode="indeterminate" *ngIf="isLoadingResults"></mat-progress-bar>
+                <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+                    Ative Task Kryptonia's API rate limit has been reached. It will be reset in one minute.
+                </div>
+            </div>
+            <mat-table [dataSource]="data" matSort matSortActive="created" matSortDisableClear matSortDirection="asc"
+                [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+
+
+                <ng-container matColumnDef="category">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Category</mat-header-cell>
+                    <mat-cell *matCellDef="let alltasks" fxHide fxShow.gt-md>
+                        <i *ngIf="alltasks.category == 'global'" class="material-icons">public</i>
+                        <i *ngIf="alltasks.category == 'facebook'" class="fb w-24 h-24"></i>
+                        <i *ngIf="alltasks.category == 'twitter'" class="twitter w-24 h-24"></i>
+                        <i *ngIf="alltasks.category == 'googleplus'" class="g-plus w-24 h-24"></i>
+                        <i *ngIf="alltasks.category == 'instagram'" class="instagram w-24 h-24"></i>
+                        <i *ngIf="alltasks.category == 'linkedin'" class="linkedin w-24 h-24"></i>
+                        <i *ngIf="alltasks.category == 'kblog'" class="kblog w-24 h-24"></i>
+                        <i *ngIf="alltasks.category == 'youtube'" class="youtube w-24 h-24"></i>
+                        <i *ngIf="alltasks.category == 'steemit'" class="steemit w-24 h-24"></i>
+                        
+                        <!-- <i class="fb w-24 h-24"></i>
+                        <i class="twitter w-24 h-24"></i>
+                        <i class="instagram w-24 h-24"></i>
+                        <i class="linkedin w-24 h-24"></i>
+                        <i class="kblog w-24 h-24"></i>
+                        <i class="youtube w-24 h-24"></i>
+                        <i class="steemit w-24 h-24"></i> -->
+                    </mat-cell>
+                </ng-container>
+
+                <!-- user Column -->
+                <ng-container matColumnDef="status_str">
+                    <mat-header-cell *matHeaderCellDef fxLayoutAlign="center center" fxHide fxShow.gt-xs>Status</mat-header-cell>
+                    <mat-cell *matCellDef="let alltasks" fxHide fxShow.gt-xs>
+                        <mat-chip-list>
+                            <mat-chip color="green" selected="true" *ngIf="alltasks.status_str ==='active'">Active</mat-chip>
+                            <mat-chip color="orange" selected="true" *ngIf="alltasks.status_str ==='deactivated'">Inactive</mat-chip>
+                            <mat-chip color="blue" selected="true" *ngIf="alltasks.status_str ==='completed'">Completed</mat-chip>
+                            <mat-chip color="grey" selected="true" *ngIf="alltasks.status_str ==='expired'">Expired</mat-chip>
+                        </mat-chip-list>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- title Column -->
+                <ng-container matColumnDef="title">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+                    <mat-cell *matCellDef="let alltasks">
+                        <ul class="list-unique m-0 w-100-p">
+                            <li>
+                                <div class="email text-capitalized mat-title mb-0">
+                                    <a *ngIf="alltasks.slug" [routerLink]="[ '/task/taskdetails', alltasks.slug ]" title="{{alltasks.title}}">{{alltasks.title}}</a>
+                                    <a *ngIf="!alltasks.slug" (click)="errorHandle();" title="{{alltasks.title}}">{{alltasks.title}}</a>
+                                </div>
+                            </li>
+                            <li>
+                                <small class="requirement-status">
+                                    Requirements:
+                                    <!-- <span *ngIf="!alltasks.is_activity_passed">
+                                        <b>Activity Score</b>:
+                                        <mat-icon *ngIf="alltasks.requirement_status.is_activity_passed" class="green-fg s-16">check</mat-icon>
+                                        <mat-icon class="red-fg s-16">close</mat-icon>
+                                    </span> -->
+                                    <!-- <span *ngIf="!alltasks.is_reputation_passed">
+                                        |
+                                        <b>Reputation</b>:
+                                        <mat-icon *ngIf="alltasks.requirement_status.is_reputation_passed" class="green-fg s-16">check</mat-icon>
+                                        <mat-icon class="red-fg s-16">close</mat-icon>
+                                    </span> -->
+                                    <span>
+                                        |
+                                        <b>Available Completion</b>:
+                                        <font class="green-fg s-16">{{alltasks.available_completer}}</font>
+                                        <!-- <span *ngIf="alltasks.is_high_risk"> -->
+                                            <!-- | -->
+                                            <!-- <b>Reputation</b>:
+                                            <mat-icon *ngIf="alltasks.requirement_status.is_reputation_passed" class="green-fg s-16">check</mat-icon>
+                                            <mat-icon *ngIf="!alltasks.requirement_status.is_reputation_passed" class="red-fg s-16">close</mat-icon> -->
+                                            <!-- |
+                                            <b>Available Completer/s</b>:
+                                            <b class="text-success">{{alltasks.available_completer}}</b>
+                                            <span *ngIf="alltasks.requirement_status.is_high_risk"> -->
+                                            <!-- |
+                                            <b>High Risk</b> :
+                                            <mat-icon class="orange-fg s-16">warning</mat-icon>
+                                        </span> -->
+                                    </span>
+                                </small>
+                                <small class="m-view" fxHide fxShow.lt-lg>
+                                    <span class="mr-8">
+                                        Reward: 
+                                        <span>
+                                            <img class="avatar w-16 h-16 mr-4 ml-8" alt="superiorcoin" [src]="'assets/images/logos/rewardLogo.png'" />
+                                        </span>
+                                        <span>
+                                            <b>{{ alltasks.reward | prettify : 'pretty'}}</b>
+                                        </span>
+                                    </span>
+                                    |
+                                    <span class="ml-8">
+                                        Category: 
+                                        <span class="ml-4">
+                                            <i class="material-icons">public</i>
+                                            <i *ngIf="alltasks.category == 'facebook'" class="fb w-16 h-16"></i>
+                                            <i *ngIf="alltasks.category == 'twitter'" class="twitter w-16 h-16"></i>
+                                            <i *ngIf="alltasks.category == 'googleplus'" class="g-plus w-16 h-16"></i>
+                                            <i *ngIf="alltasks.category == 'instagram'" class="instagram w-16 h-16"></i>
+                                            <i *ngIf="alltasks.category == 'linkedin'" class="linkedin w-16 h-16"></i>
+                                            <i *ngIf="alltasks.category == 'kblog'" class="kblog w-16 h-16"></i>
+                                            <i *ngIf="alltasks.category == 'youtube'" class="youtube w-16 h-16"></i>
+                                            <i *ngIf="alltasks.category == 'steemit'" class="steemit w-16 h-16"></i>
+                                            <!-- <i class="fb w-16 h-16"></i>
+                                            <i class="twitter w-16 h-16"></i>
+                                            <i class="g-plus w-16 h-16"></i>
+                                            <i class="instagram w-16 h-16"></i>
+                                            <i class="linkedin w-16 h-16"></i>
+                                            <i class="kblog w-16 h-16"></i>
+                                            <i class="youtube w-16 h-16"></i>
+                                            <i class="steemit w-16 h-16"></i> -->
+                                        </span>
+                                    </span>
+                                </small>
+                            </li>
+                        </ul>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="available_completer">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxLayoutAlign="center center" fxHide fxShow.gt-md>Completer</mat-header-cell>
+                    <mat-cell *matCellDef="let alltasks" fxHide fxShow.gt-md fxLayoutAlign="center center">
+                        <mat-icon class="orange-fg s-20">group</mat-icon>
+                        <strong class="text-truncate" *ngIf="alltasks.available_completer != 0">
+                            ({{ alltasks.available_completer }})
+                        </strong>
+                        <strong class="text-truncate" *ngIf="alltasks.available_completer ==0">
+                            (0)
+                        </strong>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- reward Column -->
+                <ng-container matColumnDef="reward">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-md>Reward</mat-header-cell>
+                    <mat-cell *matCellDef="let alltasks" fxHide fxShow.gt-md>
+                        <div class="phone text-truncate">
+                            <img class="avatar w-24 h-24" alt="superiorcoin" [src]="'assets/images/logos/rewardLogo.png'" />
+                        </div>
+
+                        <strong class="text-truncate font-weight-600 reward-label">
+                            {{ alltasks.reward | prettify : 'pretty' }}
+                        </strong>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- status Column -->
+                <ng-container matColumnDef="created_at">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Created</mat-header-cell>
+                    <mat-cell *matCellDef="let alltasks" fxHide fxShow.gt-sm>
+
+                        <p class="job-title text-truncate font-weight-600 ">
+                            {{ alltasks.created_at | date:'short' }}
+                        </p>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Buttons Column -->
+                <ng-container matColumnDef="slug">
+                    <mat-header-cell *matHeaderCellDef>Option</mat-header-cell>
+                    <mat-cell *matCellDef="let alltasks;">
+                        <div>
+                            <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More" (click)="$event.stopPropagation();">
+                                <mat-icon class="secondary-text">more_vert</mat-icon>
+                            </button>
+
+                            <mat-menu #moreMenu="matMenu">
+                                <button *ngIf="alltasks.status_str != 'active'" mat-menu-item aria-label="remove" (click)="opendeORactivateDialog(alltasks, 'a')">
+                                    <!-- <mat-icon>visibility</mat-icon> -->
+                                    <span>Activate</span>
+                                </button>
+                                <button *ngIf="alltasks.status_str == 'active'" mat-menu-item aria-label="remove" (click)="opendeORactivateDialog(alltasks, 'd')">
+                                    <!-- <mat-icon>delete</mat-icon> -->
+                                    <span>Deactivate</span>
+                                </button>
+                                <button mat-menu-item aria-label="remove" (click)="deleteContact(alltasks)">
+                                    <!-- <mat-icon>done</mat-icon> -->
+                                    <span>Archive</span>
+                                </button>
+                                <button mat-menu-item aria-label="remove" (click)="updateTask(alltasks.slug)">
+                                    <!-- <mat-icon>done</mat-icon> -->
+                                    <span>Edit</span>
+                                </button>
+                                <button mat-menu-item aria-label="remove" (click)="openUrlDialog(alltasks.slug)">
+                                    <!-- <mat-icon>done</mat-icon> -->
+                                    <span>Generate Task Url</span>
+                                </button>
+                                <button mat-menu-item aria-label="remove" (click)="showDetailMobile(alltasks)" fxHide fxShow.lt-sm>
+                                    <span>Details</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></mat-header-row>
+                <mat-row *matRowDef="let alltasks; columns: displayedColumns;" class="contact"  [@animate]="{value:'*',params:{y:'100%'}}">
+                </mat-row>
+
+            </mat-table>
+            <div *ngIf="data.length == 0" class="no-task">
+                <p>No data fetched.</p>
+            </div>
+
+            <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+
+
+        </div>
+    </div>
+</div>

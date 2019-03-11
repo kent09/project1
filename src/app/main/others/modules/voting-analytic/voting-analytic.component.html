@@ -1,0 +1,62 @@
+<div class="page-layout blank p-24" fusePerfectScrollbar>
+
+       <!-- Widget 2 -->
+       <div class="main-widget" *ngIf="poll_data">
+
+          <div class="fuse-card auto-width mb-32">
+
+              <div class="p-24 pb-0" fxLayout="row wrap">
+
+                  <a routerLink="/others/voting-active"><mat-icon>arrow_back</mat-icon></a> &nbsp;
+
+                  <div class="pr-16">
+                      <div class="h3 secondary-text">Title: {{poll_data.title}}</div>
+                  </div>
+
+              </div>
+
+              <div class="position-relative h-256 pb-16">
+                  <canvas baseChart
+                          [datasets]="pollChart.datasets"
+                          [labels]="pollChart.labels"
+                          [colors]="pollChart.colors"
+                          [options]="pollChart.options"
+                          [chartType]="pollChart.chartType">
+                  </canvas>
+              </div>
+
+          </div>
+
+      </div>
+
+      <mat-card>
+
+      <div class="content" *ngIf="poll_data">
+
+        <h1>VOTER LISTS ({{poll_data.voter_count}})</h1>
+          <table mat-table [dataSource]="dataSource">
+
+              <!-- Voters Column -->
+              <ng-container matColumnDef="voters">
+                  <th mat-header-cell *matHeaderCellDef class="title"> Voters </th>
+                  <td mat-cell *matCellDef="let analytic"><img onError="this.src='assets/images/avatars/profile.jpg'" src="https://kimg.io/avatar/{{analytic.user_id}}" class="avatar" /> <a [routerLink]="['/others/profile/'+analytic.username+'/']" title="{{analytic.username}}">{{analytic.username}}</a></td>
+              </ng-container>
+
+               <!-- Voting Value Column -->
+               <ng-container matColumnDef="votingvalue">
+                  <th mat-header-cell *matHeaderCellDef class="title"> Voting Value </th>
+                  <td mat-cell *matCellDef="let analytic">{{analytic.voting_value}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <mat-paginator [length]="poll_data.voter_count" [pageSize]="10"></mat-paginator>
+
+  </div>
+
+</mat-card>
+
+
+</div>

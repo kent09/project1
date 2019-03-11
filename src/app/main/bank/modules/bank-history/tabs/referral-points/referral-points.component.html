@@ -1,0 +1,47 @@
+<div id="referral-points-container" class="blank p-24 " fxLayout="row">
+    <!-- <app-header-history-data class="bank-data"></app-header-history-data> -->
+
+    <div class="widget-group copy-section mat-elevation-z2" fxLayout="column" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+        <mat-card>
+            <div class="px-16 py-8" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="form-fields">
+                    <mat-form-field class="first mr-16">
+                        <mat-select (selectionChange)="mainChanges($event)" [(value)]="selectedTaskPoints" class="simplified"
+                            aria-label="Change range">
+                            <mat-option *ngFor="let taskTab of taskPoints" [value]="taskTab.value">
+                                {{taskTab.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="second">
+
+                        <mat-select *ngIf="selectedTaskPoints == 't-points'" [(value)]="selectedReferral" class="simplified directBank-referral-tab" aria-label="Change range">
+                            <mat-option *ngFor="let directTab of directReferral" [value]="directTab.value">
+                                {{directTab.viewValue}}
+                            </mat-option>
+                        </mat-select>
+
+                        <mat-select *ngIf="selectedTaskPoints == 't-referral'" [(value)]="selectedSignReferral" class="simplified directBank-referral-tab" aria-label="Change range">
+                            <mat-option *ngFor="let referrals of referral" [value]="referrals.value">
+                                {{referrals.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </div>
+            </div>
+            <div class="p-16" fxLayout="row">
+
+                <app-bank-referral-taskpoints *ngIf="selectedTaskPoints =='t-referral' &&  selectedSignReferral=='sign-up-reward'"></app-bank-referral-taskpoints>
+                <app-bank-referrals-points *ngIf="selectedTaskPoints =='t-referral' &&  selectedSignReferral=='social-referrals'"></app-bank-referrals-points>
+
+                <!-- Referrals  -->
+                <app-bank-direct-referral *ngIf="selectedReferral =='d-levelReferral' && selectedTaskPoints =='t-points'"></app-bank-direct-referral>
+                <app-bank-referral-second-level *ngIf="selectedReferral =='d-secondReferral' && selectedTaskPoints =='t-points'"></app-bank-referral-second-level>
+                <app-bank-referral-third-level *ngIf="selectedReferral =='d-thirdReferral' && selectedTaskPoints =='t-points'"></app-bank-referral-third-level>
+
+            </div>
+        </mat-card>
+    </div>
+</div>

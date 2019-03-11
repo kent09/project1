@@ -1,0 +1,61 @@
+@import "src/@fuse/scss/fuse";
+app-create-task {
+    width: 100%;
+    .create-task {
+        width: 100%;
+        .create-taskForm {
+            width: 100%;
+          
+        }
+        .width-100 {
+            width: 350px;
+            @media screen and (max-width: 959px){
+              width: 100%;
+            }
+        }
+        .icons-checkbox-infos{
+          position: relative;
+          top: 6px;
+        }
+        .example-option-img{
+          position: relative;
+          bottom: 25px;
+        }
+        .submit-button{
+          margin: 20px;
+        }
+        .taskcharge{
+          float: right;
+          color: #ff0000;
+      
+        }
+      }
+    .budget {
+      @media screen and (max-width: 959px){
+        width: 100%;
+      }
+      .width-100 {
+        @media screen and (max-width: 959px){
+          width: 100%;
+        }
+      }
+      .mat-form-field-wrapper {
+        padding: 0;
+      }
+    }
+    .fee {
+      padding: 0 10px;
+      text-transform: capitalize;
+    }
+}
+.cdk-overlay-pane {
+  .mat-option-text {
+    display: flex;
+    align-items: center;
+    img {
+      margin-right: 5px; 
+    }
+  }
+
+ 
+}

@@ -1,0 +1,32 @@
+<div class="content-holder">
+    <div class="close" (click)="onNoClick()"><mat-icon>close</mat-icon></div>
+    <br>
+    <div class="mb-12">
+        <span class="mr-4">Transaction #:</span> <br>
+        <span>{{ history.id }}</span>
+    </div>
+    <div class="reward mb-12">
+        <span>Amount: &nbsp; </span>
+        <span class="display-flex">
+          <b> {{ history.amount}} </b>
+        </span>
+      </div>
+      <div class="mb-12">
+          <span class="mr-4">Payout Type:</span> <br>
+          <span>{{ history.type }} </span>
+      </div>
+
+      <div class="status">
+          <span class="mr-8">Status:</span>
+          <!-- <span class="{ status}}">{ status}}</span> -->
+          <span class="{{ history.status_info.text }}"> {{ history.status_info.text }}</span>
+        </div>
+    
+    <div class="mb-12">
+        <span class="mr-4">Payout Date:</span> <br>
+        <span> {{ history.created_at | date }} </span>
+    </div>
+ 
+     
+  </div>
+

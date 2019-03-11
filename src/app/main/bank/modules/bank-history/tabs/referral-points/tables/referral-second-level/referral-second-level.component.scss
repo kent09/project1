@@ -1,0 +1,133 @@
+@import "src/@fuse/scss/fuse";
+
+$default-anchor-color: #4267b2;
+$default-complete-color: #4caf50;
+app-bank-referral-second-level {
+    width: 100%;
+
+    .mat-table {
+        // mat-row:nth-child(even) {
+        //     background-color: white;
+        // }
+
+        // mat-row:nth-child(odd) {
+        //     background-color: rgb(243, 243, 243);
+        
+        // }
+
+        width: 100%;
+        height: auto;
+        min-height: 550px;
+
+        .mat-column-status {
+            flex: 0 2 95px;
+            justify-content: center;
+        }
+
+        .mat-column-fee {
+            flex: 0 2 75px;
+            justify-content: center;
+        }
+
+        .mat-column-options {
+            flex: 0 2 95px;
+            justify-content: center;
+        }
+
+        .mat-column-txn_date {
+            flex: 0 2 100px;
+            justify-content: center;
+        }
+
+        .mat-column-description {
+            flex: 0 2 100px;
+            justify-content: center;
+        }
+
+        .mat-column-status {
+            flex: 0 1 120px;
+            justify-content: center;
+            .chip {
+                padding: 5px 10px;
+                border: 1px solid;
+                border-radius: 20px;
+            }
+            .completed {
+                color: $default-complete-color;
+            }
+            .revoked {
+                color: #f44336;
+            }
+            .pending {
+                color: #ff9800;
+            }
+        }
+        .mat-column-tx_id {
+            .small-name{
+                color:rgb(29, 77, 165);
+            }
+        }
+        
+
+        .mat-sort-header-button,
+        .mat-header-cell {
+            font-weight: bolder;
+            font-size: 16px;
+            color: rgb(70, 70, 70);
+        }
+
+        .mat-column-task_title {
+            a {
+                color: $default-anchor-color;
+                .mat-title {
+                    @include media-breakpoint('xs') {
+                        line-height: normal;
+                        padding: 10px 0;
+                    }
+                }
+            }
+        }
+        .mat-column-name {
+            a {
+                color: $default-anchor-color;
+            }
+        }
+        .mat-column-option {
+            flex: 0 1 100px;
+            justify-content: center;
+        }
+
+        .mat-row {
+            position: relative;
+            cursor: pointer;
+            padding: 0;
+
+            .mat-cell {
+                min-width: 0;
+                // margin-top: -10px;
+
+                &.mat-column-detail-button {
+                    flex: 0 1 auto;
+                    padding: 0 24px 0 0;
+
+                    @include media-breakpoint('gt-md') {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .mat-header-row {
+            border-top-color: rgba(0, 0, 0, 0.12);
+            border-top-width: 1px;
+        }
+    }
+
+    #superior-coin-tab {
+        width: 100%;
+    }
+
+    .widget {
+        width: 100% !important;
+    }
+}

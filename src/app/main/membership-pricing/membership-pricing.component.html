@@ -1,0 +1,169 @@
+<div id="mail-confirm" fxLayout="column">
+  <div id="mail-confirm-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
+    <div id="mail-confirm-form">
+      <header>
+        <div class="logo">
+          <!-- <img src="/assets/images/logos/kryptonia-word-logo.png" title="Kryptonia"> -->
+          <a [routerLink]="['/']" class="pointer"><img src="/assets/svg/kryptonia-new.svg" width="250" height="auto" title="Kryptonia"></a>
+          <div class="menu" (click)="nav()">
+            <mat-icon>menu</mat-icon>
+          </div>
+        </div>
+        <nav [class.active]="showFiller == true">                      
+          <ul>
+            <li *ngIf="myUserInfo.user_id"><a class="pointer" [routerLink]="'/task/alltask'"> Dashboard</a></li>
+            
+            <li *ngIf="myUserInfo.user_id"><a class="pointer" [routerLink]="'/others/faq'">FAQ</a></li>
+            <li *ngIf="!myUserInfo.user_id"><a class="login" (click)="navigateRoute('/auth/login')">Sign in</a></li>
+            <li *ngIf="myUserInfo.user_id"><a class="login" (click)="logOut()">Logout</a></li>
+          </ul>
+        </nav>
+      </header>
+      <div class="expect"><strong>WE'VE BEEN EXPECTING YOU!</strong></div>
+      <br>
+      <div class="title">KRYPTONIA MEMBERSHIP</div>
+      <div>
+        <p class="f-20">is now on <b>BIG</b> discount. Avail NOW!</p>
+      </div>
+     
+      <div>
+
+      </div>
+
+      <div class="container">
+        <table class="pricing-table">
+          <thead class="pricing-table_head">
+            <th class="hidden-md-down"></th>
+            <th class="table-head-plan">
+              <div class="h5 text-uppercase">
+                Bronze
+              </div>
+              <div class="small text-uppercase text-muted"></div>
+              <div class="h2">
+                <span>Free</span>
+              </div>
+            </th>
+            <th class="table-head-plan">
+              <div class="h5 text-uppercase">
+                Silver
+              </div>
+              <div class="small text-uppercase text-muted"><del>Before ${{ origSilverAmount }}</del></div>
+              <div class="h2">
+                <sup class="text-normal">$</sup>
+                <span>{{ silverAmount | number : '0.1-2'}}</span>
+                <span class="h6 text-normal">/mo</span>
+              </div>
+              <div class="subscribe">
+                <button (click)="buy(1)" mat-flat-button color="accent" *ngIf="myUserInfo.user_id">{{user.membership == 'silver' ? 'Current Plan' : 'Subscribe'}}</button>
+              </div>
+            </th>
+            <th class="table-head-plan table-head-popular">
+              <div class="h5 text-uppercase">
+                <img src="/assets/svg/badges/badge-gold.svg" alt="Gold">
+              </div>
+              <div class="small text-uppercase text-muted"><del>Before ${{ origGoldAmount }}</del></div>
+              <div class="h2">
+                <sup class="text-normal">$</sup>
+                <span>{{ goldAmount | number : '0.1-2'}}</span>
+                <span class="h6 text-normal">/mo</span>
+              </div>
+              <div class="subscribe">
+                <button (click)="buy(2)" mat-flat-button color="accent" *ngIf="myUserInfo.user_id">{{user.membership == 'gold' ? 'Current Plan' : 'Subscribe'}}</button>
+              </div>
+            </th>
+            <th class="table-head-plan">
+              <div class="h5 text-uppercase">
+                Platinum
+              </div>
+              <div class="small text-uppercase text-muted"><del>Before ${{ origPlatinumAmount }}</del></div>
+              <div class="h2">
+                <sup class="text-normal">$</sup>
+                <span>{{ platinumAmount | number : '0.1-2'}}</span>
+                <span class="h6 text-normal">/yr</span>
+              </div>
+              <div class="subscribe">
+                <button (click)="buy(3)" mat-flat-button color="accent" *ngIf="myUserInfo.user_id">{{user.membership == 'platinum' ? 'Current Plan' : 'Subscribe'}}</button>
+              </div>
+            </th>
+            <th class="table-head-plan">
+              <div class="h5 text-uppercase pb-16">
+                Founders
+              </div>
+              <div class="small text-uppercase text-muted"><del>Before ${{ origFoundersAmount }}</del></div>
+              <div class="h2">
+                <sup class="text-normal">$</sup>
+                <span>{{ foundersAmount | number : '0.1-2'}}</span>
+                <span class="h6 text-normal">/lifetime</span>
+              </div>
+              <div class="subscribe">
+                <button (click)="buy(4)" mat-flat-button color="accent" *ngIf="myUserInfo.user_id">{{user.membership == 'founder' ? 'Current Plan' : 'Subscribe'}}</button>
+              </div>
+            </th>
+          </thead>
+          <tbody>
+            <tr><td colspan="6"></td></tr>
+            <ng-template ngFor let-perk [ngForOf]="perkList" let-i="index">
+              <tr class="pricing-row pricing-row__head" [attr.data-row]="perk" [class.active]="perk == slidedown" (click)="getPerk(perk)">
+                <td class="hidden-md-down text--nowrap">{{perk}}</td>
+                <td data-plan="Bronze">
+                  <span *ngIf="bronze[i] !== false && bronze[i] !== true">{{bronze[i]}}</span>
+                  <mat-icon *ngIf="bronze[i] === false" class="mat-warn s-20">clear</mat-icon>
+                  <mat-icon *ngIf="bronze[i] === true" class="mat-primary s-20">done</mat-icon>
+                </td>
+                <td data-plan="Silver">
+                  <span *ngIf="silver[i] !== false && silver[i] !== true">{{silver[i]}}</span>
+                  <mat-icon *ngIf="silver[i] === false" class="mat-warn s-20">clear</mat-icon>
+                  <mat-icon *ngIf="silver[i] === true" class="mat-primary s-20">done</mat-icon>
+                </td>
+                <td data-plan="Gold">
+                  <span *ngIf="gold[i] !== false && gold[i] !== true">{{gold[i]}}</span>
+                  <mat-icon *ngIf="gold[i] === false" class="mat-warn s-20">clear</mat-icon>
+                  <mat-icon *ngIf="gold[i] === true" class="mat-primary s-20">done</mat-icon>
+                </td>
+                <td data-plan="Platinum">
+                  <span *ngIf="platinum[i] !== false && platinum[i] !== true">{{platinum[i]}}</span>
+                  <mat-icon *ngIf="platinum[i] === false" class="mat-warn s-20">clear</mat-icon>
+                  <mat-icon *ngIf="platinum[i] === true" class="mat-primary s-20">done</mat-icon>
+                </td>
+                <td data-plan="Founder">
+                  <span *ngIf="founder[i] !== false && founder[i] !== true">{{founder[i]}}</span>
+                  <mat-icon *ngIf="founder[i] === false" class="mat-warn s-20">clear</mat-icon>
+                  <mat-icon *ngIf="founder[i] === true" class="mat-primary s-20">done</mat-icon>
+                </td>
+              </tr>
+              <tr class="pricing-row pricing-row__child" [class.show]="perk == slidedown">
+                <td colspan="6">
+                  <div class="grid grid--gutter grid--pad text--left">
+                    <div class="grid__col--50">
+                      <div class="module">
+                        <div class="h5 mb0 mt0">{{perk | uppercase}}</div>
+                        <p>{{description[i]}}</p>
+                      </div>
+                    </div>
+                   
+
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+            
+          </tbody>
+        </table>
+      </div>
+      <div class="text-center">
+        <div class="expect"><strong>Not a member? Register! It's easy as 1, 2, 3...</strong></div>
+        <div class="grid__col--75">
+          <p class="lead f-20">Uncover new growth opportunities and start earning daily</p>
+          <a class="btn btn-cloud" *ngIf="myUserInfo.user_id" [routerLink]="'/task'">Get Started</a>
+          <a class="btn btn-cloud" *ngIf="!myUserInfo.user_id" [routerLink]="'/auth/register'">Start FREE</a>
+        </div>
+      </div>
+      <!-- <div class="message">
+        <a mat-flat-button [routerLink]="'/task'" color="accent">Get Started!</a>
+      </div> -->
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,40 @@
+@import "src/@fuse/scss/fuse";
+
+
+#profile-settings {
+  margin-top: 5px;
+  justify-content: center;
+    &.modern {
+        padding: 0;
+
+        .profile-container {
+            padding: 0;
+
+          .img-avatar-prof{
+            width: 250px !important; 
+          }
+        }
+    }
+    .form-structure{
+      margin-left: 50px;
+
+      .fname, .email, .username{
+        font-size: 17px;
+        font-weight: 700;
+
+      }
+    }
+    .side-structure{
+      margin-left: 50px !important;
+    }
+
+    .header{
+        @include media-breakpoint('gt-sm') {
+          margin-top: 28px !important;
+          margin-bottom: 28px !important;
+    
+      }
+     
+    }
+
+}

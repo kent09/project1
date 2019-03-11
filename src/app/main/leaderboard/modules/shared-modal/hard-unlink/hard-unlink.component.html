@@ -1,0 +1,16 @@
+<div class="content-holder">
+  <div class="close" (click)="dialogRef.close()"><mat-icon>close</mat-icon></div>
+  <div class="mat-title">Request for Hard Unlink</div>
+
+  <form>
+
+    <mat-form-field class="memo w-100-p">
+      <textarea  name="memo" [(ngModel)]="reason" matInput placeholder="+ Add Reason"></textarea>
+    </mat-form-field>
+    <div class="message-box info"> Notice: Sending Coin to other user will deduct your current coin! </div>
+  </form>
+  <div class="btn-holder pt-16">
+    <button mat-flat-button color="warn" (click)="dialogRef.close()">Cancel</button> 
+    <button mat-flat-button color="accent" (click)="submit()">Send</button>
+  </div>
+</div>

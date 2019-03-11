@@ -1,0 +1,43 @@
+mat-dialog-container {
+    border-top: 10px solid #4268b3;
+    .confirm-dialog {
+        // .example-card-logout-confirm {
+        //     max-width: 400px;
+        //     text-align: center;
+        //     box-shadow: unset;
+        //     img{
+        //       height: 150px !important;
+        //       width: 124px !important;
+        //     }
+        // }
+        .img-holder {
+            display: block;
+            width: 70px;
+            margin: 0 auto;
+        }
+        img {
+            margin: 0;
+        }
+        .mat-accent {
+            font-size: 20px;
+            font-weight: 600;
+            background-color: #4268b3;
+            color: #fff;
+            padding: 10px 0;
+            border-radius: 6px;
+        }
+        .pointer {
+            cursor: pointer;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin: 10px 0;
+            text-decoration: underline;
+            color: #323232;
+        }
+        footer {
+            color: #c5c4c4;
+        }
+    }
+}

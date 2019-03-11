@@ -1,0 +1,123 @@
+
+
+@import "src/@fuse/scss/fuse";
+
+
+app-deposit {
+  width: 100%;
+
+  .deposit{
+    .filter {
+        display: flex;
+        float: none;
+        @include media-breakpoint('lt-sm') {
+            display: block;
+        }
+       
+        .search-input-wrapper {
+            margin-left: auto; 
+            align-items: center;
+            display: flex;
+            margin-right: 28px;
+            @include media-breakpoint('xs') {
+                margin-right: 0;
+            }
+            .mat-form-field {
+                @include media-breakpoint('xs') {
+                    width: 100%;
+                }
+            }
+        }
+        .calendar {
+            .mat-form-field {
+                @include media-breakpoint('xs') {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+    .chip {
+        border: 1px solid;
+        padding: 5px 10px;
+        border-radius: 20px;
+        display: inline-block;
+        color: #4caf50;
+    }
+    .Complete  {
+        color: #4caf50;
+    }
+
+    .no-record {
+        padding-left: 20px
+    }
+
+  .mat-table {
+    width: 100%;
+    height: auto;
+    .mat-column-user {
+     /*    flex: 0 2 104px; */
+        justify-content: center;
+    }
+    .mat-column-block {
+        flex: 0 1 120px;
+        justify-content: center;
+    }
+
+    .mat-sort-header-button,
+    .mat-header-cell {
+        // font-weight: bolder;
+        font-size: 16px;
+        color: rgb(70, 70, 70);
+    }
+    .mat-sort-header-container {
+        padding: 15px 10px;
+        display: flex;
+        @include media-breakpoint('xs') {
+            justify-content: center;
+        }
+    }
+    .mat-column-option {
+        flex: 0 1 100px;
+        @include media-breakpoint('xs') {
+            flex: 1;
+            text-align: center;
+            justify-content: center;
+            display: flex;
+        }
+    }
+    .mat-column-date_received {
+        flex: 0 1 160px;
+        justify-content: center;
+    }
+    .mat-column-amount {
+        flex: 0 1 120px;
+        @include media-breakpoint('xs') {
+            flex: 1;
+        }
+    }
+    .mat-row {
+        position: relative;
+        cursor: pointer;
+        padding: 0;
+      
+        .mat-cell {
+            min-width: 0;
+            margin-top: 0;
+            &.mat-column-detail-button {
+                flex: 0 1 auto;
+                padding: 0 24px 0 0;
+                @include media-breakpoint('gt-md') {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+  #superior-coin-tab {
+    width: 100%;
+  }
+  .widget{
+    width: 100% !important;
+  }
+}

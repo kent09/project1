@@ -1,0 +1,24 @@
+<div class="content-holder">
+  <div class="close" (click)="onNoClick()"><mat-icon>close</mat-icon></div>
+  <div class="mat-subheading-2 mb-12">
+    <a (click) = "navigatetoBlogArticle(data.blog_tag,data.metadata,data.username)">
+      <b>{{ data.blog_title }}</b>
+    </a>
+  </div>
+  <div class="name mb-12">
+    <span class="mr-8">Name:</span>
+    <a (click)="navigatetoBloggerProfile(data.username)">{{data.blogger}}</a>
+  </div>
+  <div class="date mb-12">
+    <span class="mr-4">Date Claimed:</span>
+    <span>{{ data.claimed_date }}</span>
+  </div>
+  <div class="earned mb-12">
+    <span class="mr-8">Earned:</span>
+    <span class="display-flex">
+      <img class="avatar w-16 h-16 mr-4 ml-8" src="assets/images/logos/rewardLogo.png" alt="Earned">
+      <b>{{ data.sup | prettify : 'pretty'}}</b>
+    </span>
+  </div>
+</div>
+  

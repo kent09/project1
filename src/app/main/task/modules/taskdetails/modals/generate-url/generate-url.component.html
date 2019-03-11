@@ -1,0 +1,50 @@
+<div class="content-holder">
+  <div class="close" (click)="onNoClick()"><mat-icon>close</mat-icon></div>
+  <div class="mat-headline">TASK URL GENERATED</div>
+  <div class="content-wrapper mat-subheading-2">
+    <div class="url">
+      {{data.url}}
+    </div>
+    <button (click)="copyData('link', data.url)"><mat-icon>content_copy</mat-icon></button>
+  </div>
+  <div class="share">
+    <span class="mat-subheading-2">Share</span>
+    <ul>
+      <li>
+        <a routerLink="https://www.facebook.com">
+          <img src="/assets/socials/fb.svg" class="w-24" alt="facebook">
+        </a>
+      </li>
+      <li>
+        <a routerLink="https://plus.google.com/discover">
+          <img src="/assets/socials/google-plus-color.svg" class="w-24" alt="google-plus">
+        </a>
+      </li>
+      <li>
+        <a routerLink="https://www.instagram.com">
+          <img src="/assets/socials/instagram.svg" class="w-24" alt="instagram">
+        </a>
+      </li>
+      <li>
+        <a routerLink="https://kblog.io">
+          <img src="/assets/socials/kblog.svg" class="w-24" alt="kblog">
+        </a>
+      </li>
+      <li>
+        <a routerLink="https://www.linkedin.com">
+          <img src="/assets/socials/linkedin-color.svg" class="w-24" alt="linkedin">
+        </a>
+      </li>
+      <li>
+        <a routerLink="https://twitter.com">
+          <img src="/assets/socials/twitter-color.svg" class="w-24" alt="twitter">
+        </a>
+      </li>
+      <li>
+        <a routerLink="https://www.youtube.com">
+          <img src="/assets/socials/youtube.svg" class="w-24" alt="youtube">
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

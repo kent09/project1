@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="close" (click)="matDialogRef.close(false)">
+        <mat-icon>close</mat-icon>
+      </div>
+      <div class="mat-title">
+        It seems like you are new. Are you referred by someone?
+      </div>
+      <!-- <mat-label> Please upload attachment for this task</mat-label> -->
+      <input matInput placeholder="Referral Code" [disabled]="isfetching" class="ref_code" maxlength="10" [(ngModel)]="ref_code"
+        (ngModelChange)="checkReferralCode($event)">
+      <!-- <mat-icon matPrefix>art_track</mat-icon> -->
+      <div *ngIf="referrer.name" class="ref-div">
+          <table  >
+              <tr>
+                <td colspan="2">
+                  Referrer Information
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <img [src]="profile_img +'/'+ referrer.referrer_id + '/avatar.png'" onError="this.src='assets/images/avatars/profile.jpg'" alt="avatar" class="avatar">
+                </td>
+                <td class="ref-info">
+                    <h3>{{referrer.name}}</h3>
+                    <p>@{{referrer.username}}</p>
+                </td>
+              </tr>
+            </table>
+      </div>
+      <div *ngIf="!referrer.name && code_checked" class="ref-div-404">
+          Invalid referral code.
+      </div>
+      <div *ngIf="!captcha_loaded">
+          <p >Loading reCaptcha ...</p>
+      </div>
+        
+          <form [formGroup]="aFormGroup" class="captcha">
+              <ngx-recaptcha2
+                [siteKey]="siteKey"
+                [size]="'normal'"
+                [hl]="'en'"
+                [theme]="'light'"
+                [type]="'image'"
+                (expire)="handleExpire()"
+                (load)="handleLoad()"
+                (success)="handleSuccess($event)"
+                formControlName="recaptcha">
+              </ngx-recaptcha2>
+
+              <div class="terms" fxLayout="row" fxLayoutAlign="left center">
+                  <mat-checkbox name="terms" aria-label="I read and accept" formControlName="termsAgreement" required>
+                      <span>I read and accept</span>
+                  </mat-checkbox>
+              <a (click)="termsAndAgreement()" class="term-agreement"> &nbsp;&nbsp;terms and conditions</a>
+          </div>
+            </form>
+            <!-- <p class="error-message" *ngIf="error.status">
+              {{error.message}}
+            </p> -->
+          <!-- <div class="g-recaptcha" data-sitekey="6LdZPG4UAAAAAHe-nmUcXBvubl3fmVUXs_ABH_WN"></div> -->
+      <div class="btn-holder">
+        <!-- <button mat-flat-button color="accent" (click)="checkReferralCode()">Look Up referral code</button> -->
+
+        <button mat-flat-button color="warn" class="cancel" (click)="matDialogRef.close(false)">Cancel</button>
+        <button mat-flat-button color="accent" class="use-ref" *ngIf="!captcha_res || aFormGroup.invalid || isFacebookLoggingIn" disabled>Continue</button>
+        <button mat-flat-button color="accent" class="use-ref" *ngIf="captcha_res && !aFormGroup.invalid && !isFacebookLoggingIn" (click)="registerViaFacebook()">Continue</button>
+
+      </div>
+    </div>
+  </div>
+</div>

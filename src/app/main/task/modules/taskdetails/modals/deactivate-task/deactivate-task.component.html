@@ -1,0 +1,29 @@
+<!-- <div class="deactivate-dialog">
+
+    <mat-card class="example-card-logout-confirm">
+        <mat-card-header>
+            <mat-card-title>Deactivate Task?</mat-card-title>
+        </mat-card-header>
+        <img src="assets/images/logo/kryptonia-word-logo.png" alt="kryptonia">
+        <mat-card-content>
+
+            <span class="mat-display-2">ARE YOU SURE?</span>
+            <p class="mat-subheading-2">
+                This task will be set to INACTIVE
+            </p>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-button class="mat-accent mr-16" (click)="matDialogRef.close(true)">Confirm</button>
+            <button mat-button (click)="matDialogRef.close(false)">Cancel</button>
+        </mat-card-actions>
+    </mat-card>
+</div> -->
+<div class="deactivate-dialog">
+    <img src="/assets/images/logos/kryptonia-word-logo.png" width="120" height="auto" alt="kryptonia">
+    <div class="mat-display-2">ARE YOU SURE?</div>
+    <div class="mat-subheading-2">This task will be set to INACTIVE</div>
+    <div class="btn-holder">
+        <button mat-flat-button color="accent" (click)="matDialogRef.close(true)">Confirm</button>
+        <button mat-flat-button color="warn" (click)="matDialogRef.close(false)">Cancel</button>
+    </div>
+</div>

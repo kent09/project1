@@ -1,0 +1,31 @@
+<div class="form-holder">
+    <div class="mat-title py-20 pl-16 accent">&nbsp;BTC Withdrawal</div>
+    <div class="form-wrapper">
+      <div class="input-holder">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Bitcoin Receiver Address"  [(ngModel)]="receiver_address" required>
+        </mat-form-field>
+      </div>
+      <div class="input-holder">
+        <mat-form-field class="example-full-width">
+          <input type="number" matInput placeholder="BTC Amount" [(ngModel)]="amount" required (keydown)="checkInput($event)">
+        </mat-form-field>
+      </div>
+      <div class="input-holder">
+        <mat-form-field class="example-full-width">
+          <textarea matInput rows="6" placeholder="Description" [(ngModel)]="memo" required></textarea>
+        </mat-form-field>
+      </div>
+     
+      <mat-card-actions align="end">
+          <button mat-raised-button color="warn" type="button" class="submit-button" aria-label="Reset">
+              Cancel
+          </button>
+
+          <button mat-raised-button color="accent" class="submit-button" aria-label="Save" (click)="validator()" (click)="openWithdrawDialog()" >
+             Withdrawal
+          </button>
+      </mat-card-actions>
+    </div>
+  
+  </div>

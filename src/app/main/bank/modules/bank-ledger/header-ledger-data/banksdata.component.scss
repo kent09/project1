@@ -1,0 +1,166 @@
+@import "src/@fuse/scss/fuse";
+
+#dashboard-project {
+    width: 100%;
+    > .content {
+        flex: 1;
+    }
+    .widget-group {
+        .fuse-widget-front {
+            ul {
+                list-style: none;
+                padding-left: 20px;
+                padding-right: 20px; 
+                li {
+                    line-height: 30px;
+                    div {
+                        @include media-breakpoint('lt-md') {
+                            display: flex;
+                        }
+                        span:last-child {
+                            margin-left: auto; 
+                        }
+                    }
+                }
+            }
+        }
+    }
+    fuse-widget.widget.ng-trigger.ng-trigger-animate {
+        padding: 2px;
+    }
+    .copy-section {
+        padding: 6px;
+        mat-card.mat-card {
+            width: 100%;
+        }
+    }
+    .address-section {
+        button {
+            padding: 5px 0;
+            margin: 0 10px;
+        }
+        // button:first-child {
+        //     margin-top: 10px; 
+        // }
+    }
+    .integrated, .standard, .payment-id{
+        display: flex;
+        align-items: center;
+        margin-top: 10px; 
+        @include media-breakpoint('lt-md') {
+            display: block;
+        }
+        .address-to-copy {
+            //   background-color: #cccc;
+            border-radius: 3px;
+            // margin-left: 103px;
+            font-size: 15;
+            line-height: 20px;
+            word-break: break-all;
+            // margin-top: -34px;
+            @include media-breakpoint('lt-md') {
+                margin: 0;
+                padding: 5px;
+                background: rgba(0 , 0, 0, 0.12);
+            }
+        }
+        
+    }
+    .address {
+        font-weight: 700;
+        font-size: 18px;
+        line-height: normal;
+        width: 110px;
+        @include media-breakpoint('lt-md') {
+            line-height: normal;
+            margin-bottom: 10px;
+            width: auto; 
+        }
+
+    }
+
+ 
+    .rotation-loading {
+        animation: rotating 3s linear infinite;
+    }
+    .red-fg {
+        @include media-breakpoint('lt-md') {
+            font-size: 24px; 
+        }
+    }
+    .line-height-72 {
+        @include media-breakpoint('lt-md') {
+            line-height: 32px;
+        }
+    }
+    .widget-group:first-child {
+        .py-16 {
+            @include media-breakpoint('lt-md') {
+                padding-top: 0px !important; 
+            }
+        }
+    }
+    .py-16 {
+        padding-top: 4px !important;
+        padding-bottom: 4px !important;
+    }
+    .action-button {
+        margin-top: 10px; 
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        @media screen and (max-width:700px){
+            display: block;
+        }
+        & > div {
+            float: left;
+            width: 50%;
+            text-align: center;
+            @media screen and (max-width:470px){
+                display: none;
+                float: none;
+            }
+            &:last-child {
+                @media screen and (max-width:470px){
+                    display: block;
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .mat-card-content {
+        width: 100%;
+    }
+    // .button-standard{
+    //     float: right;
+    //     margin-top: -44px;
+    //     margin-right: -208px;
+
+    //     @include media-breakpoint('lt-md') {
+    //         float: right;
+    //         float: right;
+    //         margin-top: -60px;
+    //         margin-right: -7px;
+    //     }
+    // }
+    // .button-payment-id{
+    //     float: right;
+    //     margin-top: -47px;
+    //     margin-right: 552px;
+    //     @include media-breakpoint('lt-md') {
+    //         float: right;
+    //         margin-top: -53px;
+    //         margin-right: -2px;
+    //     }
+    // }
+    // .copy-integrated{
+    //     float: right;
+    //     margin-top: -49px;
+    //     margin-right: -153px;
+    //     @include media-breakpoint('lt-md') {
+    //         float: right;
+    //         margin-top: -57px;
+    //         margin-right: -4px;
+    //     }
+    // }
+}

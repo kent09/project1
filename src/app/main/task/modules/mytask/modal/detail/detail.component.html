@@ -1,0 +1,47 @@
+<div class="content-holder">
+    <div class="close" (click)="onNoClick()"><mat-icon>close</mat-icon></div>
+    <div class="mat-subheading-2 mb-0">
+      <a [routerLink]="[ '/task/taskdetails', taskDetail.slug ]" (click)="onNoClick()"><b>{{ taskDetail.title }}</b></a>
+      <div class="small">
+          <span class="mr-4">Created at:</span>
+          <span>{{ taskDetail.created_at | date:'short' }}</span>
+      </div>
+    </div>
+    <ul class="reward-category p-0">
+        <li class="status pb-8">
+            <span>Status:</span>
+            <span class="ml-4 {{ taskDetail.status_str }}">{{ taskDetail.status_str }}</span>
+        </li>
+      <li class="category pb-8">
+        <span>Category: </span>
+        <span>
+            <i *ngIf="taskDetail.category == 'global'" class="material-icons">public</i>
+            <i *ngIf="taskDetail.category == 'facebook'" class="fb w-24 h-24"></i>
+            <i *ngIf="taskDetail.category == 'twitter'" class="twitter w-24 h-24"></i>
+            <i *ngIf="taskDetail.category == 'googleplus'" class="g-plus w-24 h-24"></i>
+            <i *ngIf="taskDetail.category == 'instagram'" class="instagram w-24 h-24"></i>
+            <i *ngIf="taskDetail.category == 'linkedin'" class="linkedin w-24 h-24"></i>
+            <i *ngIf="taskDetail.category == 'kblog'" class="kblog w-24 h-24"></i>
+            <i *ngIf="taskDetail.category == 'youtube'" class="youtube w-24 h-24"></i>
+            <i *ngIf="taskDetail.category == 'steemit'" class="steemit w-24 h-24"></i>
+        </span>
+      </li>
+      <li class="reward">
+          <span>Reward:</span>
+          <span class="display-flex">
+            <img class="avatar w-16 h-16 mr-4 ml-8" src="assets/images/logos/rewardLogo.png" alt="reward">
+            <b>{{ taskDetail.reward | prettify : 'pretty'}}</b>
+          </span>
+      </li>
+    </ul>
+    <!-- <div class="mat-subheading-1">Requirements:</div> -->
+    <ul class="required">
+      <li>
+        <span>
+            <b>Available Completion</b>:
+            <font class="green-fg s-16">{{taskDetail.available_completer}}</font>
+        </span>
+      </li>
+    </ul>
+  </div>
+  

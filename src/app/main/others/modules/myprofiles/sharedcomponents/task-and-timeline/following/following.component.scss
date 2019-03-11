@@ -1,0 +1,47 @@
+@import "src/@fuse/scss/fuse";
+
+$default-anchor-color: #4267b2;
+$default-font-color: #464646;
+.content-holder {
+    .pointer {
+        cursor: pointer;
+    }
+    header {
+        display: flex;
+        align-items: center;
+    }
+    .search-input-wrapper {
+        display: flex;
+        align-items: center;
+        margin-left: auto; 
+    }
+    .mat-form-field {
+        margin-left: auto; 
+    }
+
+    .mat-table {
+        width: 100%;
+        height: auto;
+        .mat-column-avatar {
+            flex: 0 2 100px;
+            margin-left: 26px;
+        }
+    }
+    .custom-size{
+        width: 20px !important;
+        height: 20px !important;
+    }
+    .mat-sort-header-button {
+        font-size: 18px;
+    }
+    .mat-column-name {
+        a {
+            color: $default-anchor-color;
+            text-transform: capitalize;
+            cursor: pointer;
+        }
+        a:not(.mat-button):not(.mat-raised-button):not(.mat-icon-button):hover {
+            text-decoration: none;
+        }
+    }
+}

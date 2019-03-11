@@ -1,0 +1,58 @@
+<div id="anouncement-page" class="page-layout simple">
+
+    <!-- HEADER -->
+    <div class="header mat-accent-bg p-16 p-sm-24" fxLayout="column" fxLayoutAlign="center center">
+
+        <div class="hero-text">
+            <mat-icon class="hero-icon">school</mat-icon>
+            <h1 [@animate]="{value:'*',params:{delay:'100ms', y:'25px'}}">
+                WELCOME TO KRYPTONIA
+            </h1>
+            <h3 [@animate]="{value:'*',params:{delay:'100ms', y:'25px'}}">
+                BUILDING COMMUNITY THROUGH
+                <b>SUPERIOR COIN</b> HELPING PEOPLE MAKES THIS COMMUNITY A BETTER PLACE.
+                <br> A SUPERIOR VISION FOR A SUPERIOR FUTURE.
+            </h3>
+        </div>
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <div fxLayout="column" fxLayoutAlign="center">
+
+            <div class="filters" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker" placeholder="Choose a date"
+                    (dateInput)="addEvent($event.value)" (dateChange)="addEvent( $event.value)" [(ngModel)]="myDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="announcement-items" fxLayout="row wrap" fxLayoutAlign="center" [@animateStagger]="{value:'50'}">
+                
+              <div class="fuse-card" *ngFor="let announcement of decodedData">
+                    <img src="assets/images/backgrounds/talentsBG.png">
+                    <div class="p-16">
+                        <!-- <div class="h3">NEW: CASH IN AT ANY PALAWAN PAWNSHOPBRANCH NATIONWIDE</div> -->
+                        <div class="h4 secondary-text">{{announcement.date | date}}</div>
+                    </div>
+                    <div class="p-16 pt-0 line-height-1.75">
+                        <div [innerHTML]="announcement.content | slice : 1 : 110 | htmlToPlaintext"></div>...
+                    </div>
+                    <div class="p-8 pt-0" fxLayout="row" fxLayoutAlign="start center">
+                        <button [routerLink]="'/others/announcement-details/'+announcement.id+'/'" mat-button color="accent">EXPLORE</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>

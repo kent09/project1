@@ -1,0 +1,118 @@
+@import "src/@fuse/scss/fuse";
+
+$default-anchor-color: #4267b2;
+
+app-membership-earnings {
+    fuse-widget.widget {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    div#membership {
+        width: 100% !important;
+        display: block !important;
+
+        .content-tabs {
+            flex: 1;
+
+            mat-tab-group {
+                height: 100%;
+                width: 100% !important;
+
+                .mat-tab-body-wrapper {
+                    flex-grow: 1;
+                }
+            }
+
+            .mat-tab-label-container {
+                padding: 0 24px;
+            }
+        }
+        .mat-elevation-z2{
+          margin: 6px !important; 
+          .example-container{
+              width: 100%;
+          }
+        }
+        .mat-table {
+            width: 100%;
+            height: auto;
+            min-height: 550px;
+
+            .mat-column-membership_type {
+                img{
+                        width: 50%;
+                }
+            }
+
+            .mat-column-status {
+                flex: 0 2 95px;
+                justify-content: center;
+                .chip {
+                    padding: 5px 10px;
+                    border: 1px solid;
+                    border-radius: 20px;
+                }
+                .success, .received {
+                    color: #4caf50;
+                }
+                .failed {
+                    color: #f44336;
+                }
+                .pending {
+                    color: #ff9800;
+                }
+              
+            }
+    
+            .mat-sort-header-button,
+            .mat-header-cell {
+                font-weight: bolder;
+                font-size: 16px;
+                color: rgb(70, 70, 70);
+            }
+    
+            .mat-column-sender {
+                margin-left: 15px; 
+                a {
+                    color: $default-anchor-color;
+                }
+                a:not(.mat-button):not(.mat-raised-button):not(.mat-icon-button):hover {
+                    text-decoration: none;
+                }
+            }
+    
+            .mat-row {
+                position: relative;
+                cursor: pointer;
+                padding: 0;
+    
+                .mat-cell {
+                    min-width: 0;
+                    margin-top: 0;
+    
+                    &.mat-column-detail-button {
+                        flex: 0 1 auto;
+                        padding: 0 24px 0 0;
+    
+                        @include media-breakpoint('gt-md') {
+                            display: none;
+                        }
+                    }
+                }
+            }
+            .mat-header-row {
+                border-top-color: rgba(0, 0, 0, 0.12);
+                border-top-width: 1px;
+            }
+        }
+    
+        #superior-coin-tab {
+            width: 100%;
+        }
+    
+        .widget {
+            width: 100% !important;
+        }
+    }
+}

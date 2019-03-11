@@ -1,0 +1,47 @@
+<div class="page-layout-other-task create-task p-24" fusePerfectScrollbar>
+    <h2 mat-dialog-title>Other Task</h2>
+    <mat-dialog-content>
+        <mat-card class="other-task-cool">
+            <div class="profile-box groups" fxLayout="column">
+                <div class="content" *ngIf="taskDetails">
+                  
+                    <div class="group list-item-follow" fxLayout="row" fxLayoutAlign="space-between center">
+                  
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <div>
+                                <div class="category font-weight-900">Ttitle</div>
+                            </div>
+                        </div>
+                        <div class="font-weight-900">
+                           Reward
+                        </div>
+                    </div>
+
+
+                    <div  class="group list-item-follow" *ngFor="let task of taskDetails ; let i = index" fxLayout="row" fxLayoutAlign="space-between center">
+                  
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <div>
+                                <div class="category">{{ task.title}}</div>
+                            </div>
+                        </div>
+                        <div>
+                            {{ task.reward}} &nbsp; <img class="avatar small " [src]="'assets/images/logos/rewardLogo.png'"> 
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!taskDetails" class="message-box info">
+                      No data can be found.
+                </div>
+
+            </div>
+            <!-- <mat-card-actions align="center">
+                <button mat-button class="mat-accent mr-16" (click)="matDialogRef.close(true)">View More</button>
+             </mat-card-actions> -->
+        </mat-card>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button class="mat-accent mr-16" (click)="matDialogRef.close(false)">Close</button>
+        
+    </mat-dialog-actions>
+</div>

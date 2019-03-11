@@ -1,0 +1,78 @@
+<div class="deposit">
+  <div class="filter py-16">
+      <div class="search-input-wrapper">
+        <mat-form-field floatLabel="never">
+          <input id="search" matInput placeholder="Search" (keyup.enter)="onSearchChange($event.target.value)">
+        </mat-form-field>
+        <mat-icon class="secondary-text">search</mat-icon>
+      </div>
+      <div class="calendar">
+        <mat-form-field>
+          <input matInput [matDatepicker]="dp3" placeholder="Select Date" (dateInput)="addEvent($event.value)" (dateChange)="addEvent( $event.value)" [(ngModel)]="myDate">
+          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+          <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </div>
+  </div>
+
+  <div class="example-table-container">
+
+    <mat-table class="example-table" #table [dataSource]="data" matSort matSortActive="created" matSortDisableClear
+      matSortDirection="asc" [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+
+
+      <ng-container matColumnDef="date_received">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Date Received</mat-header-cell>
+        <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs>
+          {{ row.tx_date | date }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Amount</mat-header-cell>
+        <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs>
+          {{ row.amount }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="address">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>BTC Address</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{ row.btc_sender_address }}
+        </mat-cell>
+
+      </ng-container>
+
+      
+      <ng-container matColumnDef="tx_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>TX ID</mat-header-cell>
+        <mat-cell *matCellDef="let row" fxHide fxShow.gt-sm>
+          {{ row.tx_id }}
+        </mat-cell>
+      </ng-container>
+
+
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <div class="chip {{row.status}}">
+            {{ row.status }}
+          </div>
+        </mat-cell>
+      </ng-container>
+
+
+      <mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="contact" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+      </mat-row>
+    </mat-table>
+    <div *ngIf="!data" class="no-record">
+        <p>{{ no_record }}</p>
+    </div>
+
+  </div>
+
+  <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+
+</div>

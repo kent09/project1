@@ -1,0 +1,18 @@
+.content-holder {
+    position: relative;
+    .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    a {
+        color: #4267b2;
+    }
+    .mat-subheading-2 {
+        line-height: normal;
+        a {
+            padding-right: 30px;
+            display: block; 
+        }
+    }
+}

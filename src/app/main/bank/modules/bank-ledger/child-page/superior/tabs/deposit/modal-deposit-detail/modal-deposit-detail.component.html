@@ -1,0 +1,24 @@
+<div class="content-holder">
+  <div class="close" (click)="onNoClick()"><mat-icon>close</mat-icon></div>
+  <div class="mat-title">More Details</div>
+  <div class="stat">
+    <span>Status: </span>
+    <span>{{ data.status}}</span>
+  </div>
+  <div class="date">
+    <span>Date Received: </span>
+    <span>{{ data.date_received | date }}</span>
+  </div>
+  <div class="amount">
+    <span>Amount: </span>
+    <span>{{data.amount}}</span>
+  </div>
+  <div class="block">
+    <span>Block Height: </span>
+    <span> {{data.block}}</span>
+  </div>
+  <div class="txid">
+    <div>TX ID: </div>
+    <div>{{ data.tx_id }}</div>
+  </div>
+</div>

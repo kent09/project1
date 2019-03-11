@@ -1,0 +1,52 @@
+<div class="example-container">
+    <div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoadingResults"></mat-progress-bar>
+        <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+            Please try to reload!
+        </div>
+    </div>
+
+    <div class="example-table-container">
+
+        <mat-table class="example-table" #table [dataSource]="data" matSort matSortActive="created" matSortDisableClear matSortDirection="asc"
+            [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+
+            <ng-container matColumnDef="month">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Month</mat-header-cell>
+                <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs>
+                    {{ row.month }} {{ row.year }}
+                </mat-cell>
+
+            </ng-container>
+
+            <ng-container matColumnDef="amount">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Amount</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <p class="phone text-truncate">
+                        <img class="avatar w-24 h-24" [alt]="SAMPLE" [src]="'assets/images/logos/rewardLogo.png'" />
+                    </p>
+                    <b class="text-truncate font-weight-600 reward-label">{{ row.amount }}</b>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="received_date">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Date Received</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <b class="small-name">
+                        {{ row.received_date | date }}
+                    </b>
+                </mat-cell>
+            </ng-container>
+
+
+
+            <mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" class="contact" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+            </mat-row>
+        </mat-table>
+
+
+    </div>
+
+    <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+</div>

@@ -1,0 +1,73 @@
+<div class="example-container">
+    <div class="example-loading-shade"
+         *ngIf="isLoadingResults || isRateLimitReached">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+      <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+        Please try to reload!
+      </div>
+    </div>
+  
+    <div class="example-table-container">
+
+        <mat-table class="example-table" #table 
+                                    [dataSource]="data" matSort 
+                                    matSortActive="created"
+                                    matSortDisableClear matSortDirection="asc"
+                                    [@animateStagger]="{value:'50'}"
+                                    fusePerfectScrollbar>
+
+        <ng-container matColumnDef="block">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Category</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                {{ row.block }}
+            </mat-cell>
+            
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Amount</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                {{ row.amount }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="payment_id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Payment ID</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                {{ row.payment_id  }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="tx_id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header >TX ID</mat-header-cell>
+            <mat-cell *matCellDef="let row" fxHide fxShow.gt-md>
+                {{ row.tx_id  }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="date_received">
+            <mat-header-cell *matHeaderCellDef mat-sort-header >Date Received</mat-header-cell>
+            <mat-cell *matCellDef="let row" fxHide fxShow.gt-md>
+                {{ row.date_received | date }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef mat-sort-header >Status</mat-header-cell>
+            <mat-cell *matCellDef="let row" fxHide fxShow.gt-md>
+                {{ row.status  }}
+            </mat-cell>
+        </ng-container>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" class="contact" 
+            matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+        </mat-row>
+    </mat-table>
+
+  
+    </div>
+  
+    <mat-paginator [length]="resultsLength" [pageSize]="5"></mat-paginator>
+  </div>

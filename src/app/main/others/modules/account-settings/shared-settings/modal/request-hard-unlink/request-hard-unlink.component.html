@@ -1,0 +1,12 @@
+<div class="content-holder">
+  <div class="close pointer" (click)="onNoClick()"><mat-icon>close</mat-icon></div>
+  <div class="mat-title">
+    Request for hard unlinked
+  </div>
+  <mat-form-field class="w-100-p">
+    <textarea matInput rows="5" placeholder="Reason of the request" [(ngModel)]="reason"></textarea>
+  </mat-form-field>
+  <div class="btn-holder pt-12 text-right">
+    <button mat-flat-button color="accent" (click)="submit()">Submit</button>
+  </div>
+</div>

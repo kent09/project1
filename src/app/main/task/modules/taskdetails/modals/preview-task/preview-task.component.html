@@ -1,0 +1,56 @@
+<div class="page-layout-other-task create-task p-24" fusePerfectScrollbar>
+    <h2 mat-dialog-title>Peview Task</h2>
+    <mat-dialog-content>
+        <mat-card class="other-task-cool">
+            <div class="profile-box groups" fxLayout="column">
+                <div class="content">
+
+                    You are about to be redirected to the following URL: 
+                    <mark>
+                        <a href="{{_data.task.task.task_link}}" target="_blank">
+                            {{_data.task.task.task_link}}
+                        </a>
+                    </mark>
+                </div>
+
+            </div>
+            <br>
+            <hr>
+            <div class="row" *ngIf="_data.task.metatags.title">
+                <table class="table">
+                    <tr>
+                        <td>
+                                <img class="img-tag" 
+                                    [src]="imagedata" 
+                                    alt="Website image" >
+                            
+                        </td>
+                        <td>
+                               <strong><p>{{_data.task.metatags.title}}</p></strong>
+                                <p>{{_data.task.metatags.tags.description}}</p>
+                        </td>
+                    </tr>
+                </table>
+
+                    
+               
+            </div>
+            <div *ngIf="!_data.task.metatags.title">
+                <p>No link preview</p>
+            </div>
+            
+
+            <!-- <div class="message-box info">
+                    Notice: Kryptonia.io is not responsible for any content linked in this task!
+            </div> -->  
+            <!-- <mat-card-actions align="center">
+                <button mat-button class="mat-accent mr-16" (click)="matDialogRef.close(true)">Proceed</button>
+            </mat-card-actions> -->
+        </mat-card>
+        
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button (click)="matDialogRef.close(false)">Close</button>
+
+    </mat-dialog-actions>
+</div>

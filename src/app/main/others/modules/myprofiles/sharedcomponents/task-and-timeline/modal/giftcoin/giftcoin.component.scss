@@ -1,0 +1,61 @@
+@import "src/@fuse/scss/fuse";
+
+.send-message {
+    margin-bottom: 10px;
+    color: green;
+    font-size: 14px;
+}
+.gift-coin-modal {
+
+    @include media-breakpoint('xs') {
+        width: 100%;
+    }
+
+    @include media-breakpoint-up('xs') {
+        width: 400px;
+    }
+    .mat-form-field{
+        width: 100%;
+    }
+
+    .mat-dialog-container {
+        padding: 0;
+
+        .mat-toolbar {
+            flex: 1 0 auto;
+            min-height: initial;
+        }
+
+        .toolbar-bottom {
+            height: auto;
+        }
+    }
+
+    .dialog-content-wrapper {
+        max-height: 85vh;
+        display: flex;
+        flex-direction: column;
+    }
+}
+.form-holder {
+    position: relative;
+    max-width: 350px;
+    .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+    }
+    .btn-holder {
+        margin-top: 15px;
+        display: flex;
+        .mat-accent {
+            margin-left: auto; 
+        }
+    }
+    .name {
+        color: #4267b2;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+}

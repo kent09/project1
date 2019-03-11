@@ -1,0 +1,115 @@
+<div id="profile-settings" class="modern page-layout blank " fxLayout="row">
+
+    <div class="profile-container">
+        <h1 fxHide fxShow.gt-sm>Account Settings</h1>
+
+        <div class="card" fxLayout="row" fxLayoutAlign="center center">
+
+            <div class="header" fxLayout="row" fxLayoutAlign="center center" fxHide fxShow.gt-sm >
+
+                <div class="ids" fxLayout="column" fxHide fxShow.gt-sm>
+                    <div fxLayout="row" class="seller" fxLayoutAlign="center center" fxHide fxShow.gt-sm>
+
+                        <div class="logo">
+                            <img class="img-avatar-prof" src="{{profilepic}}">
+                            <!-- <img class="img-avatar-prof" src="https://graph.facebook.com/1674265112595958/picture?type=normal" alt="Facebook Avatar" > -->
+                            <!-- <img class="img-avatar-prof" [src]="avatarImagePath(userInfo.user_id)" onError="this.src='assets/images/avatars/profile.jpg'"> -->
+                        </div>
+
+                    </div>
+                    <button mat-flat-button color="primary" (click)="fileInput.click()" fxHide fxShow.gt-sm>
+                        <mat-icon>camera_alt</mat-icon>
+                    </button>
+
+                </div>
+
+            </div>
+            <div class="card">
+
+                <div class="form-structure">
+                    <h1 fxHide.gt-sm fxShow.gt-sm>Account Settings</h1>
+
+                    <label class="fname">Name: <span class="name">{{full_name}}</span></label><br>
+                    <label class="email">Email Address: {{email}}</label><br>
+                    <label class="username"> Username: {{username}}</label>
+                  
+                    <div class="header2" fxLayout="row" fxLayoutAlign="center center">
+
+                        <div class="ids" fxLayout="column" fxHide.gt-sm fxShow.gt-sm>
+                            <div fxLayout="row" class="seller" fxLayoutAlign="center center" fxHide.gt-sm fxShow.gt-sm>
+
+                                <div class="logo" fxHide.gt-sm fxShow.gt-sm>
+                                    <img class="img-avatar-prof" src="{{profilepic}}">
+                                </div>
+0
+                            </div>
+                            <button mat-flat-button color="primary" (click)="fileInput.click()" fxHide.gt-sm fxShow.gt-sm>
+                                <mat-icon>camera_alt</mat-icon>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <br>
+
+                    <form name="registerForm" (ngSubmit)="saveAccount(null)" [formGroup]="registerForm" novalidate>
+
+                        <div class="inner-form" fxLayout="row" fxLayoutAlign="space-between start">
+
+                            <div fxLayout="column">
+                                <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                                    <mat-form-field fxFlex>
+                                        <!-- <mat-icon matPrefix class="mr-12 s-20 secondary-text">account_circle</mat-icon> -->
+                                        <input name="fname" formControlName="fname" placeholder="Name" [(ngModel)]="full_name"
+                                            matInput required>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                                    <mat-form-field fxFlex>
+                                        <!-- <mat-icon matPrefix class="mr-12 s-20 secondary-text">account_circle</mat-icon> -->
+                                        <input name="username" formControlName="username" placeholder="Username"
+                                            [(ngModel)]="username" matInput required>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                                    <mat-form-field fxFlex>
+                                        <input name="city" formControlName="city" [(ngModel)]="location" matInput
+                                            placeholder="City">
+                                    </mat-form-field>
+                                    &nbsp; &nbsp;
+                                    <mat-form-field fxFlex>
+
+                                        <mat-select name="country" placeholder="Country" [(value)]="default_country">
+                                            <mat-option>None</mat-option>
+                                            <mat-option *ngFor="let state of DataArray" [value]="state.value">{{state.value}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                </div>
+
+                                <div fxLayout="row" class="textarea-wrapper" fxLayoutAlign="start start">
+                                    <mat-form-field fxFlex>
+                                        <textarea name="notes" formControlName="notes" placeholder="About your Self"
+                                            matInput type="text" max-rows="4" [(ngModel)]="about"></textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <input style="display: none" type="file" (change)="onFileChanged($event.target.files)"
+                            #fileInput>
+                        <button mat-flat-button color="accent">
+                            <mat-icon>save</mat-icon> Update Account
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

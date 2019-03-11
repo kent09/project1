@@ -1,0 +1,11 @@
+<div class="content-holder">
+  <div class="mat-title">BLOCK USER</div>
+  <p>Why do you want to report this User?</p>
+  <mat-form-field class="w-100-p">
+    <textarea matInput rows="5" placeholder="Leave a comment"></textarea>
+  </mat-form-field>
+  <div class="btn-holder">
+    <button mat-flat-button color="warn" (click)="onNoClick()">Cancel</button>
+    <button mat-flat-button color="accent" (click)="confirmBlock()">Confirm</button>
+  </div>
+</div>

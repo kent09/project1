@@ -1,0 +1,52 @@
+<div id="anouncement-page-details" class="page-layout simple">
+
+    <!-- HEADER -->
+    <div class="header mat-accent-bg p-16 p-sm-24" fxLayout="column" fxLayoutAlign="center center">
+
+        <div class="hero-text">
+            <mat-icon class="hero-icon">school</mat-icon>
+            <h1 [@animate]="{value:'*',params:{delay:'100ms', y:'25px'}}">
+                WELCOME TO KRYPTONIA
+            </h1>
+            <h3 [@animate]="{value:'*',params:{delay:'100ms', y:'25px'}}">
+                BUILDING COMMUNITY THROUGH
+                <b>SUPERIOR COIN</b> HELPING PEOPLE MAKES THIS COMMUNITY A BETTER PLACE.
+                <br> A SUPERIOR VISION FOR A SUPERIOR FUTURE.
+            </h3>
+        </div>
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content p-24">
+
+        <div fxLayout="column" fxLayoutAlign="center">
+
+            <div class="filters" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+               
+              <div class="h2">Announcement</div>
+              <button mat-button color="accent" (click)="submitRequest()">Submit Request</button>
+            </div>
+            <div class="announcement-items" fxLayout="row wrap" fxLayoutAlign="center" [@animate]="{value:'*',params:{delay:'100ms', y:'25px'}}">
+
+
+                <div class="fuse-card full-page-widht" *ngFor="let announcement of decodedData">
+                    <img src="assets/images/backgrounds/talentsBG.png">
+                    <div class="p-16">
+                        <!-- <div class="h3">NEW: CASH IN AT ANY PALAWAN PAWNSHOPBRANCH NATIONWIDE</div> -->
+                        <div class="h4 secondary-text">JULY 19, 2018</div>
+                    </div>
+                    <div class="p-16 pt-0 line-height-1.75" [innerHTML]="announcement.content | htmlToPlaintext"></div>
+                    <div class="p-8 pt-0" fxLayout="row" fxLayoutAlign="start center">
+                        <button [routerLink]="'/others/announcement'" mat-button color="accent">Back</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>

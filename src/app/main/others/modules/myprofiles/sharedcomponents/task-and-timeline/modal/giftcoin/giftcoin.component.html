@@ -1,0 +1,62 @@
+<!-- <div class="gift-coin-modal create-task p-24" fusePerfectScrollbar>
+    <h2 mat-dialog-title>GIFT SUP COIN</h2>
+    <mat-dialog-content>
+        <mat-card class="other-task-cool">
+            <div class="profile-box groups" fxLayout="column">
+                <div class="content">
+                    <form name="create-taskForm" (ngSubmit)="sendGiftCoin()" [formGroup]="createTaskForm" novalidate>
+                        <mat-form-field class="example-form-field" appearance="outline">
+                            <input formControlName="amount" matInput type="number" placeholder="Amount (SUP Coin)">
+                            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width">
+                            <textarea formControlName="memo" matInput placeholder="+ Add memo"></textarea>
+                        </mat-form-field>
+                    </form>
+                </div>
+
+            </div>
+            <br>
+            <div class="message-box info">
+                Notice: Sending Coin to other user will deduct your current coin!
+            </div>
+            <mat-card-actions align="center">
+                <button mat-button class="mat-accent mr-16" (click)="sendGiftCoin()">Send</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button (click)="matDialogRef.close(false)">Cancel</button>
+
+    </mat-dialog-actions>
+</div> -->
+
+<div class="form-holder">
+    <div class="close" (click)="matDialogRef.close(false)"><mat-icon>close</mat-icon></div>
+    <div class="mat-title">GIFT SUP COIN</div>
+    <div class="name">{{_data.name}}</div>
+    <form name="create-taskForm" (ngSubmit)="sendGiftCoin()" [formGroup]="createTaskForm" novalidate>
+        <mat-form-field class="w-100-p">
+            <input formControlName="amount" matInput type="number" placeholder="Amount (SUP Coin)">
+        </mat-form-field>
+        <mat-form-field class="w-100-p">
+            <textarea formControlName="memo" matInput placeholder="+ Add memo"></textarea>
+        </mat-form-field>
+        <div class="send-message" *ngIf="issending">
+            <p>Sending gift coin. Please wait...</p>
+        </div>
+        
+        <div class="message-box info">
+            Notice: Sending Coin to other user will deduct your current coin!
+        </div>
+    </form>
+    <div class="btn-holder">
+        <button mat-flat-button color="warn" (click)="matDialogRef.close(false)">Cancel</button>
+        <button mat-flat-button color="accent" *ngIf="!issending" (click)="sendGiftCoin()">Send</button>
+        <button mat-flat-button color="accent" *ngIf="issending" disabled>Send</button>
+    </div>
+
+</div>

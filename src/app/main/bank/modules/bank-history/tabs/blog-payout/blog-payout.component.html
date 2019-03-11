@@ -1,0 +1,71 @@
+
+<div id="blog-payout" class="blank p-24" fxLayout="row">
+  <div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoadingResults"></mat-progress-bar>
+    <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+      Please try to reload!
+    </div>
+  </div>
+
+  <div class="example-table-container">
+    <mat-table [dataSource]="data" matSort matSortActive="created" matSortDisableClear matSortDirection="asc"
+      [@animateStagger]="{value:'50'}" fusePerfectScrollbar>
+
+      <ng-container matColumnDef="blogger">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Blogger Name</mat-header-cell>
+        <mat-cell *matCellDef="let row" fxHide fxShow.gt-sm>
+          <a (click) = "navigatetoBloggerProfile(row.username)">
+            <b>{{ row.blogger }}</b>
+          </a>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="blog_title">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Blogger Title</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <a (click) = "navigatetoBlogArticle(row.blog_tag,row.metadata,row.username)">
+              <b>{{ row.blog_title }}</b>
+            </a>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="sup">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Earned</mat-header-cell>
+        <mat-cell *matCellDef="let row" fxHide fxShow.gt-sm>
+          <p class="phone text-truncate">
+            <img class="avatar w-24 h-24 mt-0" [alt]="SAMPLE" [src]="'assets/images/logos/rewardLogo.png'" />
+          </p>
+          <b class="text-truncate font-weight-600 reward-label">{{ row.sup | prettify : 'pretty' }}</b>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="claimed_date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Claimed Date </mat-header-cell>
+        <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs>
+          <b class="small-name">
+            {{ row.claimed_date | date }}
+          </b>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="option">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.lt-sm>Option</mat-header-cell>
+        <mat-cell *matCellDef="let row" fxHide fxShow.lt-sm>
+          <button mat-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openDialog(row)">
+              <mat-icon>details</mat-icon>
+              Details
+            </button>
+          </mat-menu>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="contact" matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+      </mat-row>
+    </mat-table>
+  </div>
+  <mat-paginator [length]="resultsLength" [pageSize]=10></mat-paginator>
+</div>
+

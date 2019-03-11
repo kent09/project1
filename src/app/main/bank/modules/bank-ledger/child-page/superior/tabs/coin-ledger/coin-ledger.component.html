@@ -1,0 +1,106 @@
+<div class="ledger">
+  <div class="filter py-16">
+      <div class="ending_balance">
+          <label>Current Ending Balance: {{ending_balance}} SUP </label>
+      </div>
+      <div class="search-input-wrapper">
+        <mat-form-field floatLabel="never">
+          <input id="search" matInput placeholder="Search"  (keyup.enter)="onSearchChange($event.target.value)">
+        </mat-form-field>
+        <mat-icon class="secondary-text">search</mat-icon>
+      </div>
+
+      &nbsp;
+      <div class="calendar">
+        <mat-form-field>
+          <input matInput [matDatepicker]="dp3" placeholder="Select Date" (dateInput)="addEvent($event.value)" (dateChange)="addEvent( $event.value)" [(ngModel)]="myDate">
+          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+          <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </div>
+  </div>
+  <div class="example-container">
+      <div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoadingResults"></mat-progress-bar>
+        <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+          Please try to reload!
+        </div>
+      </div>
+    
+        <div class="example-table-container">
+  
+            <mat-table class="example-table" #table 
+                                        [dataSource]="data" matSort 
+                                        matSortActive="created"
+                                        matSortDisableClear matSortDirection="asc"
+                                        [@animateStagger]="{value:'50'}"
+                                        fusePerfectScrollbar>
+    
+            
+            <ng-container matColumnDef="txn_type" >
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxLayout="row" fxHide fxShow.gt-sm>TXN Type</mat-header-cell>
+                <mat-cell *matCellDef="let row" fxLayout="row">
+                    <div class="chip {{ row.txn_type  }}">
+                        {{ row.txn_type }}
+                    </div>
+            
+                </mat-cell>
+            </ng-container>
+
+    
+            <ng-container matColumnDef="txn_name" >
+                <mat-header-cell *matHeaderCellDef mat-sort-header>TXN Name</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    {{ row.txn_name }}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="amount">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxLayout="row" fxHide fxShow.gt-sm>Amount</mat-header-cell>
+                <mat-cell *matCellDef="let row" fxLayout="row" fxHide fxShow.gt-sm>
+                    <p class="phone text-truncate">
+                        <img class="avatar w-24 h-24" [alt]="SAMPLE" [src]="'assets/images/logos/rewardLogo.png'" />
+                    </p>
+                    <b class="text-truncate font-weight-600 reward-label">{{ row.amount | prettify :
+                        'pretty'}}</b>
+                </mat-cell>
+                
+            </ng-container>
+    
+            <ng-container matColumnDef="txn_date">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxLayout="row" fxHide fxShow.gt-md>TX Date</mat-header-cell>
+                <mat-cell *matCellDef="let row" fxLayout="row" fxHide fxShow.gt-md>
+                    {{ row.date }}
+                </mat-cell>
+            </ng-container>
+<!--     
+            <ng-container matColumnDef="description">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxLayout="row" fxHide fxShow.gt-md>Description</mat-header-cell>
+                <mat-cell *matCellDef="let row" fxLayout="row" fxHide fxShow.gt-md>
+                    {{ row.description  }}
+                </mat-cell>
+            </ng-container> -->
+    
+            <ng-container matColumnDef="ending_balance">
+                <mat-header-cell *matHeaderCellDef mat-sort-header fxLayout="row" fxHide fxShow.gt-xs>Ending Balance</mat-header-cell>
+                <mat-cell *matCellDef="let row" fxLayout="row" fxHide fxShow.gt-xs>
+                <p class="phone text-truncate">
+                        <img class="avatar w-24 h-24" [alt]="SAMPLE" [src]="'assets/images/logos/rewardLogo.png'" />
+                    </p>
+                    <b class="text-truncate font-weight-600 reward-label">{{ row.ending_balance }}</b>
+                </mat-cell>
+            </ng-container>
+    
+            <mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" class="contact" 
+                matRipple [@animate]="{value:'*',params:{y:'100%'}}">
+            </mat-row>
+            </mat-table>
+            <div *ngIf="!data" class="no-record">
+                <p>{{ no_record }}</p>
+            </div>
+            <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+        </div>
+    
+    </div>
+</div>

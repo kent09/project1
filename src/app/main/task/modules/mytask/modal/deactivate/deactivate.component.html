@@ -1,0 +1,9 @@
+<div class="deactivate-dialog">
+    <img src="/assets/images/logos/kryptonia-word-logo.png" width="120" height="auto" alt="kryptonia">
+    <div class="mat-display-2">ARE YOU SURE?</div>
+    <div class="mat-subheading-2">This task will be set to {{messageDialog}}</div>
+    <div class="btn-holder">
+        <button mat-flat-button color="accent" (click)="deORactivateTask();">Confirm</button>
+        <button mat-flat-button color="warn" (click)="matDialogRef.close(false)">Cancel</button>
+    </div>
+</div>

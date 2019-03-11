@@ -1,0 +1,111 @@
+@import "src/@fuse/scss/fuse";
+.custom-content {
+    font-size: 30px;
+    font-weight: 100;
+
+    span {
+        font-size: larger;
+        font-weight: 600;
+    }
+
+    small {
+        font-size: 15px;
+        font-weight: 600;
+    }
+}
+
+.kryptonia {
+    color: #4267b2 !important;
+}
+/deep/ .mat-dialog-container {
+    padding: 0;
+}
+.container {
+    background-image: url(/assets/socials/k-15.jpg);
+    background-color: #4789a1; 
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 270px; 
+    padding: 24px 24px 24px 270px;
+    color: #fff; 
+    position: relative;
+    @include media-breakpoint('lt-md') {
+        
+    }
+    @include media-breakpoint('lt-sm') {
+        padding: 24px;
+        text-align: center;
+        background-image: none; 
+    }
+    .pointer {
+        cursor: pointer;
+    }
+    .close {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+        .mat-icon {
+            height: 30px;
+            width: 30px;
+            font-size: 30px;
+        }
+    }  
+    .top-title {
+        // color: #4267b2;
+        font-size: 28px;
+        padding-bottom: 30px; 
+        &::after {
+            content: "";
+            display: block;
+            border-bottom: 2px solid #fff;
+            width: 60px;
+            margin-top: 10px;
+        }
+    }
+    .subtext {
+        font-size: 34px;
+        // font-weight: 300;
+        max-width: 420px;
+        line-height: 34px;
+        padding-bottom: 25px;
+        @include media-breakpoint('lt-sm') {
+            font-size: 24px;
+            line-height: 28px;
+        }
+    }
+    .text {
+        font-size: 16px;
+        line-height: normal;
+        max-width: 350px;
+        @include media-breakpoint('lt-sm') {
+            margin: 0 auto;
+        }
+    }
+    .btn-holder {
+        padding-top: 35px;
+        // display: flex;
+        .no, .yes {
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            display: block;
+            color: #fff;
+        }
+        .no {
+            text-align: center;
+            padding-top: 10px;
+            font-weight: normal; 
+        }
+        .yes {
+            background-color: #f4874b;
+            width: 100%;
+            padding: 10px 20px;
+            border-radius: 4px;
+            display: block;
+        }
+        .no:hover {
+            text-decoration: underline;
+        }
+    }
+}

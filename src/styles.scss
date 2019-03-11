@@ -1,0 +1,37 @@
+// Import Fuse core library
+@import "@fuse/scss/core";
+@import "~flag-icon-css/css/flag-icon.min.css";
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+// -----------------------------------------------------------------------------------------------------
+// @ Multiple material themes example
+// -----------------------------------------------------------------------------------------------------
+
+// Define the Material palettes
+$yellow-theme-primary: mat-palette($mat-fusedark);
+$yellow-theme-accent: mat-palette($mat-yellow, 600, 400, 700);
+$yellow-theme-warn: mat-palette($mat-red);
+
+// Create the Material theme object
+$yellow-theme: mat-light-theme($yellow-theme-primary, $yellow-theme-accent, $yellow-theme-warn);
+
+// Add ".yellow-theme" class to the body to activate this theme
+.yellow-theme {
+
+    // Generate the Angular Material theme
+    @include angular-material-theme($yellow-theme);
+
+    // Generate the fuse color classes with the new colors...
+    @include generateFuseColorClasses($yellow-theme-primary, $yellow-theme-accent, $yellow-theme-warn);
+}
+.no-data {
+    padding-left: 20px
+}
+// .swal2-popup {
+//     font-size: 1.6rem !important;
+//     font-family: 'Montserrat', sans-serif !important;
+// }
+.swal2-container {
+    zoom: 1.5;
+    font-family: 'Montserrat', sans-serif !important;
+  }

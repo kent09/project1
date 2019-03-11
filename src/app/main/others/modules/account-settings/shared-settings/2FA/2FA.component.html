@@ -1,0 +1,45 @@
+<div id="2FA-settings" class="modern page-layout blank " fxLayoutAlign="center center" fxLayout="row">
+    <div class="profile-container">
+        <h1>2FA Authentication</h1>
+        <div class="card" fxLayout="row" fxLayoutAlign="center center">
+            <div class="card">
+
+                <div class="form-structure2">
+                    <form name="registerForm" (ngSubmit)="saveAccount()" [formGroup]="registerForm" novalidate>
+
+                        <div class="inner-form" fxLayout="row" fxLayoutAlign="space-between start">
+
+                            <div fxLayout="column">
+                                <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                                    <div class="logo">
+                                        <img class="img-avatar-prof" src="assets/svg/google-auth.svg">
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div fxLayout="column" class="side-structure">
+
+                                <div class="mb-24" fxLayout="row" fxLayoutAlign="start start">
+                                    <span>
+                                       <h1>Google Authentication</h1>
+                                      Used for withdrawals and security modifications
+                                  </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button mat-flat-button color="accent" (click)="openDialog()" *ngIf="!is_verified">
+                            <mat-icon>security</mat-icon> 2FA Enable
+                        </button>
+                        
+                        <button mat-flat-button color="accent" (click)="openDialog()" *ngIf="is_verified">
+                            <mat-icon>security</mat-icon> 2FA Disable
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,148 @@
+
+
+@import "src/@fuse/scss/fuse";
+
+app-deposit {
+  width: 100%;
+
+  .deposit{
+    .filter {
+        display: inline-flex;
+        float: right;
+       
+        .search-input-wrapper {
+            align-items: center;
+            display: flex;
+            margin-right: 28px;
+            @include media-breakpoint('lt-sm') {
+                margin-right: 0; 
+            }
+            .mat-form-field {
+                @include media-breakpoint('lt-sm') {
+                    width: 100%;
+                }
+            }
+        }
+        .calendar {
+            .mat-form-field {
+                @include media-breakpoint('lt-sm') {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+  .mat-table {
+    width: 100%;
+    height: 660px;
+    .mat-column-user {
+     /*    flex: 0 2 104px; */
+        justify-content: center;
+    }
+    .mat-column-block {
+        flex: 0 2 204px;
+        justify-content: center;
+    }
+
+    .mat-sort-header-button,
+    .mat-header-cell {
+        // font-weight: bolder;
+        font-size: 14px;
+        color: rgb(70, 70, 70);
+    }
+    .mat-row {
+        position: relative;
+        cursor: pointer;
+        padding: 0;
+      
+        .mat-cell {
+            min-width: 0;
+            margin-top: 0;
+            &.mat-column-detail-button {
+                flex: 0 1 auto;
+                padding: 0 24px 0 0;
+                @include media-breakpoint('gt-md') {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+  #superior-coin-tab {
+    width: 100%;
+  }
+  .widget{
+    width: 100% !important;
+  }
+}
+
+.deposit .filter {
+    display: flex;
+    float: none;
+    @include media-breakpoint('lt-sm') {
+        display: block;
+    }
+    // float: right;
+    .search-input-wrapper {
+        margin-left: auto; 
+        display: flex;
+        align-items: center;
+        margin-right: 28px; 
+        @include media-breakpoint('lt-sm') {
+            margin-right: 0; 
+        }
+        .mat-form-field {
+            @include media-breakpoint('lt-sm') {
+                width: 100%;
+            }
+        }
+    }
+    .calendar {
+        .mat-form-field {
+            @include media-breakpoint('lt-sm') {
+                width: 100%;
+            }
+        }
+    }
+
+}
+.deposit {
+    .mat-column-amount,
+    .mat-column-tx_id {
+        padding: 15px 0;
+    }
+    .mat-column-amount, .mat-column-status {
+        flex: 0 1 120px;
+    }
+    .mat-column-status {
+        padding: 15px 0;
+        .chip {
+            padding: 5px 10px;
+            border: 1px solid;
+            display: inline-block;
+            border-radius: 20px;
+        }
+        .completed {
+            color: #4caf50;
+        }
+    }
+    .mat-row {
+        .mat-cell {
+            min-width: 0;
+            margin-top: 0;
+        }
+    }
+    .mat-column-address {
+        margin-right: 15px;
+        word-break: break-all; 
+    }
+    .mat-column-date_received {
+        flex: 0 1 150px;
+        padding: 15px 0;
+    }
+    .mat-column-tx_id {
+        flex: 0 1 160px;
+    }
+}

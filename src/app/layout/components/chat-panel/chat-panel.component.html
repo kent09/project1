@@ -1,0 +1,144 @@
+<div class="header mat-elevation-z4 mat-primary-bg" fxLayout="row" fxLayoutAlign="space-between center">
+
+    <ng-container *ngIf="selectedContact === null">
+        <div class="title ml-16" fxLayout="row" fxLayoutAlign="start center"
+             (click)="unfoldSidebarTemporarily()">
+             <mat-progress-bar *ngIf="isLoadingChats"  mode="indeterminate"></mat-progress-bar>
+              <!-- <mat-spinner *ngIf="isLoadingChats" class="s-32 white-fg"></mat-spinner> -->
+            <mat-icon *ngIf="!isLoadingChats" class="s-32 white-fg">chat</mat-icon>
+            <h3  *ngIf="!isLoadingChats" class="ml-12">Chat Users</h3>
+            <h3 *ngIf="isLoadingChats" class="ml-12">Loading Chats</h3>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="selectedContact !== null">
+        <div class="title" fxLayout="row" fxLayoutAlign="start center">
+            <img [defaultImage]="'assets/images/avatars/profile.jpg'"
+                 [lazyLoad]="avatarImagePath(selectedContact.contact_id)" 
+                 class="avatar mx-16">
+            <h3 class="text-truncate"><a class="text-white" routerLink="{{ profileLink(selectedContact.username) }}">{{ selectedContact.name }}</a></h3>
+        </div>
+    </ng-container>
+
+    <button mat-icon-button class="toggle-sidebar-folded mr-8" (click)="foldSidebarTemporarily();" fxHide fxShow.gt-md>
+        <mat-icon class="secondary-text s-20">close</mat-icon>
+    </button>
+
+    <button mat-icon-button class="toggle-sidebar-open mr-8" (click)="foldSidebarTemporarily();" fxHide.gt-md>
+        <mat-icon class="secondary-text">close</mat-icon>
+    </button>
+
+</div>
+
+<div class="content">
+
+    <!-- Contacts -->
+    <div *ngIf="contacts.listed !== null" id="contacts-list" fusePerfectScrollbar [fusePerfectScrollbarOptions]="{suppressScrollX: true}">
+
+        <div *ngFor="let contact of contacts.listed"
+             class="contacts-list-item"
+             [ngClass]="contact.online_status.text"
+             [class.active]="contact.contact_id === selectedContact?.contact_id"
+             (click)="toggleChat(contact.contact_id)">
+
+            <!-- <img class="avatar" [src]="contact.avatar" 
+                 [matTooltip]="contact.name"
+                 onError="this.src='assets/images/avatars/profile.jpg'"
+                 matTooltipPosition="left"> -->
+
+            <img [defaultImage]="'assets/images/avatars/profile.jpg'"
+                 [lazyLoad]="avatarImagePath(contact.contact_id)" 
+                 [matTooltip]="contact.name"
+                 matTooltipPosition="left"
+                 class="avatar">
+
+
+            <div class="unread-count" *ngIf="contact.unseen_count > 0">{{ contact.unseen_count }}</div>
+            <div class="status-icon" [ngClass]="contact.online_status.text"></div>
+
+        </div>
+
+    </div>
+    <!-- / Contacts -->
+
+    <!-- Chat -->
+    <div id="chat" fxLayout="column" fxFlex="1 1 auto">
+
+        <div id="messages" class="messages" fxFlex="1 1 auto" fusePerfectScrollbar>
+
+            <ng-container *ngIf="conversations  && conversations.length > 0">
+
+                <div *ngFor="let message of conversations; let i = index" class="message-row"
+                     [ngClass]="{
+                            'me': message.from == user.user_id,
+                            'contact': message.from != user.user_id,
+                            'first-of-group': isFirstMessageOfGroup(message, i),
+                            'last-of-group': isLastMessageOfGroup(message, i)
+                            }">
+
+                        <!-- <img *ngIf="shouldShowContactAvatar(message, i)"
+                         src="{{selectedContact.avatar}}"
+                         onError="this.src='assets/images/avatars/profile.jpg'"
+                         class="avatar"> -->
+                         <img *ngIf="shouldShowContactAvatar(message, i)"
+                         src="{{ avatarImagePath(selectedContact.contact_id) }}"
+                         onError="this.src='assets/images/avatars/profile.jpg'"
+                         class="avatar">
+                         
+                    <div class="bubble">
+                        <div class="message" [innerHTML]="message.message"></div>
+                        <div class="time secondary-text">{{ message.created_at | date:'short' }}</div>
+                    </div>
+
+                </div>
+
+            </ng-container>
+
+            <ng-container *ngIf="selectedContact && (conversations === null || conversations.length === 0)">
+
+                <div class="no-messages-icon">
+                    <mat-icon class="s-128">chat</mat-icon>
+                </div>
+
+                <div class="no-messages secondary-text">
+                    Start a conversation by typing your message below.
+                </div>
+
+            </ng-container>
+
+            <ng-container *ngIf="!selectedContact">
+
+                <div class="no-contact-selected">
+
+                    <div class="no-contact-icon">
+                        <mat-icon class="s-128">chat</mat-icon>
+                    </div>
+
+                    <div class="no-contact secondary-text">
+                        Select a contact to start a conversation.
+                    </div>
+
+                </div>
+
+            </ng-container>
+
+        </div>
+
+        <div class="reply-form" fxFlex="0 0 auto" fxLayout="row" fxLayoutAlign="center center"
+             *ngIf="selectedContact">
+
+            <mat-form-field class="message-text" fxFlex floatLabel="never" appearance="standard">
+                <textarea matInput name="message" [(ngModel)]="message" placeholder="Type your message"
+                          [rows]="1" [matTextareaAutosize]="true" (keyup)="keyPress($event)"></textarea>
+            </mat-form-field>
+
+            <button class="send-message-button" mat-icon-button type="button" aria-label="Send message" (click)="send()">
+                <mat-icon class="secondary-text">send</mat-icon>
+            </button>
+
+        </div>
+
+    </div>
+    <!-- / Chat -->
+
+</div>

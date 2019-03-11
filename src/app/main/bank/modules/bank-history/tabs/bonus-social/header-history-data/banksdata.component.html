@@ -1,0 +1,104 @@
+<div id="dashboard-project-cards">
+        <div class="card-counts widget-group" fxLayout="row" [@animateStagger]="{value:'50'}">
+    
+            <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+                <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                    <div class="pt-8" fxLayout="column" fxLayoutAlign="center center">
+                        <div *ngIf="bankBalanceData" class="red-fg font-size-50 line-height-72">
+                            {{ bankBalanceData.total | prettify : 'pretty' }}
+                        </div>
+                    </div>
+                    <div class="py-16" fxLayout="row" fxLayoutAlign="center center">
+                        <div class="h3">Total</div>
+                    </div>
+                </div>
+            </fuse-widget>
+    
+            <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+                <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                    <div class="pt-8" fxLayout="column" fxLayoutAlign="center center">
+                        <div *ngIf="bankBalanceData" class="red-fg font-size-50 line-height-72">
+                            {{ bankBalanceData.available | prettify : 'pretty' }}
+                        </div>
+                    </div>
+                    <div class="py-16" fxLayout="row" fxLayoutAlign="center center">
+                        <div class="h3">AVAILABLE</div>
+                    </div>
+                </div>
+            </fuse-widget>
+    
+            <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+                <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                    <div class="pt-8" fxLayout="column" fxLayoutAlign="center center">
+                        <div *ngIf="bankBalanceData" class="red-fg font-size-50 line-height-72">
+                            {{ bankBalanceData.on_hold | prettify : 'pretty' }}
+                        </div>
+                    </div>
+                    <div class="py-16" fxLayout="row" fxLayoutAlign="center center">
+                        <div class="h3">ON HOLD</div>
+                    </div>
+                </div>
+            </fuse-widget>
+    
+            <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+                <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                    <div class="pt-8" fxLayout="column" fxLayoutAlign="center center">
+                        <div *ngIf="bankBalanceData" class="red-fg font-size-50 line-height-72">
+                            {{ bankBalanceData.pending_receive | prettify : 'pretty' }}
+                        </div>
+                    </div>
+                    <div class="py-16" fxLayout="row" fxLayoutAlign="center center">
+                        <div class="h3">PENDING RECEIVE</div>
+                    </div>
+                </div>
+            </fuse-widget>
+    
+            <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+                <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                    <div class="pt-8" fxLayout="column" fxLayoutAlign="center center">
+                        <div *ngIf="bankBalanceData" class="red-fg font-size-50 line-height-72">
+                            {{ bankBalanceData.premined_coins | prettify : 'pretty' }}
+                        </div>
+                    </div>
+                    <div class="py-16" fxLayout="row" fxLayoutAlign="center center">
+                        <div class="h3">PREMINED COINS</div>
+                    </div>
+                </div>
+            </fuse-widget>
+    
+            <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+                <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                    <div class="pt-8" fxLayout="column" fxLayoutAlign="center center">
+                        <div *ngIf="bankBalanceData" class="red-fg font-size-50 line-height-72">
+                            {{ bankBalanceData.bonus_coins | prettify : 'pretty' }}
+                        </div>
+                    </div>
+                    <div class="py-16" fxLayout="row" fxLayoutAlign="center center">
+                        <div class="h3 ">BONUS COINS</div>
+                    </div>
+                </div>
+            </fuse-widget>
+        </div>
+    
+    
+        <div class="widget-group copy-section" fxLayout="row" [@animateStagger]="{value:'50'}">
+            <mat-card fxLayout="row" fxLayoutAlign="space-between center">
+                
+                <div class=" address black-fg">
+                    Address &nbsp;
+                </div>
+                <div *ngIf="bankBalanceData" class="black-fg address-to-copy">
+                    {{ bankBalanceData.address }}
+                </div>
+                <mat-progress-bar mode="buffer" *ngIf="isLoading"></mat-progress-bar>
+                <button *ngIf="!isLoading" (click)="copyData('code', bankBalanceData.address)" mat-button mat-accent color="accent" aria-label="Code">Copy Code
+                    <mat-icon>content_copy</mat-icon>
+                </button>
+                <button *ngIf="!isLoading" mat-button mat-accent color="accent" aria-label="Code">Resync Wallet
+                    <mat-icon>autorenew</mat-icon>
+                    <mat-progress-bar mode="buffer"></mat-progress-bar>
+                </button>
+            </mat-card>
+        </div>
+    
+    </div>

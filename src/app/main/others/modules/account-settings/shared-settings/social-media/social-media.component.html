@@ -1,0 +1,115 @@
+<div id="social-media-settings" class="modern page-layout blank" fxLayoutAlign="center center" fxLayout="column">
+    <header class="w-100-p px-16">
+        <div class="mat-headline pt-16">
+            Social Connects
+        </div>
+        <!-- <div class="history">
+            <a class="mat-subheading-2" [routerLink]="[ '/others/account-settings/social-history']">History</a>
+        </div> -->
+    </header>
+
+    <mat-table [dataSource]="decodedData">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="icon">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element">
+              <div class="avatar {{element.social_media}}" [ngClass]="{'linked': element.status == 'linked'}"></div>
+            </mat-cell>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element">
+                {{element.social_media}} 
+            </mat-cell>
+        </ng-container>
+      
+        <!-- Weight Column -->
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element">
+                <span *ngIf="!element.hard_unlink_status">{{element.status}}</span> 
+                <span *ngIf="element.hard_unlink_status == 1">Hard Unlink</span> 
+          </mat-cell>
+        </ng-container>
+      
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="active">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <!-- <div [ngClass]="{ 
+                'req-hard-link' : element.status_desc == 'approved',
+                'link' : element.status_desc == 'request for hard unlink',
+                'req-soft-link' : element.status_desc == 'request for hard link',
+                'unlink' : element.status_desc == 'unlink'
+            }">
+            
+                {{ element.status_desc }}
+            </div> -->
+
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+
+            <mat-menu #menu="matMenu">
+                <button *ngIf="element.status == 'not yet'" mat-menu-item class="fuse-search-bar-collapser"
+                    aria-label="Collapse Search Bar"  (click)="socialSignIn(element.social_media)">
+                    <mat-icon>link</mat-icon>
+                    <span>Link</span>
+                </button>
+
+                <button *ngIf="element.status == 'linked'" mat-menu-item class="fuse-search-bar-collapser"
+                aria-label="Collapse Search Bar" (click)="linkOrUnlink({social:element.social_media,status:0})">
+                    <mat-icon>link_off</mat-icon>
+                    <span>Unlink</span>
+                </button>
+
+                <button *ngIf="element.status == 'hard-unlinked'" mat-menu-item      class="fuse-search-bar-collapser"
+                    aria-label="Collapse Search Bar">
+                    <mat-icon>device_hub</mat-icon>
+                    <span>approved</span>
+                </button>
+
+
+                <button *ngIf="element.status == 'soft-unlinked' && !element.hard_unlink_status" mat-menu-item class="fuse-search-bar-collapser"
+                        aria-label="Collapse Search Bar" (click)="socialSignIn(element.social_media)">
+                        <mat-icon>share</mat-icon>
+                        <span>Link</span>
+                </button>
+
+                <!-- Need function for this "Request for hard unlink" -->
+                <button *ngIf="element.status == 'soft-unlinked' && !element.hard_unlink_status" mat-menu-item class="fuse-search-bar-collapser"
+                        aria-label="Collapse Search Bar" (click)="openRequestDialog(element)">
+                        <mat-icon>link_off</mat-icon>
+                        <span>Request for hard Unlink</span>
+                </button>
+
+                <button *ngIf="element.status == 'soft-unlinked' && element.hard_unlink_status == 1" mat-menu-item class="fuse-search-bar-collapser"
+                        aria-label="Collapse Search Bar">
+                      
+                        <span>Waiting for Approval</span>
+                </button>
+            </mat-menu>
+
+          </mat-cell>
+        </ng-container>
+      
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <div class="content-holder pt-16 w-100-p px-16">
+        <div class="mat-title">Social Media Connection Status:</div>
+        <b><span>Not Yet:</span></b> You haven't connected your account to this social media site.
+        <br> <br>
+        <b><span>Linked:</span> </b>You've successfully connected your account to this social media site.
+        <br> <br>
+        <b><span>Soft-Unlinked:</span></b> You unlinked your social media account successfully but you can't use it for other Krytonia.io accounts. 
+        <br> <br>
+        <b><span>Hard-Unlinked:</span></b> Your social media account was successfully unlinked by Admin.
+        <br> <br>
+        Please contact <b>Support</b> to  <b>Hard-Unlinked</b> your social media account from Kryptonia.
+    </div>
+</div>

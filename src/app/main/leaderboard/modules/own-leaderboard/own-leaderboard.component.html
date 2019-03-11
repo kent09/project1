@@ -1,0 +1,142 @@
+<div class="page-layout blank p-24" fusePerfectScrollbar>
+
+    <mat-card class="header">
+        <mat-card-header>
+            <div mat-card-avatar class="header-image"><img src="{{PROFILEIMAGE}}/avatar/{{headerData.leaderboard_userid}}" onError="this.src='assets/images/avatars/profile.jpg'" class="avatar" />
+            </div>
+            <mat-card-title class="username">{{headerData.leaderboard_name}}
+                <a [routerLink]="[ '/others/profile', headerData.leaderboard_username]">[{{headerData.leaderboard_username}}]</a>
+            </mat-card-title>
+            <mat-card-subtitle class="referrer-name">REFERRER BY: <a class="referrer">{{headerData.referrer_name}}</a></mat-card-subtitle>
+            <mat-card-subtitle class="total"> TOTAL REFERRAL EARNINGS: {{headerData.total_earnings | number : '1.2-2'}} SUP</mat-card-subtitle>
+        </mat-card-header>
+
+    </mat-card>
+    <div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+            <mat-progress-bar mode="indeterminate" *ngIf="isLoadingResults"></mat-progress-bar>
+            <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+                Active Task Kryptonia's API rate limit has been reached. It will be reset in one minute.
+            </div>
+        </div>
+    <mat-card class="header-info mt-4 custom-margins">
+  
+        <div class="content">
+            <div class="sorting">
+                <mat-form-field class="range">
+                    <mat-select placeholder="Sort by Range" [value]="defualtValues">
+                        <mat-option (click)="filter(filters.value)" *ngFor="let filters of level " [value]="defualtValues">
+                            {{filters.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                &nbsp; &nbsp;
+                <div class="calendar">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="picker" placeholder="Date"
+                               (dateInput)="addEvent($event.value)" (dateChange)="addEvent( $event.value)" [(ngModel)]="myDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                  </div>
+
+            </div>
+
+        
+            <div class="table=-holder">
+                <mat-table #table [dataSource]="dataSource" matSort>
+
+                    <!-- Rank Column -->
+                    <ng-container matColumnDef="rank">
+                        <mat-header-cell *matHeaderCellDef class="title" fxHide fxShow.gt-sm> Rank </mat-header-cell>
+                        <mat-cell *matCellDef="let leaderboard;let i = index" fxHide fxShow.gt-sm> # {{leaderboard.rank}} </mat-cell>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="avatar">
+                        <mat-header-cell *matHeaderCellDef fxHide fxShow.gt-xs></mat-header-cell>
+                        <mat-cell *matCellDef="let leaderboard;let i = index" fxHide fxShow.gt-xs> 
+                                <img [src]="avatarImagePath(leaderboard.user_id)" onError="this.src='assets/images/avatars/profile.jpg'" class="avatar h-28 w-28"/>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef class="title"> Name </mat-header-cell>
+                        <mat-cell *matCellDef="let leaderboard" class="pointer"> 
+                            <span>
+                                <strong><a [routerLink]="[ '/others/profile', leaderboard.username]">{{leaderboard.name}}</a></strong>
+                            </span>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Country Column -->
+                    <ng-container matColumnDef="country">
+                        <mat-header-cell *matHeaderCellDef class="title" fxHide fxShow.gt-sm> Country </mat-header-cell>
+                        <mat-cell *matCellDef="let leaderboard" fxHide fxShow.gt-sm>
+                            <span class="flag-icon flag-icon-{{leaderboard.flag}} flag"></span>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Country Column -->
+                    <ng-container matColumnDef="registered">
+                        <mat-header-cell *matHeaderCellDef class="title" fxHide fxShow.gt-sm> Registered Date </mat-header-cell>
+                        <mat-cell *matCellDef="let leaderboard" fxHide fxShow.gt-sm> {{leaderboard.reg_date | date : 'mediumDate'}} </mat-cell>
+                    </ng-container>
+
+                    <!-- New Direct Signup Column -->
+                    <ng-container matColumnDef="direct_signup">
+                        <mat-header-cell *matHeaderCellDef class="title" fxHide fxShow.gt-xs>Direct Signup </mat-header-cell>
+                        <mat-cell *matCellDef="let leaderboard" fxHide fxShow.gt-xs> {{leaderboard.direct_signup}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Rewards Signup Column -->
+                    <ng-container matColumnDef="rewards">
+
+                        <mat-header-cell *matHeaderCellDef class="title" fxHide fxShow.gt-xs> Rewards </mat-header-cell>
+                        <mat-cell *matCellDef="let leaderboard" fxHide fxShow.gt-xs> 
+                            <!-- <img src="assets/images/logos/rewardLogo.png" class="avatar" /> -->
+                            <span class="rewards-fonts">{{leaderboard.rewards | prettify :'pretty' }}</span>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!--Task Points Column -->
+                    <ng-container matColumnDef="task_points">
+                        <mat-header-cell *matHeaderCellDef class="title" fxHide fxShow.gt-xs> Task Points </mat-header-cell>
+                        <mat-cell *matCellDef="let leaderboard" fxHide fxShow.gt-xs> {{leaderboard.task_points  | number : '1.2-2'}} </mat-cell>
+                    </ng-container>
+
+                    <!--Earned Column -->
+                    <ng-container matColumnDef="earned">
+                        <mat-header-cell *matHeaderCellDef class="title"> Earned SUP </mat-header-cell>
+                        <mat-cell *matCellDef="let leaderboard"> {{leaderboard.earned | prettify : 'pretty' }} </mat-cell>
+                    </ng-container>
+
+                    <!-- Button Column -->
+                    <ng-container matColumnDef="button">
+                        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                        <mat-cell *matCellDef="let leaderboard">
+                            <button mat-button [matMenuTriggerFor]="menu">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item class="button-menu" [routerLink]="[ '/leaderboard', leaderboard.username]" *ngIf="leaderboard.direct_signup != 0 || leaderboard.earned != 0">Leaderboard</button>
+                                <button [routerLink]="[ '/others/profile', leaderboard.username]" mat-menu-item class="button-menu">Profile</button>
+                                <button mat-menu-item class="button-menu" (click)="giftCoinDialog(leaderboard.user_id, leaderboard.name)" *ngIf="leaderboard.is_follower">Gift Coin</button>
+                                <button mat-menu-item class="button-menu" *ngIf="!leaderboard.is_follower" (click)="follow(leaderboard.user_id,leaderboard.name)">Follow</button>
+                                <button mat-menu-item class="button-menu" *ngIf="leaderboard.is_follower" (click)="unfollow(leaderboard.user_id,leaderboard.name)">Unfollow</button>
+                            </mat-menu>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+
+                <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+            </div>
+        </div>
+
+    </mat-card>
+
+</div>

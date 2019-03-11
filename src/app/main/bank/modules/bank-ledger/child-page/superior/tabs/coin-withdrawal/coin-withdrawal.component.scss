@@ -1,0 +1,31 @@
+.form-holder {
+    width: 100%;
+    margin: 20px auto 30px;
+    padding: 0;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    .accent {
+        background-color: #3d84c6;
+        color: #fff;
+    }
+    .input-holder {
+        .mat-form-field {
+            width: 100%;
+        }
+    }
+    ul {
+        margin: 0;
+        padding: 0 0 10px;
+        list-style: none;
+        li {
+            padding-bottom: 5px;
+        }
+    }
+    .button-row {
+        button {
+            width: 100%;
+            padding: 5px;
+            font-size: 18px;
+            background-color: #3d84c6;
+        }
+    }
+}

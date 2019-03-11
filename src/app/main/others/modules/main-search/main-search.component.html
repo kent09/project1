@@ -1,0 +1,91 @@
+<div id="search" class="page-layout simple tabbed">
+        <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+  <!-- HEADER -->
+  <!-- <div class="header mat-accent-bg p-24" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+       fxLayoutAlign.gt-sm="space-between end">
+
+      <mat-form-field class="w-100-p">
+          <input matInput name="search" placeholder="Search..." >
+          <div class="icons">
+              <button mat-button class="btn"><mat-icon class="users" title="Users">supervisor_account</mat-icon></button>
+              <button mat-button class="btn"><mat-icon class="tasks" title="Tasks">view_list</mat-icon></button>
+          </div>
+        
+      </mat-form-field>
+
+  </div> -->
+  <!-- / HEADER -->
+
+  <!-- CONTENT -->
+  <div class="content">
+
+      <div class="classic-tab p-24">
+
+          <div class="result-info" fxLayout="row" fxLayoutAlign="space-between center" fxLayout.xs="column"
+               fxLayoutAlign.xs="start start">
+      
+               <span class="result-count h3 secondary-text" *ngIf="loading">
+                    
+                    <span class="ml-4">Searching `<strong>{{searchkey}}</strong>`</span>
+                </span>
+
+              <span class="result-count h3 secondary-text" *ngIf="data && !loading">
+                  <span>{{data.count}}</span>
+                  <span class="ml-4">match found for `<strong>{{searchkey}}</strong>`</span>
+              </span>
+              <span class="result-count h3 secondary-text" *ngIf="!data">
+                    <span>0</span>
+                    <span class="ml-4">match found for `<strong>{{searchkey}}</strong>`</span>
+                </span>
+      
+             
+          </div>
+      
+          <div class="results" *ngIf="data">
+              <div class="result-item" *ngFor="let item of data.data">
+                  <div class="user-info" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start center">
+                      <img class="profile-image avatar" [src]="'https://kimg.io/avatar/'+item.id+'?resize=50x50'">
+                      <div class="name">
+                          <span class="toUpperCase blue-fg"><a [routerLink]="['/others/profile/' + item.username]" >{{item.name}}</a></span> {{' @' + item.username}}
+                          <div class="cleafirx"></div>
+                          <small class="small-name">
+                            Member since:<span class="member">{{item.created_at | date : 'longDate'}}</span>
+                          </small>                
+                      </div>
+                  </div>
+                  
+              </div>
+          </div>
+          
+          
+          <mat-paginator *ngIf="data" #paginator [length]="data.count"
+              [hidePageSize]="true"
+              [pageSize]="pageSize"
+              (page)="pageEvent = $event;onPaginateChange($event)">
+            </mat-paginator>
+
+        <!-- <div class="pager" fxLayout="row" fxLayoutAlign="start center">
+                  <span class="mr-4 secondary-text">Results:</span>
+      
+                  <span class="page-info">
+                      <span>1</span>
+                      <span class="mx-4">-</span>
+                      <span>10</span>
+                      <span class="mx-4">of</span>
+                      <span>54</span>
+                  </span>
+      
+                  <button mat-icon-button aria-label="Previous page">
+                      <mat-icon>chevron_left</mat-icon>
+                  </button>
+      
+                  <button mat-icon-button aria-label="Next page">
+                      <mat-icon>chevron_right</mat-icon>
+                  </button>
+              </div> -->
+      
+      </div>
+  </div>
+  <!-- / CONTENT -->
+
+</div>

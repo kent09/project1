@@ -1,0 +1,246 @@
+<div id="price-tables" class="simple fullwidth" >
+
+        <!-- HEADER -->
+        <div class="header" fxLayout="row" fxLayoutAlign="start start" fxHidegt-xs fxShow.gt-xs>
+    
+            <div class="hero-text" fxLayout="column" fxLayoutAlign="center center" fxFlex>
+    
+                <div class="h1">We Have Been Expecting you!</div> 
+                <div class="h3">
+                    Memberships are HOW you build your business, monetize your content, get clients and change the world!
+                </div>
+                <div class="h3">Avail our <strong>35%</strong> discount NOW!</div>
+            </div>
+    
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT -->
+        <div class="content" fxLayout="column">
+    
+            <!-- PRICE TABLES -->
+            <div class="price-tables" fxLayout="row wrap" fxLayoutAlign="center" fxHidegt-xs fxShow.gt-xs>
+                <!-- <div *ngFor="let item of prices" class="price-table style-3" [class]="item.slug" 
+                [ngClass]="{'mat-elevation-z4' : !mship[item.slug], 'mat-elevation-z12' : mship[item.slug]}" 
+                (mouseenter)="entermouse(item.slug)" 
+                (mouseleave)="leavemouse(item.slug)" fxLayout="column">
+
+                    <div class="package-type">
+                        <div class="title">{{item.title}}</div>
+                
+                    </div>
+
+                    <div class="price" [ngClass]="{'mat-primary-bg': mship[item.slug], 'mat-primary-300-bg': !mship[item.slug]}" fxLayout="row" fxLayoutAlign="center start">
+                        <div class="currency" *ngIf="item.slug != 'bronze'">$</div>
+                        <div fxLayout="row" fxLayoutAlign="center end">
+                            <div  *ngIf="item.discount" class="value">{{(item.price - (item.price * item.discount)) | number : '0.1-2'}}</div>
+                            <div  *ngIf="!item.discount" class="value">{{item.price}}</div>
+                            <div class="period" *ngIf="item.span.length > 0">/{{item.span}}</div>
+                        </div>
+                    </div>
+
+                    <div class="terms" fxLayout="column">
+                            <div class="term" *ngFor="let perk of item.perks">
+                                {{perk}}
+                            </div>                                       
+                        </div>   
+                        <button *ngIf="item.slug === user.membership && item.slug !== 'bronze'" mat-raised-button class="cta-button" color="primary" matBadge="&#10004;" matBadgePosition="after" matBadgeColor="warn" (click)="navigateLogin(item)">{{item.button}}</button>
+                        <button *ngIf="item.slug !== user.membership && item.slug !== 'bronze'" mat-raised-button class="cta-button" color="accent" (click)="navigateLogin(item)">{{item.button}}</button>
+                        <button *ngIf="item.slug === 'bronze'" mat-raised-button class="cta-button" color="accent" disabled>FREE</button>
+                        
+                        <br>  
+                </div> -->
+                
+                <!-- PRICE TABLES -->
+                <table class="pricing-table">
+                    <thead class="pricing-table_head">
+                        <th class="hidden-md-down"></th>
+                        <th class="table-head-plan">
+                            <div class="h5 text-uppercase">
+                                Started
+                            </div>
+                            <div class="small text-uppercase text-muted">Bronze</div>
+                            <div class="h2">
+                                <span>Free</span>
+                            </div>
+                        </th>
+                        <th class="table-head-plan">
+                            <div class="h5 text-uppercase">
+                                Pro
+                            </div>
+                            <div class="small text-uppercase text-muted">Silver</div>
+                            <div class="h2">
+                                <sup class="text-normal">$</sup>
+                                <span>{{(9.97 - (9.97 * 0.35)) | number : '0.1-2'}}</span>
+                                <span class="h6 text-normal">/mo</span>
+                            </div>
+                            <div class="subscribe">
+                                <button (click)="buy(1)" mat-flat-button color="accent">{{user.membership == 'silver' ? 'Current Plan' : 'Subscribe'}}</button>
+                            </div>
+                        </th>
+                        <th class="table-head-plan table-head-popular">
+                            <div class="h5 text-uppercase">
+                                Agency
+                            </div>
+                            <div class="small text-uppercase text-muted"><img src="/assets/svg/badges/badge-gold.svg" alt="Gold"></div>
+                            <div class="h2">
+                                <sup class="text-normal">$</sup>
+                                <span>{{(24.97 - (24.97 * 0.35)) | number : '0.1-2'}}</span>
+                                <span class="h6 text-normal">/mo</span>
+                            </div>
+                            <div class="subscribe">
+                                <button (click)="buy(2)" mat-flat-button color="accent">{{user.membership == 'gold' ? 'Current Plan' : 'Subscribe'}}</button>
+                            </div>
+                        </th>
+                        <th class="table-head-plan">
+                            <div class="h5 text-uppercase">
+                                Enterprise
+                            </div>
+                            <div class="small text-uppercase text-muted">Platinum</div>
+                            <div class="h2">
+                                <sup class="text-normal">$</sup>
+                                <span>{{(479.97 - (479.97 * 0.35)) | number : '0.1-2'}}</span>
+                                <span class="h6 text-normal">/mo</span>
+                            </div>
+                            <div class="subscribe">
+                                <button (click)="buy(3)" mat-flat-button color="accent">{{user.membership == 'platinum' ? 'Current Plan' : 'Subscribe'}}</button>
+                            </div>
+                        </th>
+                        <th class="table-head-plan">
+                            <div class="h5 text-uppercase pb-16">
+                                Founders
+                            </div>
+                            <!-- <div class="small text-uppercase text-muted">Membership</div> -->
+                            <div class="h2">
+                                <sup class="text-normal">$</sup>
+                                <span>{{(999.97 - (999.97 * 0.35)) | number : '0.1-2'}}</span>
+                                <span class="h6 text-normal">/mo</span>
+                            </div>
+                            <div class="subscribe">
+                                <button (click)="buy(4)" mat-flat-button color="accent">{{user.membership == 'founder' ? 'Current Plan' : 'Subscribe'}}</button>
+                            </div>
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="6"></td>
+                        </tr>
+                        <ng-template ngFor let-perk [ngForOf]="perkList" let-i="index">
+                            <tr class="pricing-row pricing-row__head" [attr.data-row]="perk" [class.active]="perk == slidedown" (click)="getPerk(perk)">
+                            <td class="hidden-md-down text--nowrap">{{perk}}</td>
+                            <td data-plan="Starter">
+                                <span *ngIf="bronze[i] !== false && bronze[i] !== true">{{bronze[i]}}</span>
+                                <mat-icon *ngIf="bronze[i] === false" class="mat-warn s-20">clear</mat-icon>
+                                <mat-icon *ngIf="bronze[i] === true" class="mat-primary s-20">done</mat-icon>
+                            </td>
+                            <td data-plan="Pro">
+                                <span *ngIf="silver[i] !== false && silver[i] !== true">{{silver[i]}}</span>
+                                <mat-icon *ngIf="silver[i] === false" class="mat-warn s-20">clear</mat-icon>
+                                <mat-icon *ngIf="silver[i] === true" class="mat-primary s-20">done</mat-icon>
+                            </td>
+                            <td data-plan="Agency">
+                                <span *ngIf="gold[i] !== false && gold[i] !== true">{{gold[i]}}</span>
+                                <mat-icon *ngIf="gold[i] === false" class="mat-warn s-20">clear</mat-icon>
+                                <mat-icon *ngIf="gold[i] === true" class="mat-primary s-20">done</mat-icon>
+                            </td>
+                            <td data-plan="Enterprise">
+                                <span *ngIf="platinum[i] !== false && platinum[i] !== true">{{platinum[i]}}</span>
+                                <mat-icon *ngIf="platinum[i] === false" class="mat-warn s-20">clear</mat-icon>
+                                <mat-icon *ngIf="platinum[i] === true" class="mat-primary s-20">done</mat-icon>
+                            </td>
+                            <td data-plan="Founder">
+                                <span *ngIf="founder[i] !== false && founder[i] !== true">{{founders[i]}}</span>
+                                <mat-icon *ngIf="founder[i] === false" class="mat-warn s-20">clear</mat-icon>
+                                <mat-icon *ngIf="founder[i] === true" class="mat-primary s-20">done</mat-icon>
+                            </td>
+                            </tr>
+                            <tr class="pricing-row pricing-row__child" [class.show]="perk == slidedown">
+                                <td colspan="6">
+                                    <div class="grid grid--gutter grid--pad text--left">
+                                        <div class="grid__col--50">
+                                            <div class="module">
+                                                <div class="h5 mb0 mt0">Accurate Rankings in 130+ countries</div>
+                                                <p>Get national, regional or city level rankings with pinpoint accuracy. Capture local business results from the local pack, or directly from the Google Maps service.</p>
+                                            </div>
+                                        </div>
+                                        <div class="grid__col--50">
+                                            <div class="module">
+                                                <div class="h5 mb0 mt0">Locations Mapped to Zip Code level</div>
+                                                <p>Enjoy local results tracking with the deepest level of control on custom locations. AWR offers countless search engine location possibilities defined for specific ZIP Codes.</p>
+                                            </div>
+                                        </div>
+                                        <div class="grid__col--50">
+                                            <div class="module">
+                                                <div class="h5 mb0 mt0">Mobile Search Results</div>
+                                                <p>Expand your strategy with Mobile rank tracking capabilities. Understand how your web optimization efforts influence the visibility of your website on searches made from mobile devices.</p>
+                                            </div>
+                                        </div>
+                                        <div class="grid__col--50">
+                                            <div class="module">
+                                                <div class="h5 mb0 mt0">Optimized for International SEO</div>
+                                                <p>Grow your client base with International Business Units. With AWR, you can report rankings at subdomain or directory level and track terms with special characters on Yandex, Baidu and more.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </tbody>
+                </table>
+                
+            <!-- / PRICE TABLES -->
+    
+            <div class="faq" fxLayout="row wrap" *ngIf="false">
+    
+                <div class="title" fxFlex="100">Frequently Asked Questions</div>
+    
+                <div class="item" fxFlex="100" fxFlex.gt-xs="50">
+                    <div class="question">How does free trial work?</div>
+                    <div class="answer">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a diam nec augue tincidunt
+                        accumsan. In dignissim laoreet ipsum eu interdum.
+                    </div>
+                </div>
+    
+                <div class="item" fxFlex="100" fxFlex.gt-xs="50">
+                    <div class="question">Can I cancel any time?</div>
+                    <div class="answer">
+                        Aliquam erat volutpat. Etiam luctus massa ex, at tempus tellus blandit quis. Sed quis neque tellus.
+                        Donec maximus ipsum in malesuada hendrerit.
+                    </div>
+                </div>
+    
+                <div class="item" fxFlex="100" fxFlex.gt-xs="50">
+                    <div class="question">What happens after my trial ended?</div>
+                    <div class="answer">
+                        Aliquam erat volutpat. Etiam luctus massa ex, at tempus tellus blandit quis. Sed quis neque tellus.
+                        Donec maximus ipsum in malesuada hendrerit.
+                    </div>
+                </div>
+    
+                <div class="item" fxFlex="100" fxFlex.gt-xs="50">
+                    <div class="question">Can I have a discount?</div>
+                    <div class="answer">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a diam nec augue tincidunt
+                        accumsan. In dignissim laoreet ipsum eu interdum.
+                    </div>
+                </div>
+    
+            </div>
+    
+        </div>
+        <div class="text-center">
+            <div class="expect"><strong>WE'VE BEEN EXPECTING YOU! DON'T JUST TAKE OUR WORDS</strong></div>
+            <div class="grid__col--75">
+              <p class="lead f-20">Uncover new growth opportunities and start earning daily</p>
+              <a class="btn btn-cloud" [routerLink]="'/task'">Get Started</a>
+            </div>
+            <br>
+            <br>
+            <br>
+        </div>
+
+    
+    </div>
+    
+    

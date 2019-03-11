@@ -1,0 +1,347 @@
+<div id="about" class="p-24" fxLayout="row wrap">
+
+    <div class="about-content" fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="65">
+
+        <div class="profile-box info-box general" fxLayout="column">
+
+            <header class="mat-accent-bg">
+                <div class="title">General Information</div>
+            </header>
+
+            <div class="content">
+
+                <div class="info-line">
+                    <div class="h3">
+                        Title
+                    </div>
+
+                    <div class="name" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                        <span class="toUpperCase">{{requirements.task_title}}</span>
+                        <br>
+                        <b>Category:</b> <br>
+                        <small class="small-name">{{requirements.task.category | titlecase}}</small>
+                        <br>
+                        <b>Created At:</b> <br>
+                        <small class="small-name">{{requirements.task.created_at | date:'long'}}</small>
+                        <br>
+                        <b>Expired At:</b> <br>
+                        <small class="small-name">{{requirements.task.expired_date | date:'long'}}</small>
+                        <br>
+                        <small class="small-name">
+                            AVAILABLE COMPLETION
+                            <span class="counter-badge">({{requirements.available_completer }})</span>
+                            <!-- <span class="counter-badge" *ngIf="!requirements.failed_requirements.activity_fail">(0)</span> -->
+                        </small>
+                        <br>
+
+                    </div>
+                </div>
+
+
+                <div class="info-line" 
+                    *ngIf="requirements.failed_requirements">
+                    <div class="h3">
+                        <label>Requirements</label>
+                    </div>
+
+                    <div class="requirements">
+                        <mat-chip-list class="mat-chip-list mat-chip-list">
+                            <div class="mat-chip-list-wrapper" *ngIf="!requirements.own_task">
+                                <mat-chip *ngIf="requirements.failed_requirements.follower_fail" class="mat-chip mat-primary mat-standard-chip">
+                                    Must be a Follower
+                                </mat-chip>
+                                 <mat-chip *ngIf="requirements.failed_requirements.referral_fail" class="mat-chip mat-primary mat-standard-chip">
+                                    Must be a Referral
+                                </mat-chip>
+                                <mat-chip *ngIf="requirements.failed_requirements.connection_fail" class="mat-chip mat-primary mat-standard-chip">
+                                    Connection Only
+                                </mat-chip>
+                                <mat-chip *ngIf="requirements.failed_requirements.activity_fail" class="mat-chip mat-primary mat-standard-chip">
+                                    Activity Score ( {{requirements.activity_score_required[0]}} )
+                                </mat-chip>
+                                <mat-chip *ngIf="requirements.failed_requirements.reputation_fail" class="mat-chip mat-primary mat-standard-chip">
+                                    Reputation Score ( {{requirements.reputation_score_required[0] }} )
+                                </mat-chip>
+                                <mat-chip *ngIf="requirements.failed_requirements.attachment_fail && !requirements.attachment_img" class="mat-chip mat-warning mat-standard-chip">
+                                    Has Attachment
+                                </mat-chip>
+                            </div>
+
+                            <div class="mat-chip-list-wrapper" *ngIf="requirements.own_task">
+                                <mat-chip *ngIf="requirements.follower_option" class="mat-chip mat-primary mat-standard-chip">
+                                    Must be a Follower
+                                </mat-chip>
+                                 <mat-chip *ngIf="requirements.referral_option" class="mat-chip mat-primary mat-standard-chip">
+                                    Must be a Referral
+                                </mat-chip>
+                                <mat-chip *ngIf="requirements.connection_option" class="mat-chip mat-primary mat-standard-chip">
+                                    Connection Only
+                                </mat-chip>
+                                <mat-chip *ngIf="requirements.reputation_option" class="mat-chip mat-primary mat-standard-chip">
+                                    Activity Score ( {{requirements.activity_score_required[0]}} )
+                                </mat-chip>
+                                <mat-chip *ngIf="requirements.reputation_option" class="mat-chip mat-primary mat-standard-chip">
+                                    Reputation Score ( {{requirements.reputation_score_required[0] }} )
+                                </mat-chip>
+                              
+                                <mat-chip *ngIf="requirements.attachment" class="mat-chip mat-warning mat-standard-chip">
+                                    Has Attachment
+                                </mat-chip>
+                            </div>
+
+                        </mat-chip-list>
+
+                    </div>
+
+
+                </div>
+
+                <div class="info-line">
+                    <div class="h3">
+                        Task Description
+                    </div>
+                    <div class="info" [innerHtml]="requirements.task.description"></div>
+                </div>
+                <div class="info-line">
+                    <div class="h3">
+                        Task URL
+                    </div>
+                    <div class="info">
+                        <a [href]="requirements.task.task_link" target="_blank">{{requirements.task.task_link}}</a>
+                    </div>
+                </div>
+                <div class="info-line" *ngIf="requirements.attachment_img">
+                    <div class="h3">
+                        Your image attachment
+                    </div>
+                    <div class="attachment-img" (click)="openModal(requirements.attachment_img)">
+                       <img [src]="attachment_url +'/'+requirements.attachment_img" alt="Attachment Image">
+                    </div>
+                </div>
+                <div class="m-reward" fxHide fxShow.lt-md>
+                    <div class="mat-title m-0">Reward</div>
+                    <div class="coin py-8">
+                        <img class="avatar w-32 h-32" [src]="'assets/images/logos/rewardLogo.png'">
+                        {{ requirements.task.reward | prettify : 'pretty' }}
+
+                    </div>
+
+                    <div *ngIf="requirements.can_complete && (requirements.task.user_id != userInfo.user_id) && !requirements.completed"
+                        class="btn-complete" [@animate]="{value:'*',params:{delay:'200ms'}}">
+                        <button (click)="completeTask(requirements)" mat-raised-button class="mat-green-bg btn-text-gift"
+                            color="green" aria-label="Gift Coins">Complete</button>
+                    </div>
+
+                    <div *ngIf="!requirements.can_complete || (requirements.task.user_id == userInfo.user_id) || requirements.completed"
+                        class="btn-complete" [@animate]="{value:'*',params:{delay:'200ms'}}">
+                        <button mat-raised-button class="mat-grey-bg btn-text-gift my-own-task-btn" color="green"
+                            aria-label="Gift Coins">
+                            {{(requirements.completed) ? 'Completed' : 'Complete'}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="about-sidebar" fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="35" fxHide fxShow.gt-sm>
+
+        <div class="profile-box friends" fxLayout="column">
+
+
+            <div class="content">
+
+
+                <div class="code-contet">
+                    <div class="inner-codes-links">
+                        <span class="mat-display-2">
+                            {{ requirements.task.reward | prettify : 'pretty' }}
+                            <img class="avatar medium coin-logos" [src]="'assets/images/logos/rewardLogo.png'">
+                            <br>
+                            Reward
+                        </span>
+                    </div>
+                </div>
+                <div *ngIf="requirements.can_complete && (requirements.task.user_id != userInfo.user_id) && !requirements.completed"
+                    class="actions-new" fxLayout="row" fxLayoutAlign="center" [@animate]="{value:'*',params:{delay:'200ms'}}">
+                    <button (click)="completeTask(requirements)" mat-raised-button class="mat-green-bg btn-text-gift"
+                        color="green" aria-label="Gift Coins">Complete</button>
+                </div>
+
+                <div *ngIf="(!requirements.can_complete || requirements.completed) && (requirements.task.user_id != userInfo.user_id) "
+                    class="actions-new" fxLayout="row" fxLayoutAlign="center" [@animate]="{value:'*',params:{delay:'200ms'}}">
+                    <button mat-raised-button class="mat-grey-bg btn-text-gift my-own-task-btn" color="green"
+                        aria-label="Gift Coins">
+                        {{(requirements.completed ) ? 'Completed' : 'Complete'}}
+                    </button>
+                </div>
+
+                <div *ngIf="requirements.task.user_id == userInfo.user_id" class="actions-new" fxLayout="row"
+                    fxLayoutAlign="center" [@animate]="{value:'*',params:{delay:'200ms'}}">
+                    <button mat-raised-button 
+                        [ngClass]="{
+                            'btn-text-gift' : true, 'my-own-task-btn':true , 
+                            'expired-btn' :  requirements.task.status_str == 'expired',
+                            'active-btn' : requirements.task.status_str == 'active',
+                            'inactive-btn' : requirements.task.status_str == 'deactivated',
+                            'completed-btn' : requirements.task.status_str == 'completed'}"
+                        color="green" aria-label="Gift Coins">
+                        {{requirements.task.status_str}}
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="profile-box friends" fxLayout="column" *ngIf="requirements.other_task && requirements.other_task.length">
+
+            <div class="content">
+                <mat-table [dataSource]="requirements.other_task">
+                    <ng-container matColumnDef="title">
+                        <mat-header-cell *matHeaderCellDef class="title p-0"> Title </mat-header-cell>
+                        <mat-cell *matCellDef="let othertask" class="pl-0 pr-8">
+                            <a *ngIf="othertask.slug" class="task-link" [routerLink]="[ '/task/taskdetails', othertask.slug ]" title="{{othertask.title}}" routerLinkActive="router-link-active">{{othertask.title}}</a>
+                            <a *ngIf="!othertask.slug" class="task-link" (click)="errorHandle();" title="{{othertask.title}}" routerLinkActive="router-link-active">{{othertask.title}}</a> 
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="reward">
+                        <mat-header-cell *matHeaderCellDef class="title p-0"> Reward</mat-header-cell>
+                        <mat-cell *matCellDef="let othertask" class="p-0">
+                            <img src="assets/images/logos/rewardLogo.png" class="sup-reward mr-4" />
+                            <span> {{othertask.reward}} SUP</span></mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+<div id="timeline" class="p-24" fxLayout="row wrap">
+
+    <div class="timeline-content" fxLayout="column" fxFlex="100" fxFlex.gt-sm="55" fxFlex.gt-md="65">
+        <div class="timeline-item">
+            <div class="content">
+                    <mat-progress-bar mode="indeterminate" *ngIf="commentLoader.counter"></mat-progress-bar>
+                <br>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <button mat-button class="like-button" (click)="showCompleters()">
+                        <span fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="s-16">group</mat-icon>
+                            <span>Completers</span>&nbsp;<span>( {{ counterCompleters}})</span>
+                        </span>
+                    </button>
+                    <button mat-button class="message-button">
+                        <span fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="s-16">message</mat-icon>
+                            <span>Comments</span>&nbsp;
+                            <span>{{ counterComments }}</span>
+                        </span>
+                    </button>
+                    <button (click)="shareLinks()" mat-button class="share-button">
+                        <span fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="s-16">share</mat-icon>
+                            <span>Share</span>&nbsp;
+                            <!-- <span>(36)</span> -->
+                        </span>
+                    </button>
+                </div>
+                <mat-progress-bar mode="indeterminate" *ngIf="commentLoader.list"></mat-progress-bar>
+            </div>
+
+
+            <footer class="" fxLayout="column" fxLayoutAlign="start start">
+                    
+                <div class="list-of-comments" *ngIf="listofComments">
+                    <div *ngFor="let comments of listofComments; let i = index" class="comment" fxLayout="row"
+                        fxFlexFill>
+                        <img [src]="avatarImagePath(comments.comment_user_id)" onError="this.src='assets/images/avatars/profile.jpg'"  class="avatar" alt="{{ comments.user_details.name }}">
+                        <div fxLayout="column" fxFlex>
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                <span [routerLink]="['/others/profile/', comments.user_details.username]" class="username">
+                                    {{ comments.user_details.name }}
+                                </span>
+                                <span class="time">{{ comments.timeago }}</span>
+                                <span class="delete" *ngIf="userInfo.user_id === comments.user_details.id || userInfo.type == 9">
+                                        <mat-icon (click)="deleteComment(comments.comment_id)" fxFlex class="report-button s-16">delete</mat-icon>
+                                </span>
+                            </div>
+                            <div class="message">
+                                {{ comments.comment }}
+                            </div>
+                            <div class="actions" fxLayout="row" fxLayoutAlign="space-between center">
+                                <a (click)="replyComment(i)" class="reply-button">Reply {{(comments.reply) ? '(' + comments.reply.length + ')' : ""}}</a>
+                                <!-- <mat-icon fxFlex class="report-button s-16">flag</mat-icon> -->
+                            </div>
+                            <div class="inner-custom-reply" *ngIf="comments.collapse">
+                                <div *ngIf="comments.reply.length" class="list-inner-replies">
+                                    <div *ngFor="let replies of comments.reply; let ii = index" class="comment" fxLayout="column" fxFlexFill>
+                                      <div class="sections-list-padding">
+                                        <div fxLayout="row" fxLayoutAlign="space-between">
+                                            <div class="one-block">
+                                                <img [src]="avatarImagePath(replies.user_details.id)" onError="this.src='assets/images/avatars/profile.jpg'" class="avatar" />
+                                                <span [routerLink]="['/others/profile/', comments.user_details.username]"
+                                                    class="username">
+                                                    {{ replies.user_details.name }}
+                                                </span>
+                                                <span class="time">{{ replies.timeago }}</span>
+                                            </div>
+                                            <span class="delete" *ngIf="userInfo.user_id === replies.user_details.id || userInfo.type == 9">
+                                                <mat-icon (click)="deleteComment(replies.reply_id)" fxFlex class="report-button s-16">delete</mat-icon>
+                                            </span>
+                                        </div>
+                                        <div class="message">
+                                            {{ replies.comment }}
+                                        </div>
+                                        
+                                      </div>
+                                    </div>
+                                </div>
+                                <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+                                <textarea placeholder="Reply to this comment" [(ngModel)]="replyset[i]"></textarea>
+                                <br>
+                                <button (click)="replyInnerComment(comments.comment_id, replyset[i], i)"
+                                    [disabled]="isLoading"
+                                    mat-raised-button
+                                    color="accent" 
+                                    class="post-comment-button" 
+                                    aria-label="Post Comment">
+                                    Reply
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="reply" fxLayout="row" fxFlexFill>
+                    <img [src]="avatarImagePath(userInfo.user_id)" onError="this.src='assets/images/avatars/profile.jpg'" class="avatar" />
+
+                    <form fxFlex name="create-comment" (ngSubmit)="addComments()" [formGroup]="createComments"
+                        novalidate>
+                        <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+                        <textarea placeholder="Add a comment..." formControlName="taskComments"></textarea>
+                        <button 
+                        [disabled]="isLoading"    
+                        mat-raised-button color="accent" class="post-comment-button" aria-label="Post Comment">
+                            Add Comment
+                        </button>
+                    </form>
+                </div>
+            </footer>
+        </div>
+
+
+    </div>
+
+</div>

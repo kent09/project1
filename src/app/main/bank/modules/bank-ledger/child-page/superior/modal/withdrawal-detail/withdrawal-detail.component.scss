@@ -1,0 +1,24 @@
+
+.content-holder {
+    position: relative;
+    max-width: 400px;
+    font-size: 16px;
+    .close {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        right: 0;
+    }
+    .content-wrapper {
+        div:nth-child(2) {
+            word-break: break-all;
+            strong {
+                display: block;
+                margin-bottom: 5px;
+            }
+        }
+    }
+    .btn-holder {
+        text-align: right;
+    }
+}

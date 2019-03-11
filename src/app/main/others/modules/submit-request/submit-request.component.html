@@ -1,0 +1,46 @@
+<div class="page-layout create-task" fusePerfectScrollbar>
+    <div class="content">
+        <mat-progress-bar *ngIf="isWithdrawing"  mode="indeterminate"></mat-progress-bar>
+        <mat-card>
+            <div class="message-box info w-100-p mb-16">
+                Submit a Request
+            </div>
+            <br>
+            <form name="withdraw-forms" enctype="multipart/form-data"  [formGroup]="requestForms" novalidate>
+
+                <div [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}" class="mb-16">
+                    <mat-form-field class="w-100-p">
+                        <input matInput placeholder="Email Address" formControlName="email" [(ngModel)]="email">
+                        <mat-error *ngIf="requestForms.get('email').hasError('required')">
+                            Email is required
+                        </mat-error>
+                        <mat-error *ngIf="requestForms.get('email').hasError('email')">
+                            Please enter a valid email address
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100-p mb-16">
+                        <input matInput placeholder="Subject"  formControlName="subject" [(ngModel)]="subject">
+                        <mat-error>
+                            Subject is required
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100-p mb-16">
+                        <textarea matInput placeholder="Description" formControlName="description" [(ngModel)]="message"></textarea>
+                        <mat-error>
+                            Description is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <mat-card-actions align="end" class="m-0 p-0">
+                    <button mat-raised-button color="accent" class="submit-button mb-0" aria-label="Create" [disabled]="requestForms.invalid"></button>
+                    <button mat-raised-button color="accent" class="submit-button" aria-label="Create" [disabled]="requestForms.invalid" (click)="submitRequest()">
+                        Submit Request
+                    </button>
+                    <button mat-raised-button color="warn" (click)="matDialogRef.close(false)" type="button" class="submit-button mr-0 mb-0" aria-label="Reset">
+                        Cancel
+                    </button>
+                </mat-card-actions>
+            </form>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div id="potion-trades-project" class="blank p-24" fxLayout="row">
+    <!-- <app-header-history-data class="bank-data"></app-header-history-data> -->
+
+    <div class="widget-group copy-section mat-elevation-z2" fxLayout="column" [@animateStagger]="{value:'50'}"
+        fusePerfectScrollbar>
+        <mat-card>
+            <div class="px-16 py-8" fxLayout="row" fxLayoutAlign="space-between center">
+                <mat-form-field>
+                    <mat-select [(value)]="selectedOptionTrade" class="simplified" aria-label="Change range">
+                        <mat-option *ngFor="let tab of optionTrade" [value]="tab.value">
+                            {{tab.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="p-16" fxLayout="row">
+                <app-bank-option-trade-deposit *ngIf="selectedOptionTrade =='optionTradeDeposit'"></app-bank-option-trade-deposit>
+                <app-bank-option-trade-withdrawal *ngIf="selectedOptionTrade =='optionTradeRewards'"></app-bank-option-trade-withdrawal>
+            </div>
+        </mat-card>
+    </div>
+</div>

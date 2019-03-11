@@ -1,0 +1,118 @@
+<div id="dashboard-project">
+
+    <div class="widget-group" 
+        fxLayout="row" 
+        fxLayout.sm="column"
+        fxLayout.xs="column"
+        [@animateStagger]="{value:'50'}" fxHide fxShow.lt-md>
+
+        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100">
+            <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                <ul>
+                    <li>
+                        <div>
+                            <span class="label">Wallet Balance:</span>
+                            <span class="result red-fg">
+                                {{wallet_balance | prettify : 'pretty'}}
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="label">Sending:</span>
+                            <span class="result red-fg">
+                                {{sending| prettify : 'pretty'}}
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="label">Receiving:</span>
+                            <span class="result red-fg">
+                                {{receiving | prettify : 'pretty'}}
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </fuse-widget>
+    </div>
+
+    <div class="widget-group" fxLayout="row" fxLayout.lt-md="column" [@animateStagger]="{value:'50'}" fxHide fxShow.gt-sm>
+
+        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+            <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                <div class="pt-8" fxLayout="column" fxLayoutAlign="center center">
+                    <div class="red-fg font-size-50 line-height-72">
+                        {{wallet_balance | prettify : 'pretty'}}
+                    </div>
+                </div>
+                <div class="py-16" fxLayout="row" fxLayoutAlign="center center">
+                    <div class="h3">WALLET BALANCE</div>
+                </div>
+            </div>
+        </fuse-widget>
+
+        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+            <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                <div class="pt-8" fxLayout="column" fxLayoutAlign="center center">
+                    <div class="red-fg font-size-50 line-height-72">
+                        {{sending| prettify : 'pretty'}}
+                    </div>
+                </div>
+                <div class="py-16" fxLayout="row" fxLayoutAlign="center center">
+                    <div class="h3">SENDING</div>
+                </div>
+            </div>
+        </fuse-widget>
+
+        <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+            <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+                <div class="pt-8" fxLayout="column" fxLayoutAlign="center center">
+                    <div class="red-fg font-size-50 line-height-72">
+                        {{receiving | prettify : 'pretty'}}
+                    </div>
+                </div>
+                <div class="py-16" fxLayout="row" fxLayoutAlign="center center">
+                    <div class="h3">RECEIVING</div>
+                </div>
+            </div>
+        </fuse-widget>
+    </div>
+
+
+    <div class="widget-group copy-section" fxLayout="row" [@animateStagger]="{value:'50'}" *ngIf="address">
+        <mat-card fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between center">
+            <div class=" address black-fg">
+                Address &nbsp;
+            </div>
+            <div class="black-fg address-to-copy">
+                {{address}}
+            </div>
+            <mat-progress-bar mode="buffer" *ngIf="isLoading"></mat-progress-bar>
+            <button (click)="copyData('code', address)" class="address-copy" mat-button mat-accent color="accent" aria-label="Code">Copy Code
+                <mat-icon>content_copy</mat-icon>
+            </button>
+            <button mat-button mat-accent color="accent" aria-label="Code" (click)="resync()">Resync Wallet
+                <mat-icon>autorenew</mat-icon>
+                <mat-progress-bar mode="buffer"></mat-progress-bar>
+            </button>
+        </mat-card>
+    </div>
+
+    <div class="widget-group copy-section" fxLayout="row" [@animateStagger]="{value:'50'}" *ngIf="!address">
+            <mat-card fxLayout="row" fxLayoutAlign="space-between center">
+                <div class=" address black-fg">
+                    <!-- Address &nbsp; -->
+                </div>
+                <div class="black-fg address-to-copy">
+                    {{address}}
+                </div>
+                <mat-progress-bar mode="buffer" *ngIf="isLoading"></mat-progress-bar>
+                <button  mat-button mat-accent color="accent" aria-label="Code" (click)="generateWallet()">Generate BTC Wallet
+                    <mat-icon>cached</mat-icon>
+                </button>
+            </mat-card>
+        </div>
+
+</div>

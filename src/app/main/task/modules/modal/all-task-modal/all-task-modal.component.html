@@ -1,0 +1,57 @@
+<div class="content-holder">
+  <div class="close">
+    <mat-icon>close</mat-icon>
+  </div>
+  <div class="mat-subheading-2 mb-0">
+    <a *ngIf="taskdetail.slug" [routerLink]="[ '/task/taskdetails', taskdetail.slug ]"><b>{{ taskdetail.title }}</b></a>
+    <a *ngIf="!taskdetail.slug" (click)="errorHandle();" title="{{taskdetail.title}}">{{taskdetail.title}}</a>
+  </div>
+  <div class="author">
+      <span>Created by: </span>
+      <a [routerLink]="[ '/others/profile', splitdata(taskdetail.user_info)[2] ]">{{ splitdata(taskdetail.user_info)[1] }}</a>
+  </div>
+  <ul class="reward-category p-0">
+    <li class="category pb-8">
+      <span class="mr-8">Category: </span>
+      <span>
+          <i *ngIf="taskdetail.category == 'global'" class="material-icons">public</i>
+          <i *ngIf="taskdetail.category == 'facebook'" class="fb w-24 h-24"></i>
+          <i *ngIf="taskdetail.category == 'twitter'" class="twitter w-24 h-24"></i>
+          <i *ngIf="taskdetail.category == 'googleplus'" class="g-plus w-24 h-24"></i>
+          <i *ngIf="taskdetail.category == 'instagram'" class="instagram w-24 h-24"></i>
+          <i *ngIf="taskdetail.category == 'linkedin'" class="linkedin w-24 h-24"></i>
+          <i *ngIf="taskdetail.category == 'kblog'" class="kblog w-24 h-24"></i>
+          <i *ngIf="taskdetail.category == 'youtube'" class="youtube w-24 h-24"></i>
+          <i *ngIf="taskdetail.category == 'steemit'" class="steemit w-24 h-24"></i>
+      </span>
+    </li>
+    <li class="reward">
+        <span>Reward:</span>
+        <span class="display-flex">
+          <img class="avatar w-16 h-16 mr-4 ml-8" src="assets/images/logos/rewardLogo.png" alt="reward">
+          <b>{{ taskdetail.reward | prettify : 'pretty'}}</b>
+        </span>
+    </li>
+  </ul>
+  <div class="mat-subheading-1">Requirements:</div>
+  <ul class="required">
+    <li *ngIf="!taskdetail.is_activity_passed">
+          <b>Activity Score</b>:
+          <mat-icon class="red-fg s-16">close</mat-icon>
+    </li>
+    <li *ngIf="!taskdetail.is_reputation_passed">
+          <b>Reputation</b>:
+          <mat-icon class="red-fg s-16">close</mat-icon>
+    </li>
+    <li *ngIf="taskdetail.is_high_risk">
+          <b>High Risk</b> :
+          <mat-icon class="orange-fg s-16">warning</mat-icon>
+    </li>
+    <li>
+      <span>
+          <b>Available Completion</b>:
+          <font class="green-fg s-16">{{taskdetail.available_completer}}</font>
+      </span>
+    </li>
+  </ul>
+</div>

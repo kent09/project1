@@ -1,0 +1,109 @@
+<div id="notification-page" class="page-layout blank p-24" fusePerfectScrollbar>
+
+    <mat-card>
+       
+            <div class="example-table-container">
+                    <div class="example-loading-shade" *ngIf="isLoadingResults || isRateLimitReached">
+                            <mat-progress-bar mode="indeterminate" *ngIf="isLoadingResults"></mat-progress-bar>
+                            <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+                                Active Task Kryptonia's API rate limit has been reached. It will be reset in one minute.
+                            </div>
+                        </div>
+
+                    <mat-table class="example-table" #table 
+                                                [dataSource]="data" matSort 
+                                                matSortActive="created"
+                                                matSortDisableClear matSortDirection="asc"
+                                                [@animateStagger]="{value:'50'}"
+                                                fusePerfectScrollbar>
+
+                    <ng-container matColumnDef="sender_id">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm></mat-header-cell>
+                        <mat-cell *matCellDef="let row" fxHide fxShow.gt-sm>
+                            <p class="phone text-truncate">
+                                <img src="https://kimg.io/avatar/{{row.sender_id}}?resize=50x50" onError="this.src='assets/images/avatars/profile.jpg'" class="avatar h-28 w-28 m-0" />
+                            </p>
+                        </mat-cell>
+                        
+                    </ng-container>
+
+                    <ng-container matColumnDef="sender_name">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Sender</mat-header-cell>
+                            <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs>
+                                <a [routerLink]="[ '/others/profile',  row.sender_username]">
+                                    <div class="wrapper" fxLayout="row" fxLayoutAlign="center center">
+                                        <strong>{{ row.sender_name }}</strong>
+                                    </div>
+                                </a>
+                            </mat-cell>
+                        </ng-container>
+            
+                    <ng-container matColumnDef="title" >
+                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-xs>Status</mat-header-cell>
+                        <mat-cell *matCellDef="let row" fxHide fxShow.gt-xs>
+                            <b class="text-truncate font-weight-600 reward-label">{{ row.title }}</b>
+                        </mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="description">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <!-- {{ row.description }} -->
+                                <div *ngIf="isHTML(row.description)" [innerHTML]="row.description"></div>
+                                <div *ngIf="!isHTML(row.description)" >
+                                    {{row.description}}
+                                </div>
+                            </mat-cell>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="created_at">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Date</mat-header-cell>
+                        <mat-cell *matCellDef="let row" fxHide fxShow.gt-sm>
+                            <b class="small-name">
+                                {{ row.notif_datetime  }}
+                            </b>
+                        </mat-cell>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef>Option</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <div>
+                                <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More" (click)="$event.stopPropagation();">
+                                    <mat-icon class="secondary-text">more_vert</mat-icon>
+                                </button>
+    
+                                <mat-menu #moreMenu="matMenu">
+                                    <button mat-menu-item aria-label="view" (click)="deleteNotifications(row);">
+                                        <mat-icon>delete_outline</mat-icon>
+                                        <span>Delete</span>
+                                    </button>
+                                    <button mat-menu-item aria-label="hide" (click)="hideTask(row)">
+                                        <mat-icon>visibility_off</mat-icon>
+                                        <span>Mark as read</span>
+                                    </button>
+                                    <button mat-menu-item aria-label="hide" (click)="viewDetail(row)" fxHide fxShow.lt-sm>
+                                        <mat-icon>details</mat-icon>
+                                        <span>Details</span>
+                                    </button>
+                                </mat-menu>
+                            </div>
+    
+                        </mat-cell>
+                    </ng-container>
+                    
+                    <mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;" class="contact" 
+                         [@animate]="{value:'*',params:{y:'100%'}}">
+                    </mat-row>
+                </mat-table>
+            
+              
+                </div>
+              
+                <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
+                
+    </mat-card>
+
+</div>

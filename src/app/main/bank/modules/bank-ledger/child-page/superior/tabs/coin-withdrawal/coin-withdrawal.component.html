@@ -1,0 +1,39 @@
+<div class="form-holder">
+  <div class="mat-title py-20 accent pl-16">&nbsp;Superior Coin Withdrawal</div>
+  <div class="form-wrapper">
+    <div class="input-holder">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Superior Coin Receiver Address" [(ngModel)]="supReceiverAddress">
+      </mat-form-field>
+    </div>
+    <div class="input-holder">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Payment ID" [(ngModel)]="paymentId">
+      </mat-form-field>
+    </div>
+    <div class="input-holder">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="SUP Amount" type="number" [(ngModel)]="supAmount" (keydown)="checkInput($event)">
+      </mat-form-field>
+    </div>
+    <div class="input-holder">
+      <mat-form-field class="example-full-width">
+        <textarea matInput rows="6" placeholder="Description" [(ngModel)]="memo"></textarea>
+      </mat-form-field>
+    </div>
+    <ul *ngIf="supAmount >= 1">
+      <li><strong>+3</strong> Transaction Fee</li>
+      <li><strong>{{3 + supAmount}}</strong> Total Charges</li>
+    </ul>
+    <mat-card-actions align="end">
+        <button mat-raised-button color="warn" type="button" class="submit-button" aria-label="Reset">
+            Cancel
+        </button>
+
+        <button mat-raised-button color="accent" class="submit-button" aria-label="Save" (click)="openDialog()">
+           Withdraw
+        </button>
+    </mat-card-actions>
+  </div>
+
+</div>

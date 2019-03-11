@@ -1,0 +1,35 @@
+.complete-dialog {
+    max-width: 600px;
+    width: auto;
+
+    .example-card-complete-task {
+        max-width: 600px;
+        text-align: center;
+        width: 500px !important;
+
+        img {
+            height: 150px !important;
+            width: 124px !important;
+        }
+
+        .width-100 {
+            width: 350px !important;
+        }
+    }
+}
+.content-holder {
+    width: 450px;
+    position: relative;
+    .close {
+        position: absolute;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+    }
+    .btn-holder {
+        display: flex;
+        .mat-warn {
+            margin-left: auto; 
+        }
+    }
+}

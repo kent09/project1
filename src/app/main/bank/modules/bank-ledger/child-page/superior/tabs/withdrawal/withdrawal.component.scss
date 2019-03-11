@@ -1,0 +1,104 @@
+@import "src/@fuse/scss/fuse";
+
+
+.withdrawal{
+    .filter {
+        display: flex;
+        @include media-breakpoint('xs') {
+            display: block;
+        }
+        .search-input-wrapper {
+            margin-left: auto; 
+            align-items: center;
+            display: flex;
+            margin-right: 28px;
+            @include media-breakpoint('xs') {
+                margin-right: 0;
+            }
+            .mat-form-field {
+                @include media-breakpoint('xs') {
+                    width: 100%;
+                }
+            }
+        }
+        .calendar {
+            .mat-form-field {
+                @include media-breakpoint('xs') {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .mat-column-txn_date {
+        flex: 0 1 120px;
+        .date {
+            display: flex;
+        }
+    }
+    .small-name {
+        padding: 15px 10px;
+    }
+    
+}
+app-bank-ledger {
+    .mat-table {
+        .mat-row {
+            .mat-cell  {
+                margin: 0;
+                display: flex;
+            }
+        }
+            
+    }
+    .mat-column-amount {
+        flex: 0 1 90px;
+        justify-content: center;
+        @include media-breakpoint('lt-sm') {
+            flex: 1;
+        }
+    }
+    .mat-column-options {
+        flex: 0 1 90px; 
+        @include media-breakpoint('lt-sm') {
+            flex: 1;
+        }
+    }
+    .mat-column-status {
+        flex: 0 1 100px;
+        @include media-breakpoint('lt-sm') {
+            flex: 1;
+        }
+    }
+    .mat-column-fee {
+        flex: 0 1 70px;
+    }
+    .mat-column-block {
+        flex: 0 1 100px;
+    }
+    .mat-column-description {
+        padding-right: 10px;
+        .descrip {
+            display: block;
+            width: 100%;
+        }
+    }
+    .Failed {
+        color: #f44336;
+    }
+    .mat-column-tx_id {
+        b {
+            word-break: break-all;
+            display: block;
+            white-space: normal;
+        }
+    }
+    .chip {
+        border: 1px solid;
+        padding: 5px 10px;
+        border-radius: 20px;
+        display: inline-block;
+    }
+    .Complete  {
+        color: #4caf50;
+    }
+}

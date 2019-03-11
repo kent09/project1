@@ -1,0 +1,227 @@
+<div id="mail-confirm" fxLayout="column">
+  <div id="mail-confirm-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
+    <div id="mail-confirm-form">
+
+      <div class="container">
+        <mat-vertical-stepper [linear]="true" #stepper>
+          <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
+            <div class="holder">
+              <ng-template matStepLabel>Enter Amount</ng-template>
+              <div class="form">
+                <h2>Enter Amount</h2>
+                <div class="right">
+                  <form [formGroup]="firstFormGroup">
+                    <mat-form-field class="full-width">
+                      <input type="number" matInput placeholder="ENTER SUP AMOUNT" formControlName="firstCtrl" required>
+                    </mat-form-field>
+                  </form>
+                    <div class="equv" clickOutside (clickOutside)="showCoin = false">
+                      <mat-form-field class="full-width">
+                        <input matInput placeholder="EQUIVALENT" value="0.0000" disabled>
+                      </mat-form-field>
+                      <div class="currency-select">
+                        <button class="text-switch pointer" (click)="showCoin = !showCoin">
+                          <i class="cc {{selectedCoins.icon}}"></i>
+                          <span>{{selectedCoins.coin}}</span>
+                          <mat-icon>keyboard_arrow_down</mat-icon>
+                        </button>
+                      </div>
+                      <div class="droplist" *ngIf="showCoin">
+                        <button class="close pointer" (click)="showCoin = !showCoin">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                        <div class="search-holder">
+                          <mat-icon>search</mat-icon>
+                          <input type="text" [(ngModel)]="query"  placeholder="Type a currency or ticker">
+                        </div>
+                        <ul>
+                          <li *ngFor="let coinsList of coins | search:'icon,name':query">
+                            <button class="pointer" [class.selected]="coinsList.name === selectedCoins.name"
+                            (click)="onSelect(coinsList)">
+                              <i class="cc {{coinsList.icon}}"></i>
+                              <span>{{coinsList.coin}}</span>
+                              {{coinsList.name}}
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="button">
+                      <button class="pointer" matStepperNext>Next Step</button>
+                    </div>
+                  </div>
+              </div>
+              <div class="detail">
+                <h2>Detail</h2>
+                <ul>
+                  <li>
+                    <div class="text-label">Expected exchange rate</div>
+                    <div class="text-val">
+                      1 ETH = 0.03028503 BTC
+                    </div>
+                  </li>
+                  <li>
+                    <div class="text-label">Exchange fee</div>
+                    <div class="text-val">
+                      58.4185 XRP
+                    </div>
+                  </li>
+                  <li>
+                    <div class="text-label">Estimated arrival</div>
+                    <div class="text-val">
+                      ≈ 5-30 minutes
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </mat-step>
+          <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+            <form [formGroup]="secondFormGroup">
+              <div class="holder1">
+                <ng-template matStepLabel>SUP Address</ng-template>
+                <div class="header">
+                  <h2>SUP address</h2><button class="back pointer" matStepperPrevious>Back</button>
+                </div>
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Address</mat-label>
+                  <input matInput placeholder="Recipient address" formControlName="secondCtrl" required>
+                </mat-form-field>
+                <mat-form-field class="full-width" appearance="outline">
+                  <mat-label>Payment ID</mat-label>
+                  <input matInput placeholder="Recipient address">
+                </mat-form-field>
+                <div class="button">
+                  <button class="pointer" matStepperNext>Next Step</button>
+                </div>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Check Details</ng-template>
+            <div class="holder1">
+              <div class="header">
+                <h2>Check Details</h2><button class="back pointer" matStepperPrevious>Back</button>
+              </div>
+              <mat-divider></mat-divider>
+              <div class="detail mt-16">
+                  <ul>
+                    <li>
+                      <div class="text-label">SUP You Send</div>
+                      <div class="text-val">
+                          1 BTC
+                      </div>
+                    </li>
+                    <li>
+                      <div class="text-label">SUP You Get</div>
+                      <div class="text-val">
+                          32.901267 ETH
+                      </div>
+                    </li>
+                    <li>
+                      <div class="text-label">SUP Recipient Address</div>
+                      <div class="text-val">
+                          0x4140a2B47896C028A04AE444008e07FDa76c87D0
+                      </div>
+                    </li>
+                    <li>
+                      <div class="text-label">SUP Payment ID</div>
+                      <div class="text-val">
+                        1 BTC ≈ 33.0666 ETH
+                      </div>
+                    </li>
+                    <li>
+                      <div class="text-label">Exchange fee</div>
+                      <div class="text-val">
+                        0.165333 ETH
+                      </div>
+                    </li>
+                    <li>
+                      <div class="text-label">Network fee</div>
+                      <div class="text-val">
+                          0.002 ETH
+                      </div>
+                    </li>
+                    <li>
+                      <div class="text-label">Estimated arrival</div>
+                      <div class="text-val">
+                        ≈ 5-30 minutes
+                      </div>
+                    </li>
+                  </ul>
+                  <mat-checkbox>Your transaction may be delayed for the verification period in order to pass KYC procedure, in accordance with European AML directives.</mat-checkbox>
+                </div>
+                <div class="button mt-12">
+                  <button class="pointer" matStepperNext>Confirm and make payment</button>
+                </div>
+            </div>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Send your funds</ng-template>
+            <div class="holder1 w-wide">
+              <div class="header">
+                <h2>Send your funds</h2><div class="tranid">Transaction ID: <span>watfhfg14nfiozsk</span></div>
+              </div>
+              <div class="content">
+                <div class="info">
+                  <p>Please use your wallet or exchange to send money to the following address in one transaction or use QR-code</p>
+                  <div class="detail">
+                    <ul>
+                      <li>
+                        <div class="text-label">Send</div>
+                        <div class="text-val">
+                          1 BTC
+                        </div>
+                      </li>
+                      <li>
+                        <div class="text-label">To address</div>
+                        <div class="text-val">
+                          32YxfAC5VPArwBWf1cQXDFczQwrXxLmJj2
+                          <button class="copy pointer" (click)="copy()">{{copied}}</button>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="qr-code">
+                  <qrcode [qrdata]="'myAngularxQrCode'" [size]="360" [level]="'H'"></qrcode>
+                </div>
+              </div>
+              <div class="footer">
+                You have 36 hours to send funds otherwise the transaction will be canceled automatically
+              </div>
+            </div>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Wait for the exchange</ng-template>
+              <div class="holder1">
+                <div class="detail">
+                  <ul>
+                    <li>
+                      <div class="text-label">Payment Received:</div>
+                      <div class="text-val">0.0004675 BTC</div>
+                    </li>
+                    <li>
+                      <div class="text-label">Sent SUP:</div>
+                      <div class="text-val">3800 SUP</div>
+                    </li>
+                    <li>
+                      <div class="text-label">Exchange Rate:</div>
+                      <div class="text-val">3800 SUP</div>
+                    </li>
+                    <li>
+                      <div class="text-label">Network Fee:</div>
+                      <div class="text-val">3800 SUP</div>
+                    </li>
+                    <li>
+                      <div class="text-label">Tx Hash:</div>
+                      <div class="text-val">uyshshsjskssokssk</div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+          </mat-step>
+        </mat-vertical-stepper>
+      </div>
+  </div>
+</div>

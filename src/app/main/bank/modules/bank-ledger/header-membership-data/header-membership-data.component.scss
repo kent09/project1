@@ -1,0 +1,89 @@
+@import "src/@fuse/scss/fuse";
+
+#dashboard-project {
+    width: 100%;
+    > .content {
+        flex: 1;
+    }
+    fuse-widget.widget.ng-trigger.ng-trigger-animate {
+        padding: 6px;
+    }
+    .widget-group {
+        .fuse-widget-front {
+            ul {
+                list-style: none;
+                padding-left: 20px;
+                padding-right: 20px; 
+                li {
+                    line-height: 30px;
+                    div {
+                        @include media-breakpoint('lt-md'){
+                            display: flex;
+                        }
+                        span:last-child {
+                            margin-left: auto; 
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .copy-section {
+        padding: 6px;
+        mat-card.mat-card {
+            width: 100%;
+        }
+    }
+    .address-to-copy {
+        //   background-color: #cccc;
+        border-radius: 3px;
+        margin-left: 7px;
+        font-size: 15;
+        line-height: 20px;
+        word-break: break-all;
+        @include media-breakpoint('lt-md') {
+            margin: 0;
+            padding: 20px;
+            background: rgba(0 , 0, 0, 0.12);
+        }
+    }
+    .address {
+        margin-top: 0;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: normal;
+        @include media-breakpoint('lt-md') {
+            line-height: normal;
+            margin-bottom: 15px; 
+        }
+
+    }
+    .rotation-loading {
+        animation: rotating 3s linear infinite;
+    }
+    .red-fg {
+        font-size: 24px; 
+    }
+    .line-height-72 {
+        line-height: 32px;
+    }
+    .widget-group:first-child {
+        .py-16 {
+            @include media-breakpoint('lt-md') {
+                padding-top: 0px !important; 
+            }
+        }
+    }
+    .address-copy {
+        margin-left: auto; 
+        @include media-breakpoint('lt-md') {
+            margin-left: 0; 
+        }
+    }
+
+    .minimum{
+        font-size: 11px;
+        color: blue;
+    }
+
+}

@@ -1,0 +1,21 @@
+.content-holder {
+    position: relative;
+    max-width: 350px;
+    .close {
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    .btn-holder {
+        display: flex;
+        .mat-accent {
+            margin-left: auto; 
+        }
+    }
+    .name {
+        color: #4267b2;
+        font-size: 18px;
+        margin-bottom: 10px; 
+    }
+}

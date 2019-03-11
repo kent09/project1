@@ -1,0 +1,58 @@
+.no-data {
+    padding: 15px;
+    margin-left: 30px;
+}
+
+table {
+    width: 100%;
+}
+.disabled-block-btn {
+    cursor: not-allowed;
+   
+}
+.avatar {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: 700px;
+}
+
+.mat-table {
+    width: 100%;
+    height: auto;
+
+    .mat-column-disabled {
+        flex: 0 1 200px;
+        margin-left: 26px;
+    }
+    .mat-green-bg{
+        color: white !important;
+    }
+}
+.attachment-image {
+    width: 60px;
+}
+.main-header {
+    .general {
+        font-size: 16px;
+
+        .top {
+            font-size: 16px;
+        }
+    }
+
+    .leaderboard-earnings {
+        font-size: 16px;
+    }
+
+    .revoke,
+    .block {
+        height: 32px;
+        width: 32px;
+    }
+
+
+}

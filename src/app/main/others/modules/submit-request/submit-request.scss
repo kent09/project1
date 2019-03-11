@@ -1,0 +1,24 @@
+@import "src/@fuse/scss/fuse";
+app-submit-request {
+  .create-task {
+    width: 400px;
+    @include media-breakpoint('lt-sm') {
+      width: 100%;
+    }
+    .create-taskForm {
+      width: 100%;
+    }
+    .icons-checkbox-infos{
+      position: relative;
+      top: 6px;
+    }
+    .example-option-img{
+      position: relative !important;
+      bottom: 25px !important;
+    }
+    .submit-button{
+      margin: 20px;
+    }
+  }
+
+}

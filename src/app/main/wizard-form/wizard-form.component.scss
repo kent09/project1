@@ -1,0 +1,88 @@
+@import "src/@fuse/scss/fuse";
+/deep/ body.boxed {
+    box-shadow: none;
+}
+:host {
+    width: 100%;
+    #wizard-form {
+        width: 100%;
+        background-color: #b4b4b4; 
+        mat-card.mat-card{
+            height: auto;
+            width: 50%;
+            margin: 50px auto 0;
+            @include media-breakpoint('lt-md') {
+                width: 100%;
+            }
+        }
+    }
+    .first-steps {
+        display: flex;
+        justify-content: center !important;
+    }
+    mat-horizontal-stepper {
+        .mat-horizontal-content-container {
+            .first-steps.ng-trigger.ng-trigger-animate {
+                justify-content: center !important;
+            }
+        }
+        .info-message {
+            width: 100%;
+            .message-box {
+                max-width: 100%;
+                .clr-txt-red {
+                    color: white;
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
+        }
+        .social-width {
+            .sg-white {
+                color: white;
+                font-size: 58px;
+                @include media-breakpoint('lt-sm') {
+                    font-size: 32px; 
+                }
+            }
+            mat-button .mat-button-wrapper>*,
+            .mat-fab .mat-button-wrapper>*,
+            .mat-flat-button .mat-button-wrapper>*,
+            .mat-icon-button .mat-button-wrapper>*,
+            .mat-mini-fab .mat-button-wrapper>*,
+            .mat-raised-button .mat-button-wrapper>*,
+            .mat-stroked-button .mat-button-wrapper>* {
+                vertical-align: none !important;
+            }
+            .fa,
+            .fab,
+            .fal,
+            .far,
+            .fas {
+                -moz-osx-font-smoothing: grayscale;
+                -webkit-font-smoothing: antialiased;
+                display: inline;
+                font-style: normal;
+                font-variant: normal;
+                text-rendering: auto;
+                line-height: 1;
+                right: 20px;
+            }
+            button {
+                margin-left: 20px;
+                width: 110px;
+                height: 110px;
+                @include media-breakpoint('lt-sm') {
+                    width: 60px;
+                    height: 60px;
+                }
+            }
+            .active {
+                background-color: rgb(19, 185, 74);
+            }
+            .disabled {
+                background-color: gray;
+            }
+        }
+    }
+}
